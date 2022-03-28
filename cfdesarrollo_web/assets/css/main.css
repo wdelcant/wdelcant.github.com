@@ -67,5 +67,21 @@ justify-content: center;
 }
 
 /* cambia el fondo de la tabla de los números pares */
-
 .table tr:nth-child(even){background-color: rgb(255, 226, 244);}
+
+
+/* linea bajo el titulo */
+.title-item{
+
+  border-bottom: solid 2px #C6426E;
+  padding-bottom: 1em;
+
+}
+
+/* Arregla el fondo del numero de la pagina 2*/
+.position{
+  background-color: #C6426E;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+}
