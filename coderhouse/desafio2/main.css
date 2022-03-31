@@ -6,7 +6,7 @@ html {
   background: #ffffff; /* fallback for old browsers */
   /* /* height: 100vh; */
   width: 100vw;
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -16,9 +16,10 @@ html {
   max-height: 600px;
   width: 100%;
   height: 100%; */
+  width: 1280px;
   background-color: white;
   box-shadow: 5px 5px 30px 1px;
-  
+  position: relative;
 }
 
 /* Quitar linea inferior a los links */
@@ -30,53 +31,62 @@ a {
 .home-header {
   background-image: url(./assets/images/bannertop.jpg);
   background-size: cover;
-  padding: 60px;
+  padding: 100px;
   background-repeat: no-repeat;
-  
-
 }
 
 h1 {
   color: #ffffff;
-  text-shadow: center 10px 30px;
+  text-shadow: 1px 2px #999;
   text-transform: uppercase;
 }
 
 .menu {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   padding: 5px;
   border-spacing: 20px;
   border-bottom: solid 4px #667080;
   word-spacing: 40px;
-  font-family: 'Nunito';
-  
+  font-family: "Nunito";
 }
 
 .menu li {
-  display: inline-block;   /* dejar las listas en linea*/
+  display: inline-block; /* dejar las listas en linea*/
   font-size: 20px;
+  font-weight: bold;
+  
 }
 
 .home-quiensomos {
-  padding: 50px
+  padding: 50px;
+}
+
+.home-video {
+  left: 700px;
+  top: 400px;
+  
+  position: absolute;
 }
 
 .home-galeria {
   padding: 0px 50px 0px 50px;
-  
 }
+
 
 .home-ubicacion {
   padding: 50px;
 }
 
 .home-contacto {
-  padding-left: 20px;
-  padding: 50px;
+  left: 700px;
+  bottom: 250px;
+  padding-left: 60px;
+  border-left: solid 4px #667080;
+  position: absolute;
 }
 
 .footer {
-  background-color: #C4C4C4;
+  background-color: #c4c4c4;
   padding: 50px;
   border-top: solid 4px #667080;
 }
