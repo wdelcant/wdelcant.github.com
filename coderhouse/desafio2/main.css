@@ -1,0 +1,91 @@
+html {
+  font-family: "Nunito", sans-serif;
+}
+
+.container {
+  background: #ffffff; /* fallback for old browsers */
+  /* /* height: 100vh; */
+  width: 100vw;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  /* max-width: 1200px;
+  max-height: 600px;
+  width: 100%;
+  height: 100%; */
+  background-color: white;
+  box-shadow: 5px 5px 30px 1px;
+  
+}
+
+/* Quitar linea inferior a los links */
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.home-header {
+  background-image: url(./assets/images/bannertop.jpg);
+  background-size: cover;
+  padding: 60px;
+  background-repeat: no-repeat;
+  
+
+}
+
+h1 {
+  color: #ffffff;
+  text-shadow: center 10px 30px;
+  text-transform: uppercase;
+}
+
+.menu {
+  background-color: #C4C4C4;
+  padding: 5px;
+  border-spacing: 20px;
+  border-bottom: solid 4px #667080;
+  word-spacing: 40px;
+  font-family: 'Nunito';
+  
+}
+
+.menu li {
+  display: inline-block;   /* dejar las listas en linea*/
+  font-size: 20px;
+}
+
+.home-quiensomos {
+  padding: 50px
+}
+
+.home-galeria {
+  padding: 0px 50px 0px 50px;
+  
+}
+
+.home-ubicacion {
+  padding: 50px;
+}
+
+.home-contacto {
+  padding-left: 20px;
+  padding: 50px;
+}
+
+.footer {
+  background-color: #C4C4C4;
+  padding: 50px;
+  border-top: solid 4px #667080;
+}
+
+.footer-suscriptions {
+  text-align: center;
+}
+
+.footer-rss {
+  text-align: right;
+  padding-right: 5px;
+}
