@@ -1,10 +1,9 @@
 html {
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif, "Roboto";
 }
 
 .container {
-  background: #ffffff; /* fallback for old browsers */
-  /* /* height: 100vh; */
+  background: #ece7e7;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -12,10 +11,6 @@ html {
 }
 
 .content {
-  /* max-width: 1200px;
-  max-height: 600px;
-  width: 100%;
-  height: 100%; */
   width: 1280px;
   background-color: white;
   box-shadow: 5px 5px 30px 1px;
@@ -37,8 +32,9 @@ a {
 
 h1 {
   color: #ffffff;
+  font-weight: 800px;
   text-shadow: 1px 2px #999;
-  text-transform: uppercase;
+  text-transform: uppercase; /* Deja todos los títulos en mayúsculas */
 }
 
 .menu {
@@ -54,32 +50,33 @@ h1 {
   display: inline-block; /* dejar las listas en linea*/
   font-size: 20px;
   font-weight: bold;
-  
 }
 
 .home-quiensomos {
-  padding: 50px;
+  padding: 100px;
+  font-weight: 400;
+  font-size: 25px;
 }
-
-.home-video {
-  left: 700px;
-  top: 400px;
-  
-  position: absolute;
+.home-quiensomos iframe {
+  padding: 0px 0px 0px 500px;
 }
 
 .home-galeria {
-  padding: 0px 50px 0px 50px;
+  padding: 100px;
+  font-size: 20px;
 }
 
+.home-galeria span img {
+  width: 250px;
+}
 
 .home-ubicacion {
-  padding: 50px;
+  padding: 100px;
 }
 
 .home-contacto {
   left: 700px;
-  bottom: 250px;
+  bottom: 200px;
   padding-left: 60px;
   border-left: solid 4px #667080;
   position: absolute;
