@@ -13,7 +13,7 @@ html {
 .content {
   width: 1280px;
   background-color: white;
-  box-shadow: 5px 5px 30px 1px;
+  box-shadow: 5px 10px 10px 01px;
   position: relative;
 }
 
@@ -28,28 +28,55 @@ a {
   background-size: cover;
   padding: 100px;
   background-repeat: no-repeat;
+  
 }
 
 h1 {
   color: #ffffff;
-  font-weight: 800px;
-  text-shadow: 1px 2px #999;
+  font-size: 60px;
+  text-shadow:  2px 2px 15px #000000;
   text-transform: uppercase; /* Deja todos los títulos en mayúsculas */
 }
 
+
 .menu {
+  top: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   background-color: #c4c4c4;
-  padding: 5px;
-  border-spacing: 20px;
-  border-bottom: solid 4px #667080;
-  word-spacing: 40px;
-  font-family: "Nunito";
+  text-transform: uppercase;
+  font-size: 18px;
 }
 
+
+
 .menu li {
-  display: inline-block; /* dejar las listas en linea*/
-  font-size: 20px;
+  float: left;
+}
+
+.menu li a {
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 20px 20px;
+  text-decoration: none;
   font-weight: bold;
+  }
+
+.menu li a:hover {
+  background-color: #667080;
+}
+
+li a:hover:not(.active) {
+  background-color: #9db0cf;
+}
+
+.active {
+  background-color: #9db0cf;
+  border-bottom: 5px solid #357550;
+
 }
 
 .home-quiensomos {
@@ -59,6 +86,7 @@ h1 {
 }
 .home-quiensomos iframe {
   padding: 0px 0px 0px 500px;
+  border: solid 4px #667080;
 }
 
 .home-galeria {
@@ -68,6 +96,7 @@ h1 {
 
 .home-galeria span img {
   width: 250px;
+  border-radius: 20px;
 }
 
 .home-ubicacion {
