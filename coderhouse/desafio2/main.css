@@ -11,7 +11,7 @@ html {
 }
 
 .content {
-  width: 1280px;
+  width: 1260px;
   background-color: white;
   box-shadow: 5px 10px 10px 01px;
   position: relative;
@@ -124,7 +124,7 @@ li a:hover:not(.active) {
 
 .home-contacto {
   left: 750px;
-  bottom: 270px;
+  bottom: 340px;
   padding-left: 60px;
   border-left: solid 4px #667080;
   position: absolute;
@@ -145,6 +145,7 @@ li a:hover:not(.active) {
 
 .footer-suscriptions {
   text-align: center;
+  padding-bottom: 80px;
 }
 
 .barra-suscriptions {
@@ -163,6 +164,7 @@ li a:hover:not(.active) {
 .footer-rss {
   text-align: right;
   padding-right: 5px;
+  padding-bottom: 50px;
 }
 
 .footer-rss img {
@@ -172,8 +174,6 @@ margin: 0px;
 
 .footer-final {
   text-align: center;
+  border: 0px;
+  padding: 0px;
 }
-
-.footer-final p {
-  
- }
