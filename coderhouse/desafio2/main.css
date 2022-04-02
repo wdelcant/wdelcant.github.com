@@ -80,17 +80,23 @@ li a:hover:not(.active) {
 }
 
 .home-quiensomos {
-  padding: 100px;
+  margin: 100px;
   font-weight: 400;
   font-size: 25px;
 }
 .home-quiensomos iframe {
-  padding: 0px 0px 0px 500px;
   border: solid 4px #667080;
+  border-radius: 20px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 500px;
+  height: 250px;
+    
 }
 
 .home-galeria {
-  padding: 100px;
+  margin: 100px;
   font-size: 20px;
 }
 
@@ -100,8 +106,21 @@ li a:hover:not(.active) {
 }
 
 .home-ubicacion {
-  padding: 100px;
+  margin: 100px;
+  font-size: 20px;
+  }
+
+.home-ubicacion p {
+  font-size: 16px;
 }
+
+.home-ubicacion iframe {
+  width: 500px;
+  height: 250px;
+  border: solid 4px #667080;
+  border-radius: 20px;
+}
+
 
 .home-contacto {
   left: 700px;
@@ -109,7 +128,13 @@ li a:hover:not(.active) {
   padding-left: 60px;
   border-left: solid 4px #667080;
   position: absolute;
+  font-size: 18px;
 }
+
+.home-contacto h2 {
+  font-size: 30px;
+}
+
 
 .footer {
   background-color: #c4c4c4;
@@ -124,4 +149,9 @@ li a:hover:not(.active) {
 .footer-rss {
   text-align: right;
   padding-right: 5px;
+}
+
+.footer-rss img {
+width: 48px;
+margin: 0px;
 }
