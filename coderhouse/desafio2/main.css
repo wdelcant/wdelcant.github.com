@@ -78,15 +78,15 @@ nav ul li {
 nav ul li a {
   display: block;   /* Convertimos los elementos a en elementos bloque para manipular el padding */
   padding: 20px;
-  color: rgb(0, 0, 0);
+  color: #000000;
   text-decoration: none;
 }
 nav ul li:hover {
-  background: #9db0cf;
+  background: #999bfd;
 }
 
 .active {  /* Cambia el color del la sección activa en el menu y coloca una barra inferior */
-  background-color: #9db0cf;
+  background-color: #5c70a5;
   border-bottom: 5px solid #667080;
 }
 
@@ -155,6 +155,34 @@ nav ul li:hover {
   font-size: 30px;
 }
 
+
+/* registros de usuarios nuevos */
+
+.form-register input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-register div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 40px 250px;
+}
+
+#enviar {
+  width: 20%;
+  background-color: #39813b;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
 /* Pie de pagina */
 
 .footer {
