@@ -87,36 +87,50 @@ nav ul li:hover {
 /* main de quienes somos + video */
 
 .home-aboutus {
-  vertical-align: middle;
-  margin: 100px;
+    z-index: 1;
+    width: 100%;
+    height: 400px;
+    padding:60px;
+    font-size: 15px;
+    line-height: 30px;
 }
 
 .home-aboutus h2 {
-  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.home-aboutus ul {
+  margin-left: 50px;
 }
 
 .home-aboutus iframe {
-  border: solid 4px #667080;
-  border-radius: 20px;
-  top: 24%;
-  left: 50%;
-  width: 500px;
-  height: 250px;
+    width: 500px;
+    height: 250px;
+    border-radius: 10px;
+    float: right;
+    margin-right: 15px;
+  
+
 }
+
 
 /* Galería de imágenes futuros efectos*/
 
 .home-gallery {
-  margin: 100px;
+  z-index: 1;
   font-size: 20px;
+  background: #f2f2f2;
+  width: 100%;
+  height: 100%;
+  padding:60px;
 }
 
 .home-gallery h2 {
-  margin: 20px;
+    margin-bottom: 25px;
 }
 
 .home-gallery span img {
-  width: 300px;
+  width: 250px;
   border-radius: 20px;
 }
 
