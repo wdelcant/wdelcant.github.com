@@ -75,7 +75,7 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #9db0cf;
-  border-bottom: 5px solid #357550;
+  border-bottom: 5px solid #667080;
 
 }
 
@@ -115,20 +115,21 @@ li a:hover:not(.active) {
 }
 
 .home-ubicacion iframe {
-  width: 500px;
-  height: 250px;
+  width: 600px;
+  height: 350px;
   border: solid 4px #667080;
   border-radius: 20px;
 }
 
 
 .home-contacto {
-  left: 700px;
-  bottom: 200px;
+  left: 750px;
+  bottom: 270px;
   padding-left: 60px;
   border-left: solid 4px #667080;
   position: absolute;
   font-size: 18px;
+  margin-bottom: 40px;
 }
 
 .home-contacto h2 {
@@ -138,12 +139,25 @@ li a:hover:not(.active) {
 
 .footer {
   background-color: #c4c4c4;
-  padding: 50px;
+  padding: 30px 50px 50px 50px;
   border-top: solid 4px #667080;
 }
 
 .footer-suscriptions {
   text-align: center;
+}
+
+.barra-suscriptions {
+  border: solid 3px #667080;
+  width: 50%;
+  height: 30px;
+}
+
+.button-suscriptions {
+  border: solid 3px #667080;
+  height: 35px;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
 .footer-rss {
@@ -155,3 +169,11 @@ li a:hover:not(.active) {
 width: 48px;
 margin: 0px;
 }
+
+.footer-final {
+  text-align: center;
+}
+
+.footer-final p {
+  
+ }
