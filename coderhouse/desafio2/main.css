@@ -2,6 +2,11 @@ html {
   font-family: "Nunito", sans-serif, "Roboto";
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 .container {
   background: #ece7e7;
   width: 100vw;
@@ -23,11 +28,14 @@ a {
   color: #000000;
 }
 
+
+/* Banner superior y titulo */
 .home-header {
   background-image: url(./assets/images/bannertop.jpg);
   background-size: cover;
   padding: 100px;
   background-repeat: no-repeat;
+  
   
 }
 
@@ -38,90 +46,102 @@ h1 {
   text-transform: uppercase; /* Deja todos los títulos en mayúsculas */
 }
 
+/* menu */
 
 .menu {
-  top: 0;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  width: 80%;
+  margin: auto;
   overflow: hidden;
-  background-color: #c4c4c4;
-  text-transform: uppercase;
-  font-size: 18px;
-  
+  background: #c4c4c4;
+  width: 100%;
+  z-index: 10;
+
+}
+nav {
+  float: left; /* Desplazamos el nav hacia la izquierda */
 }
 
-.menu li {
+
+nav ul {
+  list-style: none;
+  overflow: hidden; /* Limpiamos errores de float */
+}
+
+nav ul li {
   float: left;
-}
-
-.menu li a {
-  display: block;
-  color: #000000;
-  text-align: center;
-  padding: 20px 20px;
-  text-decoration: none;
+  font-family: 'Nunito',Arial, sans-serif;
+  font-size: 18px;
   font-weight: bold;
-  }
-
-.menu li a:hover {
-  background-color: #667080;
 }
 
-li a:hover:not(.active) {
-  background-color: #9db0cf;
+
+nav ul li a {
+  display: block;   /* Convertimos los elementos a en elementos bloque para manipular el padding */
+  padding: 20px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+nav ul li:hover {
+  background: #9db0cf;
 }
 
-.active {
+.active {  /* Cambia el color del la sección activa en el menu y coloca una barra inferior */
   background-color: #9db0cf;
   border-bottom: 5px solid #667080;
-
 }
 
-.home-quiensomos {
+/* main de quienes somos + video */
+
+.home-aboutus {
   margin: 100px;
   font-weight: 400;
   font-size: 25px;
 }
-.home-quiensomos iframe {
+.home-aboutus iframe {
   border: solid 4px #667080;
   border-radius: 20px;
   position: absolute;
-  top: 30%;
+  top: 26%;
   left: 50%;
   width: 500px;
   height: 250px;
     
 }
 
-.home-galeria {
+/* Galería de imágenes futuros efectos*/
+
+
+.home-gallery {
   margin: 100px;
   font-size: 20px;
 }
 
-.home-galeria span img {
+.home-gallery span img {
   width: 250px;
   border-radius: 20px;
 }
 
-.home-ubicacion {
+/* Localización del lugar */
+
+.home-location {
   margin: 100px;
   font-size: 20px;
   }
 
-.home-ubicacion p {
+.home-location p {
   font-size: 16px;
 }
 
-.home-ubicacion iframe {
+.home-location iframe {
   width: 600px;
   height: 350px;
   border: solid 4px #667080;
   border-radius: 20px;
 }
 
+/* Contacto para que el usuario mande un correo */
 
-.home-contacto {
+.home-contact {
   left: 750px;
   bottom: 340px;
   padding-left: 60px;
@@ -135,6 +155,7 @@ li a:hover:not(.active) {
   font-size: 30px;
 }
 
+/* Pie de pagina */
 
 .footer {
   background-color: #c4c4c4;
