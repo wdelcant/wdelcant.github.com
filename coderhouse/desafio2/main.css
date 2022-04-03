@@ -39,7 +39,8 @@ h1 {
   color: #ffffff;
   font-size: 50px;
   text-shadow: 2px 2px 15px #000000;
-  text-transform: uppercase; /* Deja todos los títulos en mayúsculas */
+  text-transform: uppercase;
+  /* Deja todos los títulos en mayúsculas */
 }
 
 /* menu */
@@ -52,13 +53,16 @@ h1 {
   width: 100%;
   z-index: 10;
 }
+
 nav {
-  float: left; /* Desplazamos el nav hacia la izquierda */
+  float: left;
+  /* Desplazamos el nav hacia la izquierda */
 }
 
 nav ul {
   list-style: none;
-  overflow: hidden; /* Limpiamos errores de float */
+  overflow: hidden;
+  /* Limpiamos errores de float */
 }
 
 nav ul li {
@@ -69,11 +73,13 @@ nav ul li {
 }
 
 nav ul li a {
-  display: block; /* Convertimos los elementos a en elementos bloque para manipular el padding */
+  display: block;
+  /* Convertimos los elementos a en elementos bloque para manipular el padding */
   padding: 20px;
   color: #000000;
   text-decoration: none;
 }
+
 nav ul li:hover {
   background: #6e6e6e;
 }
@@ -111,6 +117,7 @@ nav ul li:hover {
   border-radius: 10px;
   float: right;
   margin-right: 15px;
+  border: solid 4px #667080;
 }
 
 /* Galería de imágenes futuros efectos*/
@@ -138,10 +145,10 @@ nav ul li:hover {
 /* Selector final */
 
 .home-prefooter {
+  display: flex;
   z-index: 1;
   width: 100%;
   height: 100%;
-  background-color: #ffa3a3;
   padding: 60px;
 }
 
@@ -150,6 +157,8 @@ nav ul li:hover {
 .home-location {
   font-size: 20px;
   line-height: 40px;
+  width: 50%;
+  display: inline-block;
 }
 
 .home-location p {
@@ -157,8 +166,8 @@ nav ul li:hover {
 }
 
 .home-location iframe {
-  width: 400px;
-  height: 250px;
+  width: 500px;
+  height: 450px;
   border: solid 4px #667080;
   border-radius: 20px;
 }
@@ -166,18 +175,25 @@ nav ul li:hover {
 /* Contacto para que el usuario mande un correo */
 
 .home-contact {
-  
+  width: 200px;
   padding-left: 25px;
+  line-height: 45px;
   border-left: solid 4px #667080;
-  font-size: 18px;
-  line-height: 40px;
-  float: right;
 }
 
-.home-contact h2 {
-  font-size: 30px;
+.home-contact input {
+  width: 100%;
+  padding: 12px 200px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
+.home-contact textarea {
+  width: 400px;
+  height: 200px;
+}
 /* registros de usuarios nuevos */
 
 .form-register input {
@@ -196,12 +212,12 @@ nav ul li:hover {
   padding: 40px 250px;
 }
 
-#enviar {
+#registar {
   width: 20%;
   background-color: #39813b;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 5px 0;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -210,8 +226,9 @@ nav ul li:hover {
 
 .footer {
   background-color: #c4c4c4;
-  padding: 30px 50px 50px 50px;
+  padding: 60px;
   border-top: solid 4px #667080;
+  height: 210px;
 }
 
 .footer-suscriptions {
@@ -227,26 +244,20 @@ nav ul li:hover {
 
 .button-suscriptions {
   border: solid 3px #667080;
-
   padding: 10px;
   border-radius: 10px;
   font-weight: bold;
   font-size: 15px;
 }
 
-.footer-rss {
-  text-align: right;
+.footer img {
+  float: right;
   padding-right: 5px;
-  padding-bottom: 50px;
-}
-
-.footer-rss img {
+  padding-bottom: 20px;
   width: 48px;
   margin: 0px;
 }
 
-.footer-final {
+.footer p {
   text-align: center;
-  border: 0px;
-  padding: 0px;
 }
