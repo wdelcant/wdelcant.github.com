@@ -28,30 +28,29 @@
                 <h1>Cabañas Olmué</h1>
 
             </header>
-            <section>
+            <nav>
                 <div class="menu">
-                    <nav>
-                        <ul>
 
-                            <li><a class="active" href="./index.html"><span class="material-icons icon">
-                                        home
-                                    </span>Inicio</a></li>
-                            <li><a href="./pages/reservas.html">Reservas</a></li>
-                            <li><a href="./pages/eventos.html">Eventos</a></li>
-                            <li><a href="./pages/ofertas.html">Ofertas</a></li>
-                            <li class="register"><a href="./pages/registrate.html">Registrarte</a></li>
-                        </ul>
-                    </nav>
+                    <ul>
+
+                        <li><a class="active" href="./index.html"><span class="material-icons icon">
+                                    home
+                                </span>Inicio</a></li>
+                        <li><a href="./pages/reservas.html">Reservas</a></li>
+                        <li><a href="./pages/eventos.html">Eventos</a></li>
+                        <li><a href="./pages/ofertas.html">Ofertas</a></li>
+                        <li class="register"><a href="./pages/registrate.html">Registrarte</a></li>
+                    </ul>
+
                 </div>
-            </section>
-
+            </nav>
 
 
             <main>
-                <section>
-                    <div class="home-aboutus">
+                <section class="aboutus-container">
+                    <div class="aboutus">
                         <h2>Quienes Somos?</h2>
-                        <iframe class="home-video" src="https://www.youtube.com/embed/t4bpIj7vJoM"></iframe>
+
                         <p>Somos una PYME familiar, arriendo de cabañas totalmente equipadas y amplia piscina.
                             Contamos con variedad de eventos, tales como:</p>
 
@@ -65,6 +64,9 @@
                         </ul>
 
                         Eso y mucho mas, Te esperamos!
+                    </div>
+                    <div>
+                        <iframe src="https://www.youtube.com/embed/t4bpIj7vJoM"></iframe>
                     </div>
                 </section>
 
@@ -104,34 +106,35 @@
                                 <label for="exampleTextarea">Comentario</label>
                                 <textarea type="text" placeholder="Ingrese su mensaje"></textarea>
 
-                                <input id="boton" type="submit" value="Enviar">
+                                <button>Enviar</button>
                             </form>
                         </div>
                     </div>
                 </section>
             </main>
-
             <footer>
-                <div class="footer">
-                    <a href="https://www.facebook.com/" target="_blank">
-                        <img src="./assets/images/fb.png" alt="Facebook">
-                    </a>
-                    <a href="https://wa.me/56954205188" target="_blank">
-                        <img src="./assets/images/wsp.png" alt="Whatsapp">
-                    </a>
-                    <a href="mailto:wilsondelcanto.redes@gmail.com" target="_blank">
-                        <img src="./assets/images/email.png" alt="Email">
-                    </a>
-                    <a href="https://www.instagram.com/" target="_blank">
-                        <img src="./assets/images/insta.png" alt="Instagram">
-                    </a>
-
-                    <form class="footer-suscriptions">
-
-                        <input class="barra-suscriptions" type="email" placeholder="Dirección de correo electrónico">
-                        <input class="button-suscriptions" type="submit" value="SUSCRÍBETE">
-                    </form>
-
+                <div class="footer-container">
+                    <div class="footer-icons">
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <img src="./assets/images/fb.png" alt="Facebook">
+                        </a>
+                        <a href="https://wa.me/56954205188" target="_blank">
+                            <img src="./assets/images/wsp.png" alt="Whatsapp">
+                        </a>
+                        <a href="mailto:wilsondelcanto.redes@gmail.com" target="_blank">
+                            <img src="./assets/images/email.png" alt="Email">
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <img src="./assets/images/insta.png" alt="Instagram">
+                        </a>
+                    </div>
+                    <div class="footer-suscriptions">
+                        <form>
+                            <input class="barra-suscriptions" type="email"
+                                placeholder="Dirección de correo electrónico">
+                            <button>SUSCRÍBETE</button>
+                        </form>
+                    </div>
                     <p><a href="">&copy; Cabañas Olmué, Chile. 2022</a></p>
                 </div>
             </footer>
