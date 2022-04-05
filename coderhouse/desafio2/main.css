@@ -2,7 +2,35 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Nunito", sans-serif, "Roboto";
+  font-family: 'Roboto', sans-serif;
+  
+}
+
+.icon {
+  font-size: 18px;
+  padding-right: 10px;
+  
+
+  
+}
+
+/* Quitar linea inferior a los links */
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 50px;
+  text-shadow: 2px 2px 15px #000000;
+  text-transform: uppercase;
+  /* Deja todos los títulos en mayúsculas */
+}
+
+h2 {
+  margin-bottom: 25px;
+  font-size: 30px;
 }
 
 .container {
@@ -21,11 +49,6 @@
   position: relative;
 }
 
-/* Quitar linea inferior a los links */
-a {
-  text-decoration: none;
-  color: #000000;
-}
 
 /* Banner superior y titulo */
 .home-header {
@@ -35,49 +58,31 @@ a {
   background-repeat: no-repeat;
 }
 
-h1 {
-  color: #ffffff;
-  font-size: 50px;
-  text-shadow: 2px 2px 15px #000000;
-  text-transform: uppercase;
-  /* Deja todos los títulos en mayúsculas */
-}
 
 /* menu */
 
 .menu {
-  width: 80%;
-  margin: auto;
-  overflow: hidden;
-  background: #c4c4c4;
   width: 100%;
+  display: inline-block;
+  white-space: initial;
+  background: #c4c4c4;
   z-index: 10;
+  margin: 0;
 }
 
-nav {
-  float: left;
-  /* Desplazamos el nav hacia la izquierda */
-}
-
-nav ul {
-  list-style: none;
-  overflow: hidden;
-  /* Limpiamos errores de float */
-}
 
 nav ul li {
   float: left;
   font-family: "Nunito", Arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
+  list-style: none; 
+  
 }
 
 nav ul li a {
   display: block;
-  /* Convertimos los elementos a en elementos bloque para manipular el padding */
   padding: 20px;
-  color: #000000;
-  text-decoration: none;
 }
 
 nav ul li:hover {
@@ -92,6 +97,7 @@ nav ul li:hover {
 
 /* main de quienes somos + video */
 
+
 .home-aboutus {
   z-index: 1;
   width: 100%;
@@ -102,10 +108,7 @@ nav ul li:hover {
   font-family: "Nunito";
 }
 
-.home-aboutus h2 {
-  margin-bottom: 25px;
-  font-size: 30px;
-}
+
 
 .home-aboutus ul {
   margin-left: 50px;
@@ -132,9 +135,6 @@ nav ul li:hover {
   font-family: "Nunito";
 }
 
-.home-gallery h2 {
-  margin-bottom: 25px;
-}
 
 .home-gallery span img {
   width: 250px;
@@ -182,10 +182,10 @@ nav ul li:hover {
 }
 
 .home-contact input {
-  width: 100%;
-  padding: 12px 200px;
+  width: 400px;
+  height: 40px;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #667080;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -193,7 +193,9 @@ nav ul li:hover {
 .home-contact textarea {
   width: 400px;
   height: 200px;
+  border: 1px solid #667080;
 }
+
 /* registros de usuarios nuevos */
 
 .form-register input {
@@ -212,8 +214,8 @@ nav ul li:hover {
   padding: 40px 250px;
 }
 
-#registar {
-  width: 20%;
+#boton {
+  width: 150px;
   background-color: #39813b;
   color: white;
   padding: 14px 20px;
@@ -222,13 +224,27 @@ nav ul li:hover {
   cursor: pointer;
 }
 
+/* Parrafos */
+
+.parrafos {
+  z-index: 1;
+  width: 100%;
+  padding: 60px;
+  font-size: 15px;
+  line-height: 30px;
+  font-family: "Nunito";
+  display: inline-block;
+
+}
+
 /* Pie de pagina */
 
 .footer {
   background-color: #c4c4c4;
-  padding: 60px;
+  padding: 60px 60px 0px;
   border-top: solid 4px #667080;
-  height: 210px;
+  width: 100%;
+  display: inline-block;
 }
 
 .footer-suscriptions {
