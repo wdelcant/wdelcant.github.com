@@ -1,0 +1,182 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 20px;
+}
+h3 {
+  font-size: 14px;
+}
+p {
+  font-size: 14px;
+}
+ul {
+  list-style: none;
+}
+li {
+  font-size: 14px;
+}
+button {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #00000080;
+  background-color: #39816b;
+  color: white;
+}
+button:hover {
+  background-color: #234d24;
+}
+
+/* empezamos */
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+header {
+  background-color: #39816b;
+}
+
+header .logo {
+  margin: 0;
+  padding: 25px 30px;
+  font-weight: bold;
+  color: white;
+  font-size: 28px;
+  text-shadow: 5px 5px 10px #00000080;
+  text-transform: uppercase;
+  text-align: flex-start;
+}
+
+header .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header nav {
+  display: flex;
+  flex-direction: horizontal;
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+header a {
+  padding: 5px 12px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #ffe711bd;
+}
+
+header a:hover {
+  color: #b1a111bd;;
+}
+
+#banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  height: 40vh;
+  background-image: linear-gradient(0deg, #00000080, #00000080),
+    url("./assets/images/bannertop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-top: solid 4px #ffe711bd;
+  border-bottom: solid 4px #667080;
+}
+
+#banner h1 {
+  color: white;
+  text-shadow: 5px 5px 10px #00000080;
+}
+
+#quienes-somos {
+  background-color: #39816b27;
+}
+
+#quienes-somos .container {
+  padding: 60px;
+  line-height: 30px;
+}
+
+#quienes-somos .video {
+  width: 450px;
+  height: 250px;
+  margin-right: 60px;
+  border: solid 2px #667080;
+}
+
+#galeria {
+    background-color: #c2c2c249;
+}
+
+#galeria .container {
+  padding: 60px;
+  line-height: 30px;
+  
+}
+
+#galeria img {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  margin: 2px;
+  
+}
+
+#ubi-contact {
+  background-color: #39816b27;
+}
+
+#ubi-contact .container {
+  padding: 60px;
+  line-height: 30px;
+}
+
+#ubi-contact iframe {
+  width: 450px;
+  height: 250px;
+  margin-right: 60px;
+  border: solid 2px #667080;
+}
+
+#footer {
+  background-color: #c4c4c4;
+  border-top: solid 4px #667080;
+}
+
+#footer .container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 60px 0px;
+}
+
+#footer .footer-suscriptions {
+  border: solid 3px #667080;
+  width: 600px;
+  height: 40px;
+  padding-left: 10px;
+  margin-bottom: 50px;
+}
+
+#footer img {
+  padding-right: 5px;
+  padding-bottom: 20px;
+  width: 48px;
+  margin: 0px;
+}
