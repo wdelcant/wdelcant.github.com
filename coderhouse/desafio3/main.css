@@ -5,6 +5,9 @@ body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   margin: 0;
 }
+a {
+  text-decoration: none;
+}
 h1 {
   font-size: 30px;
 }
@@ -79,7 +82,7 @@ header a {
 }
 
 header a:hover {
-  color: #b1a111bd;;
+  color: #b1a111bd;
 }
 
 #banner {
@@ -120,13 +123,12 @@ header a:hover {
 }
 
 #galeria {
-    background-color: #c2c2c249;
+  background-color: #c2c2c249;
 }
 
 #galeria .container {
   padding: 60px;
   line-height: 30px;
-  
 }
 
 #galeria img {
@@ -134,7 +136,6 @@ header a:hover {
   height: 250px;
   border-radius: 20px;
   margin: 2px;
-  
 }
 
 #ubi-contact {
