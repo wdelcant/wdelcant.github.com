@@ -198,3 +198,51 @@ header a:hover {
   width: 48px;
   margin: 0px;
 }
+
+
+/* Pagina de reservas */
+
+/* Pagina de eventos */
+
+#eventos {
+
+}
+
+#eventos h2 {
+    text-align: center;
+}
+
+#eventos .container {
+  padding: 60px;
+  line-height: 30px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+}
+
+#eventos .container div:nth-child(odd) {
+  background: #39816b27;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+
+}
+
+#eventos .container div:nth-child(even) {
+  background: #c2c2c249;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  margin: 30px;
+
+}
+
+#eventos img {
+  width: 600px;
+  height: 250px;
+  border-radius: 10px;
+  margin: 10px;
+
+/* Pagina de cabañas */
+
+/* Pagina de contacto */
