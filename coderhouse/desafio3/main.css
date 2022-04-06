@@ -43,7 +43,7 @@ button:hover {
 
 /* ancho maximo de la web y sin margen */
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
 }
 
