@@ -41,10 +41,13 @@ button:hover {
 
 /* empezamos */
 
+/* ancho maximo de la web y sin margen */
 .container {
   max-width: 900px;
   margin: auto;
 }
+
+/* Cabecera y menu */
 
 header {
   background-color: #39816b;
@@ -85,6 +88,8 @@ header a:hover {
   color: #b1a111bd;
 }
 
+/* Banner principal y bienvenida */
+
 #banner {
   display: flex;
   align-items: center;
@@ -106,6 +111,8 @@ header a:hover {
   text-shadow: 5px 5px 10px #00000080;
 }
 
+/* Primera sección */
+
 #quienes-somos {
   background-color: #39816b27;
 }
@@ -115,12 +122,18 @@ header a:hover {
   line-height: 30px;
 }
 
+#quienes-somos ul {
+  list-style: disc;
+}
+
 #quienes-somos .video {
   width: 450px;
   height: 250px;
   margin-right: 60px;
   border: solid 2px #667080;
 }
+
+/* Segunda sección */
 
 #galeria {
   background-color: #c2c2c249;
@@ -138,6 +151,8 @@ header a:hover {
   margin: 2px;
 }
 
+/* Tercera sección */
+
 #ubi-contact {
   background-color: #39816b27;
 }
@@ -153,6 +168,8 @@ header a:hover {
   margin-right: 60px;
   border: solid 2px #667080;
 }
+
+/* Pie de pagina y final */
 
 #footer {
   background-color: #c4c4c4;
