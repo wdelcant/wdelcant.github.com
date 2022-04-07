@@ -45,6 +45,7 @@ button:hover {
 .container {
   max-width: 1200px;
   margin: auto;
+  position: relative;
 }
 
 /* Cabecera y menu */
@@ -70,7 +71,6 @@ header .container {
 }
 
 header nav {
-  display: flex;
   text-align: center;
   padding-bottom: 25px;
 }
@@ -130,7 +130,8 @@ header a:hover {
 }
 
 #quienes-somos .video {
-  width: 450px;
+  max-width: 450px;
+  width: 50vw;
   height: 250px;
   margin-right: 60px;
   border: solid 2px #667080;
@@ -166,7 +167,8 @@ header a:hover {
 }
 
 #ubi-contact iframe {
-  width: 450px;
+  max-width: 450px;
+  width: 50vw;
   height: 250px;
   margin-right: 60px;
   border: solid 2px #667080;
@@ -184,12 +186,13 @@ header a:hover {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-around;
-  padding: 60px 0px;
+  padding-top: 60px;
 }
 
-#footer .footer-suscriptions {
+#footer .barra-suscriptions {
   border: solid 3px #667080;
-  width: 600px;
+  max-width: 600px;
+  width: 50vw;
   height: 40px;
   padding-left: 10px;
   margin-bottom: 50px;
@@ -205,9 +208,6 @@ header a:hover {
 /* Pagina de reservas */
 
 /* Pagina de eventos */
-
-#eventos {
-}
 
 #eventos h2 {
   text-align: center;
@@ -226,6 +226,8 @@ header a:hover {
   border-radius: 10px;
   padding: 30px;
   text-align: center;
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
 
 #eventos .container div:nth-child(even) {
@@ -233,7 +235,6 @@ header a:hover {
   border-radius: 10px;
   padding: 30px;
   text-align: center;
-  margin: 30px;
 }
 
 #eventos img {
@@ -245,4 +246,106 @@ header a:hover {
 
 /* Pagina de cabañas */
 
-/* Pagina de contacto */
+#cabanas h2 {
+  text-align: center;
+}
+
+#cabanas p {
+  text-align: center;
+}
+
+#cabanas img {
+  width: 35vw;
+  max-height: 400px;
+  max-width: 450px;
+  border-radius: 10px;
+}
+
+#cabanas .container {
+  padding: 60px;
+  line-height: 30px;
+}
+
+#cabanas .equipamientos {
+  display: grid;
+  background-color: #39816b27;
+  border-radius: 10px;
+  padding: 60px;
+  grid-template-areas:
+    "equipamiento1 texto1"
+    "texto2 equipamiento2"
+    "equipamiento3 texto3"
+    "texto4 equipamiento4"
+    "equipamiento5 texto5";
+  grid-gap: 25px;
+
+  align-items: center;
+  text-align: start;
+}
+
+.equipamiento1 {
+  grid-area: equipamiento1;
+}
+
+.equipamiento2 {
+  grid-area: equipamiento2;
+}
+
+.equipamiento3 {
+  grid-area: equipamiento3;
+}
+
+.equipamiento4 {
+  grid-area: equipamiento4;
+}
+
+.equipamiento5 {
+  grid-area: equipamiento5;
+}
+
+.texto1 {
+  grid-area: texto1;
+}
+
+.texto2 {
+  grid-area: texto2;
+}
+
+.texto3 {
+  grid-area: texto3;
+}
+
+.texto4 {
+  grid-area: texto4;
+}
+.texto5 {
+  grid-area: texto5;
+}
+
+/* Pagina de registro */
+
+#register .container {
+  height: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 60px 300px;
+}
+
+#register .container form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#register .container img {
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  margin: 10px;
+}
