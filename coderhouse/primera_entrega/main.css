@@ -253,9 +253,6 @@ input {
   padding: 8px;
 }
 
-.container input {
-}
-
 /* Pagina de eventos */
 
 #eventos h2 {
@@ -380,7 +377,6 @@ input {
   align-items: center;
   justify-content: space-evenly;
   padding: 60px 300px;
-
 }
 
 #register .container form input {
