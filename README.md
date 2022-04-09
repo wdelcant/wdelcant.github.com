@@ -1,7 +1,7 @@
 [![Header](https://github.com/adamalston/adamalston/raw/master/profile.gif)](https://www.adamalston.com/)
 
 <h2> Hi, I'm Wilson del canto! <img src="https://media.giphy.com/media/mGcNjsfWAjY5AEZNw6/giphy.gif" width="50"></h2>
-<img align='right' src="https://media.giphy.com/media/ieyl9zmCjO4b4t6qoY/giphy.gif" width="230">
+<img align='right' src="https://avatars.githubusercontent.com/u/99770820?s=400&u=7eba582b942c734c3e40f307d4c112a0def9d357&v=4" width="230">
 <p><em>Im from Chile</em></p>
 <p><em>IT Support Technician</em></p>
 <p><em>Full Stack Web Development Trainee</em></p>
