@@ -23,15 +23,72 @@
             </nav>
         </div>
     </header>
-    <section id="banner">
-        <h1>Visita el mejor lugar de relajo en Olmué</h1>
-        <form action="./reservas.html">
-            <button>Reserva ahora!</button>
-        </form>
-    </section>
-
     <main>
 
+
+
+        <section id="check">
+            <div class="container">
+                <h2>Reservas</h2>
+                <h3>¿BUSCAS FECHAS? REVISA Y RESERVA AQUÍ</h3>
+                <table style="width:100%">
+                    <tr>
+                        <th>Check in</th>
+                        <th>Check Out</th>
+                        <th>Cabañas</th>
+                        <th>Adultos</th>
+                        <th>Niños</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form><label for="checkin"></label>
+                                <input type="date" id="checkin" name="checkin">
+                            </form>
+                        </td>
+                        <td>
+                            <form><label for="checkout"></label>
+                                <input type="date" id="checkout" name="checout">
+                            </form>
+                        </td>
+                        <td>
+                            <form><label for="cabanas"></label>
+                                <select name="cabanas" id="cabanas">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form><label for="adultos"></label>
+                                <select name="adultos" id="adultos">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form><label for="ninos"></label>
+                                <select name="ninos" id="ninos">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <button>COTIZAR</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
 
     </main>
 
@@ -55,6 +112,7 @@
                 </div>
                 <div class="footer-suscriptions">
                     <form>
+                        <h2>Recibe nuestras ofertas!</h2>
                         <input class="barra-suscriptions" type="email" placeholder="Dirección de correo electrónico">
                         <button>SUSCRÍBETE</button>
                     </form>
