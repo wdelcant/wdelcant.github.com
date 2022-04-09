@@ -6,5 +6,5 @@ title: Wilson Del Canto Cepeda
 description: Bienvenido a mi Portfolio
 name: &name "Wilson Del Canto Cepeda"
 title_separator: "-"
-
+show_downloads: True
 locale: "en-ES"
