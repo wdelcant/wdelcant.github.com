@@ -28,4 +28,4 @@ With experience in customer service for an operational continuity project for Ba
 
 <p><em>Desafio1 : <a href="./coderhouse/desafio1" target="_blank" rel="noreferrer">Link</a></em></p>
 <p><em>Desafio2 : <a href="./coderhouse/desafio2" target="_blank" rel="noreferrer">Link</a></em></p>
-<p><em>Primera Entrega : Desafio1 : <a href="./coderhouse/primera_entrega" target="_blank" rel="noreferrer">Link</a></em></p>
+<p><em>Primera Entrega : <a href="./coderhouse/primera_entrega" target="_blank" rel="noreferrer">Link</a></em></p>
