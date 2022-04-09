@@ -26,6 +26,6 @@ With experience in customer service for an operational continuity project for Ba
 
 Portfolio
 
-Desafio1 : <a href="./coderhouse/desafio1" target="_blank" rel="noreferrer">
-Desafio2 : <a href="./coderhouse/desafio2" target="_blank" rel="noreferrer">
-Primera Entrega : Desafio1 : <a href="./coderhouse/primera_entrega" target="_blank" rel="noreferrer">
+Desafio1 : <a href="./coderhouse/desafio1" target="_blank" rel="noreferrer"></a>
+Desafio2 : <a href="./coderhouse/desafio2" target="_blank" rel="noreferrer"></a>
+Primera Entrega : Desafio1 : <a href="./coderhouse/primera_entrega" target="_blank" rel="noreferrer"></a>
