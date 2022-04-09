@@ -23,8 +23,9 @@ With experience in customer service for an operational continuity project for Ba
 [![Gmail](https://img.shields.io/badge/-GMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:wilsondelcanto.reedes@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/-LINKEDIN-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wilsondelcanto/)
 [![Twitter](https://img.shields.io/badge/-Twitter-00acee?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/wilsondelcanto)
-[![wilsondelcanto.dev](https://img.shields.io/badge/-WILSONDELCANTO.DEV-000000?style=for-the-badge&logo=css&logoColor=white)](https://wilsondelcanto.dev/)
 [![Github](https://img.shields.io/badge/-github-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/wdelcant)
+[![wilsondelcanto.dev](https://img.shields.io/badge/-WILSONDELCANTO.DEV-000000?style=for-the-badge&logo=css&logoColor=white)](https://wilsondelcanto.dev/)
+
 ---
 
 
