@@ -3,7 +3,7 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: Wilson Del Canto Cepeda
-description: Bienvenido a mi Portfolio
+description: Full Stack Web Development Trainee
 name: &name "Wilson Del Canto Cepeda"
 title_separator: "-"
 show_downloads: False
