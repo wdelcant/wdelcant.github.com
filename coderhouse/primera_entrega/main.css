@@ -1,3 +1,5 @@
+/* Configuraciones globales */
+
 * {
   box-sizing: border-box;
 }
@@ -39,7 +41,7 @@ button:hover {
   background-color: #234d24;
 }
 
-/* empezamos */
+/* contenido de la pagina */
 
 /* ancho máximo de la web y sin margen */
 .container {
@@ -68,6 +70,7 @@ header .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 header nav {
@@ -235,6 +238,7 @@ header a:hover {
   height: 60vh;
   display: flex;
   flex-flow: column wrap;
+  height: 60vh;
 }
 
 .container table {
@@ -285,7 +289,7 @@ input {
 
 #eventos img {
   width: 35vw;
-  height: 400px;
+  height: 350px;
   border-radius: 10px;
   margin: 10px;
 }
