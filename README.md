@@ -7,10 +7,6 @@
 <p><em>Full Stack Web Development Trainee</em></p>
 >>>>>>> 89324b996a8c07ab0966e81d41a8fc24838eb421
 
-### A little more about me...
-
-<<<<<<< HEAD
-=======
 
 ### A little more about me...``
 
