@@ -8,7 +8,7 @@
 
 
 
-### A little more about me...``
+### A little more about me...
 
 <p><em>Qualified Technical Professional of the Career in Administration and Support of Computer Networks.
 my skills are teamwork, proactivity, creativity, good interpersonal relationships and responsibility.
@@ -26,4 +26,5 @@ With experience in customer service for an operational continuity project for Ba
 [![wilsondelcanto.dev](https://img.shields.io/badge/-WILSONDELCANTO.DEV-000000?style=for-the-badge&logo=css&logoColor=white)](https://wilsondelcanto.dev/)
 
 ---
+<h3 align="left">Portfolio:</h3>
 
