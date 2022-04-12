@@ -5,7 +5,7 @@
 <p><em>Im from Chile</em></p>
 <p><em>IT Support Technician</em></p>
 <p><em>Full Stack Web Development Trainee</em></p>
->>>>>>> 89324b996a8c07ab0966e81d41a8fc24838eb421
+
 
 
 ### A little more about me...
@@ -14,7 +14,7 @@
 my skills are teamwork, proactivity, creativity, good interpersonal relationships and responsibility.
 I have experience in IT, HW, SW and NETWORKS support.
 With experience in customer service for an operational continuity project for BancoEstado.</em></p>
-<<<<<<< HEAD
+
 =======
 
 <h3 align="left">Languages and Tools:</h3>
