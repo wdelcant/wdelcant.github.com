@@ -8,9 +8,8 @@
 >>>>>>> 89324b996a8c07ab0966e81d41a8fc24838eb421
 
 
-### A little more about me...``
+### A little more about me...
 
->>>>>>> 89324b996a8c07ab0966e81d41a8fc24838eb421
 <p><em>Qualified Technical Professional of the Career in Administration and Support of Computer Networks.
 my skills are teamwork, proactivity, creativity, good interpersonal relationships and responsibility.
 I have experience in IT, HW, SW and NETWORKS support.
