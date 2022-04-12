@@ -16,6 +16,7 @@ h1 {
 h2 {
   font-size: 1.5rem;
   padding-bottom: 2rem;
+  text-decoration: underline;
 }
 h3 {
   font-size: 1.2rem;
@@ -220,12 +221,15 @@ header a:hover {
   padding-right: 5px;
   padding-bottom: 20px;
   width: 48px;
-  margin: 0px;
 }
 
 #footer button {
   margin-bottom: 2rem;
   font-size: 1rem;
+}
+
+#footer img:hover {
+  color: #b1a111bd;
 }
 
 /* Pagina de eventos */
@@ -271,14 +275,19 @@ header a:hover {
 
 #cabanas .container {
   line-height: 2rem;
+  
   align-items: center;
   text-align: center;
+}
+
+#cabanas h2 {
+  padding: 2rem;
 }
 
 #cabanas .equipamientos {
   display: grid;
   background-color: #39816b27;
-
+  border-radius: 1rem 1rem 0rem 0rem;
   padding: 1rem;
   grid-template-areas:
     "equipamiento1"
@@ -360,8 +369,8 @@ header a:hover {
   height: 400px;
   border-radius: 10px;
   margin: 10px;
+  
 }
-
 
 @media screen and (min-width: 480px) {
 }
