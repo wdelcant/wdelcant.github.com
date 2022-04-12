@@ -2,39 +2,46 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
 }
 body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  margin: 0;
 }
 a {
   text-decoration: none;
 }
 h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 h2 {
-  font-size: 30px;
+  font-size: 2rem;
+  padding-bottom: 2rem;
 }
 h3 {
-  font-size: 20px;
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
 }
 p {
-  font-size: 16px;
+  font-size: 1rem;
 }
 ul {
   list-style: none;
 }
 li {
-  font-size: 16px;
+  font-size: 1rem;
 }
 button {
-  font-size: 14px;
+  font-size: 0.8rem;
   font-weight: bold;
-  padding: 8px;
-  border-radius: 3px;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
   border: 1px solid #00000080;
-  background-color: #39816b;
+  background-color: #4caf50;
   color: white;
 }
 button:hover {
@@ -45,24 +52,27 @@ button:hover {
 
 /* ancho máximo de la web y sin margen */
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: auto;
-  position: relative;
 }
 
 /* Cabecera y menu */
 
 header {
-  background-color: #39816b;
+  position: sticky;
+  top: 0px;
+  background-color: #009688;
+  border-top: 1rem solid #00796b;
+  border-bottom: solid 0.2rem #ffe711bd;
 }
 
 header .logo {
   margin: 0;
-  padding: 25px 30px;
+  padding: 1.5rem 2rem;
   font-weight: bold;
   color: white;
-  font-size: 28px;
-  text-shadow: 5px 5px 10px #00000080;
+  font-size: 1.8rem;
+  text-shadow: 0.3rem 0.3rem 0.5rem #00000080;
   text-transform: uppercase;
 }
 
@@ -70,16 +80,15 @@ header .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 header nav {
   text-align: center;
-  padding-bottom: 25px;
+  padding-bottom: 1.5rem;
 }
 
 header a {
-  padding: 5px 12px;
+  padding: 0.3rem 0.8rem;
   text-decoration: none;
   font-weight: bold;
   color: #ffe711bd;
@@ -103,13 +112,13 @@ header a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  border-top: solid 4px #ffe711bd;
-  border-bottom: solid 4px #667080;
+
+  border-bottom: solid 0.3rem #667080;
 }
 
 #banner h1 {
   color: white;
-  text-shadow: 5px 5px 10px #00000080;
+  text-shadow: 0.3rem 0.3rem 0.5rem #00000080;
   font-size: 3vw;
 }
 
@@ -124,8 +133,8 @@ header a:hover {
 }
 
 #quienes-somos .container {
-  padding: 60px;
-  line-height: 30px;
+  padding: 4rem;
+  line-height: 2rem;
 }
 
 #quienes-somos ul {
@@ -133,11 +142,11 @@ header a:hover {
 }
 
 #quienes-somos .video {
-  max-width: 450px;
+  max-width: 28rem;
   width: 50vw;
-  height: 250px;
+  height: 15rem;
   margin-right: 60px;
-  border: solid 2px #667080;
+  border: solid 0.2rem #667080;
 }
 
 /* Segunda sección */
@@ -147,7 +156,7 @@ header a:hover {
 }
 
 #galeria .container {
-  padding: 60px;
+  padding: 4rem;
   line-height: 30px;
 }
 
@@ -165,7 +174,7 @@ header a:hover {
 }
 
 #ubi-contact .container {
-  padding: 60px;
+  padding: 4rem;
   line-height: 30px;
 }
 
@@ -180,13 +189,19 @@ header a:hover {
 /* Pie de pagina y final */
 
 #footer {
-  background-color: #c4c4c4;
-  border-top: solid 4px #667080;
+  /* background-color: #c4c4c4; */
+  background: #009688;
+  border-top: solid 4px #ffe711bd;
+}
+
+#footer a {
+  color: #fff;
 }
 
 #footer h2 {
   text-align: center;
-  color: #667080;
+  color: #ffffff;
+  padding: 1rem;
 }
 
 #footer .container {
@@ -201,9 +216,9 @@ header a:hover {
   border: solid 3px #667080;
   max-width: 600px;
   width: 50vw;
-  height: 40px;
-  padding-left: 10px;
-  margin-bottom: 50px;
+  height: 2.5rem;
+  padding-left: 0.8rem;
+  margin-bottom: 3rem;
 }
 
 #footer img {
@@ -221,7 +236,6 @@ header a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  border-top: solid 4px #ffe711bd;
 }
 
 #check h2 h3 {
@@ -264,7 +278,7 @@ input {
 }
 
 #eventos .container {
-  padding: 60px;
+  padding: 4rem;
   line-height: 30px;
   display: flex;
   flex-flow: column wrap;
@@ -312,7 +326,7 @@ input {
 }
 
 #cabanas .container {
-  padding: 60px;
+  padding: 4rem;
   line-height: 30px;
 }
 
@@ -320,7 +334,7 @@ input {
   display: grid;
   background-color: #39816b27;
   border-radius: 10px;
-  padding: 60px;
+  padding: 4rem;
   grid-template-areas:
     "equipamiento1 texto1"
     "texto2 equipamiento2"
@@ -380,7 +394,7 @@ input {
   flex-flow: column wrap;
   align-items: center;
   justify-content: space-evenly;
-  padding: 60px 300px;
+  padding: 4rem 18rem;
 }
 
 #register .container form input {
@@ -398,4 +412,17 @@ input {
   height: 400px;
   border-radius: 10px;
   margin: 10px;
+}
+
+@media screen and (min-width: 480px) {
+}
+@media screen and (min-width: 576px) {
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 992px) {
+}
+@media screen and (min-width: 1024px) {
+}
+@media screen and (min-width: 1440px) {
 }
