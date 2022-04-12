@@ -8,12 +8,7 @@
   text-decoration: none;
   border: none;
   outline: none;
-}
-body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-}
-a {
-  text-decoration: none;
 }
 h1 {
   font-size: 2.5rem;
@@ -233,58 +228,15 @@ header a:hover {
   font-size: 1rem;
 }
 
-/* Pagina de reservas */
-
-#check {
-  background-image: linear-gradient(0deg, #00000080, #00000080),
-    url("../assets/images/foto4.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
-
-#check h2 h3 {
-  text-align: center;
-  text-shadow: 5px 5px 10px #00000080;
-}
-
-#check .container {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  line-height: 30px;
-  height: 60vh;
-  display: flex;
-  flex-flow: column wrap;
-  height: 60vh;
-}
-
-.container table {
-  color: #667080;
-  align-items: center;
-  padding: 0px;
-  margin: 0px;
-  max-width: 800px;
-  background-color: #ffffff;
-  border: solid;
-  padding: 10px;
-}
-
-.container table form select,
-input {
-  padding: 8px;
-}
-
 /* Pagina de eventos */
 
 #eventos h2 {
   text-align: center;
+  padding: 2rem;
 }
 
 #eventos .container {
-  padding: 4rem;
-  line-height: 30px;
+  line-height: 2rem;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
@@ -292,64 +244,55 @@ input {
 
 #eventos .container div:nth-child(odd) {
   background: #39816b27;
-  border-radius: 10px;
-  padding: 30px;
+  border-radius: 1rem;
+  padding: 2rem;
   text-align: center;
-  margin-bottom: 5%;
-  margin-top: 5%;
+  margin: 1rem 0rem;
 }
 
 #eventos .container div:nth-child(even) {
   background: #c2c2c249;
-  border-radius: 10px;
-  padding: 30px;
+  border-radius: 1rem;
+  padding: 2rem;
   text-align: center;
 }
 
 #eventos img {
-  width: 35vw;
-  height: 350px;
-  border-radius: 10px;
-  margin: 10px;
+  width: 16rem;
+  border-radius: 1rem;
 }
 
 /* Pagina de cabañas */
 
-#cabanas h2 {
-  text-align: center;
-}
-
-#cabanas p {
-  text-align: center;
-}
-
 #cabanas img {
-  width: 35vw;
-  max-height: 400px;
-  max-width: 450px;
-  border-radius: 10px;
+  width: 15rem;
+  border-radius: 0.8rem;
 }
 
 #cabanas .container {
-  padding: 4rem;
-  line-height: 30px;
+  line-height: 2rem;
+  align-items: center;
+  text-align: center;
 }
 
 #cabanas .equipamientos {
   display: grid;
   background-color: #39816b27;
-  border-radius: 10px;
-  padding: 4rem;
-  grid-template-areas:
-    "equipamiento1 texto1"
-    "texto2 equipamiento2"
-    "equipamiento3 texto3"
-    "texto4 equipamiento4"
-    "equipamiento5 texto5";
-  grid-gap: 25px;
 
-  align-items: center;
-  text-align: start;
+  padding: 1rem;
+  grid-template-areas:
+    "equipamiento1"
+    "texto1"
+    "equipamiento2"
+    "texto2"
+    "equipamiento3"
+    "texto3"
+    "equipamiento4"
+    "texto4"
+    "equipamiento5"
+    "texto5";
+
+  grid-gap: 2rem;
 }
 
 .equipamiento1 {
@@ -399,7 +342,7 @@ input {
   flex-flow: column wrap;
   align-items: center;
   justify-content: space-evenly;
-  padding: 4rem 18rem;
+  padding: 2rem;
 }
 
 #register .container form input {
@@ -418,6 +361,7 @@ input {
   border-radius: 10px;
   margin: 10px;
 }
+
 
 @media screen and (min-width: 480px) {
 }
