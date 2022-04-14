@@ -51,7 +51,7 @@ button:hover {
 
 /* Cabecera y menu */
 
-header {
+/* header {
   position: sticky;
   top: 0px;
   background-color: #009688;
@@ -78,6 +78,7 @@ header .container {
 
 header nav {
   padding-bottom: 1rem;
+  position: relative;
 }
 
 header a {
@@ -89,6 +90,60 @@ header a {
 
 header a:hover {
   color: #b1a111bd;
+} */
+
+/* test nav */
+
+header .container {
+  position: sticky;
+  top: 0px;
+  background-color: #009688;
+  border-top: 1rem solid #00796b;
+  border-bottom: solid 0.2rem #ffe711bd;
+}
+
+header .container > .nav-header {
+  display: inline;
+}
+
+header .container > .nav-header > .nav-title {
+  display: inline-block;
+  font-size: 22px;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
+}
+
+header .logo {
+  display: inline-block;
+  font-size: 22px;
+  color: #ecdada;
+  padding: 1rem;
+  
+}
+
+header .container > .nav-btn {
+  display: none;
+}
+
+header .container > .nav-links {
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+header .container > .nav-links > a {
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #efefef;
+}
+
+header .container > .nav-links > a:hover {
+  background-color: #0000004d;
+}
+
+header .container > #nav-check {
+  display: none;
 }
 
 /* Banner principal y bienvenida */
@@ -274,7 +329,7 @@ header a:hover {
 
 #cabanas .container {
   line-height: 2rem;
-  
+
   align-items: center;
   text-align: center;
 }
@@ -368,12 +423,68 @@ header a:hover {
   height: 400px;
   border-radius: 10px;
   margin: 10px;
-  
 }
 
-@media screen and (min-width: 480px) {
+@media (min-width: 480px) {
+  #galeria img {
+    width: 21.6rem;
+    height: 16rem;
+    border-radius: 1.2rem;
+    margin: 0.2rem;
+  }
+  #ubi-contact iframe {
+    max-width: 28rem;
+    width: 22rem;
+    height: 14rem;
+    margin-right: 4rem;
+    border: solid 2px #667080;
+  }
 }
-@media screen and (min-width: 576px) {
+@media (max-width:576px) {
+  header .container > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  header .container > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  header .container > .nav-btn > label:hover,
+  header .container #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  header .container > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  header .container > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  header .container > .nav-links > a {
+    display: block;
+    width: 100%;
+  }
+  header .container > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+  header .container > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
 }
 @media screen and (min-width: 768px) {
 }
