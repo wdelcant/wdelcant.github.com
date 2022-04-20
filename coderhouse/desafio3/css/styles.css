@@ -57,7 +57,7 @@ button {
 
 button:hover {
   background-position: right center;
-  color: #fff;
+  background: #fa0202;
   text-decoration: none;
 }
 
@@ -112,6 +112,10 @@ header a:hover {
   color: #fffffd;
 }
 
+header .linkdirecto {
+  display: none;
+}
+
 /* Banner principal */
 
 #banner {
@@ -147,29 +151,47 @@ header a:hover {
 /* Primera sección - Quienes somos? */
 
 #quienes-somos {
+  padding: 0.5rem;
   background-color: #39816b27;
-  display: flex;
+}
+
+#quienes-somos .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 5px;
+  align-content: center;
   align-items: center;
+  justify-items: center;
   justify-content: center;
 }
-#quienes-somos .container {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 1.5rem;
+
+#quienes-somos .text {
+  grid-area: 1 / 1 / 2 / 2;
+  text-align: left;
+  padding: 0.5rem;
 }
-#quienes-somos .container .text {
-  flex-flow: column nowrap;
-  line-height: 1.5rem;
+#quienes-somos .video {
+  grid-area: 2 / 1 / 3 / 2;
 }
+
+#quienes-somos h2 {
+  text-align: center;
+}
+
+#quienes-somos .container .video iframe {
+  border: solid 0.2rem #ffe711bd;
+  width: 16rem;
+  height: 10rem;
+}
+
 #quienes-somos ul {
   padding: 0.6rem 2rem;
 }
 #quienes-somos ul li {
   font-size: 1rem;
   list-style: disc;
-}
-#quienes-somos .container .video {
-  display: none;
 }
 
 /* galería sección */
@@ -207,64 +229,48 @@ header a:hover {
 }
 
 /* Tercera sección Ubicación y contacto */
-
-#location-contact {
+#location {
   background-color: #39816b27;
-  display: flex;
+  padding: 0.5rem;
+}
+
+#location .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 0.5rem;
+  align-content: center;
   align-items: center;
+  justify-items: center;
   justify-content: center;
-  text-align: left;
-  flex-direction: column;
 }
 
-#location-contact h2 {
-  text-align: center;
+#location .imagen {
+  grid-area: 1 / 1 / 2 / 2;
+  background-image: url("../assets/images/clip.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 10rem;
+  width: 16rem;
 }
 
-#location-contact .container {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 1.5rem;
-  line-height: 1.5rem;
+#location .location-div {
+  grid-area: 2 / 1 / 3 / 2;
 }
 
 /* mapa de ubicación */
 
-#location-contact .container .location {
-  margin: 1rem 0rem;
-  line-height: 2rem;
-}
-
-#location-contact .container .location iframe {
-  width: 16rem;
-  height: 10rem;
+#location .container .location-div iframe {
+  width: 18rem;
+  height: 12rem;
   border: solid 2px #667080;
 }
 
-/* Contacto para que el usuario mande un correo */
-
-#location-contact .container .contact {
-  line-height: 2rem;
-  margin: 2rem 0rem;
-}
-
-#location-contact .container .contact input {
-  width: 16rem;
-  height: 2.5rem;
-  padding-left: 1rem;
-
-  border: 0.1rem solid #667080;
-  border-radius: 0.2rem;
-}
-#location-contact .container .contact textarea {
-  width: 16rem;
-  height: 10rem;
-  padding: 10px;
-  border: 1px solid #667080;
-}
-
-#location-contact button {
-  width: 16rem;
+#location h2 {
+  text-align: center;
 }
 
 /* Pie de pagina y final */
@@ -311,8 +317,40 @@ header a:hover {
   font-size: 1rem;
 }
 
+/* Botón flotante subir*/
+
 .btn-flotante {
-  display: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  background-color: #4caf50;
+  padding: 18px 30px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  transition: all 300ms ease 0ms;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+}
+.btn-flotante:hover {
+  background-color: #ffe711bd;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-7px);
+}
+.rocketfloat {
+  width: 1.4rem;
+}
+
+.btn-grad {
+  background-image: linear-gradient(
+    to right,
+    #02aab0 0%,
+    #00cdac 51%,
+    #02aab0 100%
+  );
 }
 
 /* Pagina de eventos */
@@ -354,14 +392,13 @@ header a:hover {
 /* Pagina de cabañas */
 
 #cabanas img {
-  width: 15rem;
+  width: 14rem;
+  height: 12rem;
   border-radius: 0.8rem;
 }
 
 #cabanas .container {
   line-height: 2rem;
-  max-width: 1440px;
-  margin: auto;
   align-items: center;
   text-align: center;
 }
@@ -441,8 +478,6 @@ header a:hover {
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
-  max-width: 1440px;
-  margin: auto;
 }
 
 #entertainments .container div:nth-child(odd) {
@@ -490,40 +525,70 @@ header a:hover {
   width: 16rem;
 }
 
-/* Pagina de reservas */
-
-#check {
-  background-image: linear-gradient(0deg, #00000080, #00000080),
-    url("../assets/images/foto4.jpg");
-  height: 68vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-}
-
-#check h2 h3 {
-}
-
-#check .container {
-}
-
-.container table {
-}
-
-.container table form select,
-input {
-  padding: 8px;
-}
-
 /* Empiezan los Media por resolución */
 
+@media screen and (min-width: 375px) {
+  /* Tercera sección Ubicación y contacto */
+
+  #location .container .location-div iframe {
+    width: 20rem;
+    height: 12rem;
+    border: solid 2px #667080;
+  }
+
+  #location h2 {
+    text-align: center;
+  }
+}
+
 @media screen and (min-width: 480px) {
+  #quienes-somos .container .video iframe {
+    border: solid 0.2rem #ffe711bd;
+    width: 26rem;
+    height: 14rem;
+  }
+
+  /* galería sección */
+
+  #galeria img {
+    width: 24rem;
+    height: 18rem;
+    border-radius: 1.2rem;
+    margin: 0.2rem;
+  }
+
+  /* Tercera sección Ubicación y contacto */
+
+  #location .container .location-div iframe {
+    width: 26rem;
+    height: 16rem;
+    border: solid 2px #667080;
+  }
+
+  /* Pagina de cabañas */
+
+  #cabanas img {
+    width: 18rem;
+    height: 16rem;
+    border-radius: 0.8rem;
+  }
+
+  #cabanas .container {
+    line-height: 2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  #cabanas h2 {
+    padding: 2rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
   /* logo y menu */
 
   header {
+    z-index: 10;
     position: sticky;
     top: 0px;
   }
@@ -537,9 +602,10 @@ input {
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-size: 1rem;
   }
   header .nav .reg {
-    padding: 0.8rem;
+    padding: 0.5rem;
     background-color: #4caf50;
     color: white;
     font-weight: bold;
@@ -552,14 +618,25 @@ input {
     color: white;
   }
 
+  header a {
+    padding: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ffe711bd;
+  }
+
   header .logo {
     transition: transform 300ms ease-in-out;
+    font-size: 1.4rem;
   }
   .logo:hover {
     transform: translate(0px, 0px) scale(1.3, 1.3);
   }
 
   /* Banner principal */
+  #banner {
+    height: 30vh;
+  }
 
   #banner h1 {
     font-size: 1.5rem;
@@ -576,6 +653,70 @@ input {
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+  /* Primera sección - Quienes somos? */
+
+  #quienes-somos {
+    background-color: #39816b27;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+  }
+
+  /* Pagina de eventos */
+
+  #eventos img {
+    width: 20rem;
+    height: 14rem;
+    border-radius: 1rem;
+  }
+
+  #eventos p {
+    font-size: 1.2rem;
+    margin: 0rem 5rem;
+  }
+
+  /* Pagina de cabañas */
+
+  #cabanas img {
+    width: 20rem;
+    height: 14rem;
+    border-radius: 1rem;
+  }
+
+  #cabanas p {
+    font-size: 1.2rem;
+    margin: 0rem 5rem;
+  }
+
+  #cabanas .container {
+    line-height: 2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  #cabanas h2 {
+    padding: 2rem;
+  }
+
+  /* Pagina de Entretención */
+
+  #entertainments h2 {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  #entertainments img {
+    width: 20rem;
+    height: 14rem;
+    border-radius: 1rem;
+  }
+
+  #entertainments p {
+    font-size: 1.2rem;
+    margin: 0rem 5rem;
   }
 }
 
@@ -613,7 +754,7 @@ input {
   /* Banner principal */
 
   #banner {
-    height: 60vh;
+    height: 30vh;
   }
 
   #banner h1 {
@@ -626,26 +767,256 @@ input {
   #banner button {
     font-size: 1rem;
   }
-}
 
-@media screen and (min-width: 1440px) {
-  /* Banner principal */
-
-  #banner {
-    height: 90vh;
+  #quienes-somos .container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
   }
 
-  #banner h1 {
-    color: white;
-    text-shadow: 0.3rem 0.3rem 0.5rem #00000080;
-    font-size: 3.5rem;
-    padding: 1rem;
+  #quienes-somos .text {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  #quienes-somos .video {
+    grid-area: 1 / 2 / 2 / 3;
   }
 
-  #banner button {
-    font-size: 1.8rem;
+  #quienes-somos .container .video iframe {
+    border: solid 0.2rem #ffe711bd;
+    width: 24rem;
+    height: 14rem;
+    animation: video1 1s ease-in-out 0s 1 normal;
   }
-}
 
-@media screen and (min-width: 1920px) {
+  @keyframes video1 {
+    0% {
+      transform: scaleX(0.4);
+      transform-origin: 100% 100%;
+    }
+
+    100% {
+      transform: scaleX(1);
+      transform-origin: 100% 100%;
+    }
+  }
+
+  /* galería sección */
+
+  #galeria .container {
+    padding: 4rem;
+    line-height: 1.5rem;
+  }
+
+  #galeria .text {
+    line-height: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  #galeria .fotos {
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+  }
+
+  #galeria img {
+    width: 20rem;
+    height: 14rem;
+    border-radius: 1.2rem;
+    margin: 0.2rem;
+    transition: transform 300ms ease-in-out;
+  }
+
+  #galeria img:hover {
+    transform: translate(0px, 0px) scale(1.8, 1.8);
+  }
+
+  /* Tercera sección Ubicación y contacto */
+
+  #location .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0rem;
+    grid-row-gap: 0px;
+    padding: 2rem;
+    line-height: 1.5rem;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  #location .imagen {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  #location .location-div {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+
+  #location {
+    background-color: #39816b27;
+  }
+
+  #location h2 {
+    text-align: center;
+  }
+
+  #location .imagen {
+    background-image: url("../assets/images/clip.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 18rem;
+    height: 12rem;
+  }
+  /* mapa de ubicación */
+
+  #location .container .location-div iframe {
+    width: 35rem;
+    height: 15rem;
+    border: solid 2px #667080;
+  }
+  /* Pagina de eventos */
+
+  #eventos img {
+    width: 24rem;
+    height: 18rem;
+    border-radius: 1rem;
+  }
+
+  #eventos p {
+    font-size: 1.2rem;
+    margin: 0rem 15rem;
+  }
+
+  #eventos h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 2rem;
+  }
+  /* Pagina de cabañas */
+
+  #cabanas img {
+    width: 24rem;
+    height: 18rem;
+    border-radius: 0.8rem;
+  }
+
+  #cabanas .container {
+    line-height: 2rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  #cabanas h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  #cabanas p {
+    font-size: 1.2rem;
+    margin: 0rem 3rem;
+  }
+  /* Pagina de Entretención */
+
+  #entertainments h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  #entertainments .container img {
+    width: 24rem;
+    height: 18rem;
+    border-radius: 1rem;
+  }
+
+  #entertainments p {
+    font-size: 1.2rem;
+    margin: 0rem 15rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    /* Banner principal */
+
+    #banner {
+      height: 90vh;
+    }
+
+    #banner h1 {
+      color: white;
+      text-shadow: 0.3rem 0.3rem 0.5rem #00000080;
+      font-size: 3.5rem;
+      padding: 1rem;
+    }
+
+    #banner button {
+      font-size: 1.8rem;
+    }
+
+    header .linkdirecto {
+      display: inline;
+    }
+
+    #location .container .location-div iframe {
+      width: 45rem;
+      height: 15rem;
+      border: solid 2px #667080;
+    }
+
+    #cabanas h2 {
+      font-size: 1.8rem;
+    }
+
+    #cabanas p {
+      font-size: 1.2rem;
+    }
+
+    #cabanas .equipamientos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-column-gap: 0rem;
+      grid-row-gap: 0rem;
+      background-color: #39816b27;
+      align-content: center;
+      align-items: center;
+      justify-items: center;
+      justify-content: center;
+      padding: 4rem;
+    }
+
+    .equipamiento1 {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .texto1 {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    .texto2 {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    .equipamiento2 {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+    .equipamiento3 {
+      grid-area: 3 / 1 / 4 / 2;
+    }
+    .texto3 {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+    .texto4 {
+      grid-area: 4 / 1 / 5 / 2;
+    }
+    .equipamiento4 {
+      grid-area: 4 / 2 / 5 / 3;
+    }
+    .equipamiento5 {
+      grid-area: 5 / 1 / 6 / 2;
+    }
+    .texto5 {
+      grid-area: 5 / 2 / 6 / 3;
+    }
+  }
 }
