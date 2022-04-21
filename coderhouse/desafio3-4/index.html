@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Cabañas Olmué" content="Arriendo de cabañas en la comuna de Olmué">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./assets/images/cabana.ico">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,60 +20,68 @@
 <body>
     <!-- Logo y menu de navegación -->
     <header>
-        <div class="container">
-            <input type="checkbox" id="nav-check">
-            <a class="logo" href="./index.html">Cabañas Olmué</a>
+        <section id="header">
+            <div class="container">
 
-            <div class="nav-btn">
-                <label for="nav-check">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
+                <a class="logo" href="./index.html"> Cabañas <span>Olmué</span></a>
+
+                <nav class="nav">
+                    <a href="./index.html">Inicio</a>
+                    <a class="linkdirecto" href="#quienes-somos">Quienes somos?</a>
+                    <a class="linkdirecto" href="#galeria">Galería</a>
+                    <a class="linkdirecto" href="#location">Ubicación</a>
+                    <a href="./pages/eventos.html">Eventos</a>
+                    <a href="./pages/cabanas.html">Cabañas</a>
+                    <a href="./pages/entretenciones.html">Entretención</a>
+                    <a class="reg" href="./pages/registrate.html">Regístrate</a>
+                </nav>
+
             </div>
-            <div class="nav-links">
-                <a href="./index.html">Inicio</a>
-                <a href="./pages/eventos.html">Eventos</a>
-                <a href="./pages/cabanas.html">Cabañas</a>
-                <a href="./pages/entretenciones.html">Entretenciones</a>
-                <a href="./pages/registrate.html">Regístrate</a>
-            </div>
-        </div>
+        </section>
     </header>
 
+    <!-- Inicio del contenido -->
     <main>
+        <!-- banner de bienvenida -->
         <section id="banner">
-            <h1>Visita el mejor lugar de relajo en Olmué</h1>
-            <form action="../pages/reservas.html">
+            <h1>Visita el mejor lugar de relajo en <span>Olmué</span></h1>
+            <form action="#">
                 <button>Reserva ahora!</button>
             </form>
         </section>
 
+        <!-- Seccion quienes somos? -->
         <section id="quienes-somos">
             <div class="container">
-                <div class="img-container"></div>
-                <h2>Quienes Somos?</h2>
-                <p>Somos una PYME familiar, arriendo de cabañas totalmente equipadas y amplia piscina.
-                    Contamos con variedad de eventos, tales como:</p>
-                <ul>
-                    <li>Cumpleaños</li>
-                    <li>Matrimonios</li>
-                    <li>Fiestas de empresas</li>
-                    <li>Fiestas de graduaciones</li>
-                    <li>Celebración de Bautizos.</li>
-                    <li>Aniversarios de boda.</li>
-                    <li>Servicios de gastronomia (desayuno, almuerzo y once)</li>
-                </ul>
-                <p> Eso y mucho mas, Te esperamos!</p>
-                <iframe class="video" src="https://www.youtube.com/embed/t4bpIj7vJoM"></iframe>
+                <div class="text">
+                    <div class="img-container"></div>
+                    <h2>Quienes Somos?</h2>
+                    <p>Somos una PYME familiar, arriendo de cabañas totalmente equipadas y amplia piscina.
+                        Contamos con variedad de eventos, tales como:</p>
+                    <ul>
+                        <li>Cumpleaños</li>
+                        <li>Matrimonios</li>
+                        <li>Fiestas de empresas</li>
+                        <li>Fiestas de graduaciones</li>
+                        <li>Celebración de Bautizos.</li>
+                        <li>Aniversarios de boda.</li>
+                        <li>Servicios de gastronomia (desayuno, almuerzo y once)</li>
+                    </ul>
+                    <p> Eso y mucho mas, Te esperamos!</p>
+                </div>
+                <div class="video">
+                    <iframe src="https://www.youtube.com/embed/t4bpIj7vJoM"></iframe>
+                </div>
             </div>
         </section>
-
+        <!-- seccion galeria de imagenes -->
         <section id="galeria">
             <div class="container">
-                <div class="fotos">
+                <div class="text">
                     <h2>Galería de fotos</h2>
                     <p>Puedes ver algunas de nuestras fotos de nuestras cabañas y piscina.</p>
+                </div>
+                <div class="fotos">
                     <span><img src="./assets/images/foto1.jpg" alt="Imagen"></span>
                     <span><img src="./assets/images/foto2.jpg" alt="Imagen"></span>
                     <span><img src="./assets/images/foto3.jpg" alt="Imagen"></span>
@@ -84,21 +93,22 @@
                 </div>
             </div>
         </section>
-
-        <section id="ubi-contact">
+        <!-- sección ubicación y contacto -->
+        <section id="location">
             <div class="container">
-                <div class="ubicacion">
+                <div class="location-div">
                     <h2>Ubicación</h2>
                     <p>Estamos ubicados a pasos del centro, y muy cerca de tu relajo</p>
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3345.6762676335043!2d-71.18030176118798!3d-33.01230948400787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96882ad84803d687%3A0x209184f09caf0471!2zMzPCsDAwJzQ0LjMiUyA3McKwMTAnNDQuNCJX!5e0!3m2!1ses-419!2scl!4v1648320848688!5m2!1ses-419!2scl"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3345.6762676335043!2d-71.18030176118798!3d-33.01230948400787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96882ad84803d687%3A0x209184f09caf0471!2zMzPCsDAwJzQ0LjMiUyA3McKwMTAnNDQuNCJX!5e0!3m2!1ses-419!2scl!4v1648320848688!5m2!1ses-419!2scl"></iframe>
                     <p>London Miraflores 5000, Olmué</p>
                 </div>
+
+                <div class="imagen"></div>
             </div>
         </section>
     </main>
-
+    <!-- Pie de paginado -->
     <footer>
         <section id="footer">
             <div class="container">
@@ -116,10 +126,10 @@
                         <img src="./assets/images/insta.png" alt="Instagram">
                     </a>
                 </div>
-                <div class="footer-suscriptions">
+                <div class="footer-subscriptions">
                     <form>
                         <h3>Recibe nuestras ofertas!</h3>
-                        <input class="barra-suscriptions" type="email" placeholder="Dirección de correo electrónico">
+                        <input class="barra-subscriptions" type="email" placeholder="Dirección de correo electrónico">
                         <button>SUSCRÍBETE</button>
                     </form>
                 </div>
@@ -127,7 +137,7 @@
             </div>
         </section>
     </footer>
-
+    <a href="#" class="btn-flotante">Subir<img class="rocketfloat" src="./assets/images/rocket.png"></a>
 </body>
 
 </html>
