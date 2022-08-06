@@ -87,7 +87,7 @@ function contactForm() {
                 // Si es enviado el formulario este se limpia
                 $form.reset();
             })
-            // Si la respuesta de la API es errónea arroja un error con sweetalert
+            // Si la respuesta de la API es errónea arroja un error con SweetAlert
             .catch((error) => {
                 console.log(error);
                 const Toast = Swal.mixin({
