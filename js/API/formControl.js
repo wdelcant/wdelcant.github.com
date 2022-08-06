@@ -6,7 +6,7 @@ const d = document;
 // Realiza una validación de formulario
 function contactForm() {
     const $form = d.querySelector(".form-reset");
-    $inputs = d.querySelectorAll(".contact-form [required]");
+    $inputs = d.querySelectorAll(".form-reset [required]");
 
     $inputs.forEach((input) => {
         const $span = d.createElement("span");
