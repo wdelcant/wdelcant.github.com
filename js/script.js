@@ -73,8 +73,8 @@ $(document).ready(function () {
     scrollBar: true,
     responsiveWidth: 200,
     navigation: true,
-    navigationTooltips: ["home", "aboutme", "portfolio", "contact", "connect"],
-    anchors: ["home", "aboutme", "portfolio", "contact", "connect"],
+    navigationTooltips: ["home", "aboutme", "skills", "portfolio", "contact", "connect"],
+    anchors: ["home", "aboutme", "skills", "portfolio", "contact", "connect"],
     menu: "#myMenu",
     fitToSection: false,
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
       }
 
       //using index
-      if (index == 2) {
+      if (index == 3) {
         /* animate skill bars */
         $(".skillbar").each(function () {
           $(this)
@@ -124,12 +124,16 @@ $(document).ready(function () {
     $.fn.fullpage.moveTo(2);
   });
 
-  $(document).on("click", "#projects", function () {
+    $(document).on("click", "#skills", function () {
     $.fn.fullpage.moveTo(3);
   });
 
-  $(document).on("click", "#contact", function () {
+  $(document).on("click", "#projects", function () {
     $.fn.fullpage.moveTo(4);
+  });
+
+  $(document).on("click", "#contact", function () {
+    $.fn.fullpage.moveTo(5);
   });
 
   // smooth scrolling
