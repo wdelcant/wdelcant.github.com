@@ -208,19 +208,19 @@ p {
   padding: 1px 1px 5px 5px;
 }
 
-.aboutme {
+.home {
   background: url("../assets/images/fondo.jpg") no-repeat;
   background-size: cover;
 }
 
-.aboutme p {
+.home p {
   color: white;
   font-weight: 100;
   font-size: 20px;
   text-shadow: 0px 0px 5px, 1px 1px 7px black;
 }
 
-.aboutme h1 {
+.home h1 {
   font-size: 3em;
   color: #a065b6;
   font-weight: bold;
@@ -490,19 +490,23 @@ label {
 
 /* footer styles */
 .footer {
-  background: rgb(160, 101, 182);
-  background: -moz-linear-gradient(top, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
-  background: -webkit-linear-gradient(top, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
-  background: linear-gradient(to bottom, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#a065b6", endColorstr="#6f2196",GradientType=0 );
-  height: 100px;
-  padding-top: 10px;
+  background: rgb(98, 62, 111);
+  height: 150px;
+  text-align: center;
+  padding-top: 20px;
 }
 
-.footer p {
+.footer h4 {
   color: white;
   font-weight: bold;
   font-size: 16px;
+}
+
+.copy {
+  padding-top: 20px;
+  color: rgb(153, 153, 153);
+  font-size: 14px;
+  text-align: center;
 }
 
 .social-links a {
