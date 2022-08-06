@@ -38,6 +38,15 @@ p {
   display: block;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+
+}
+
 /* flash alert styles */
 
 .flash-container {
