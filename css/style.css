@@ -1,5 +1,4 @@
 /* general styles */
-
 body {
   font-family: "Raleway", sans-serif !important;
 }
@@ -39,7 +38,6 @@ p {
 }
 
 /* flash alert styles */
-
 .flash-container {
   width: 100%;
   position: fixed;
@@ -57,7 +55,6 @@ p {
 }
 
 /* Nav Screen */
-
 .nav-screen {
   height: 100%;
   z-index: 500;
@@ -75,7 +72,6 @@ p {
 }
 
 /* nav header links */
-
 .nav-brand {
   position: fixed;
   left: 0;
@@ -119,7 +115,6 @@ p {
   float: right;
   padding: 15px;
   font-size: 1.5em;
-  
 }
 
 .header-links a {
@@ -133,10 +128,8 @@ p {
 }
 
 /* slide out nav menu styles */
-
 .nav-container {
   padding-top: 10%;
-  
 }
 
 .nav-links {
@@ -171,19 +164,16 @@ p {
   -moz-transition: all 0.6s ease-in-out;
   transition: all 0.6s ease-in-out;
   text-shadow: 0px 0px 5px, 1px 1px 7px black;
-  
 }
 
 #fp-nav ul li .fp-tooltip {
-  color: #5f5f5f !important;
+  color: #a065b6 !important;
 }
 
 /* Expanding border effect */
-
 .header-links a::after {
   display: block;
   margin: 0 auto;
-  
   margin-top: 5px;
   width: 0;
   height: 2px;
@@ -203,7 +193,6 @@ p {
 }
 
 /* main header section */
-
 .opaque-bg {
   margin-left: auto;
   margin-right: auto;
@@ -231,7 +220,6 @@ p {
 }
 
 /* bouncing arrow */
-
 .fa-chevron-down {
   color: #ffffff !important;
   bottom: 10px;
@@ -244,13 +232,8 @@ p {
 }
 
 /* Scroll down indicator (bouncing) */
-
 @-webkit-keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
+  0%, 20%, 50%, 80%, 100% {
     -webkit-transform: translateY(0);
     transform: translateX(0);
   }
@@ -263,13 +246,8 @@ p {
     transform: translateY(-15px);
   }
 }
-
 @-moz-keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
+  0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
   40% {
@@ -279,13 +257,8 @@ p {
     transform: translateY(-15px);
   }
 }
-
 @keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
+  0%, 20%, 50%, 80%, 100% {
     -ms-transform: translateY(0);
     transform: translateY(0);
   }
@@ -298,16 +271,13 @@ p {
     transform: translateY(-15px);
   }
 }
-
 .bounce {
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite;
 }
 
 /* about section */
-
 /* Skill bars */
-
 .container-skillbar {
   width: 100%;
   padding-top: 30px;
@@ -316,6 +286,7 @@ p {
   height: auto;
   overflow: none;
 }
+
 .skillbar {
   position: relative;
   display: block;
@@ -389,7 +360,6 @@ p {
 }
 
 /* portfolio section */
-
 .content {
   margin-left: auto;
   margin-right: auto;
@@ -418,17 +388,15 @@ p {
 
 #fp-nav ul li a span,
 .fp-slidesNav ul li a span {
-  background: rgba(0, 0, 0, 0.62) !important;
+  background: rgba(160, 101, 182, 0.558) !important;
 }
 
 /* contact us styles */
-
 .fa-paper-plane {
   color: #484848;
 }
 
 /* paper plane shake on hover */
-
 .plane-animated {
   animation-duration: 6s;
   animation-fill-mode: both;
@@ -442,21 +410,13 @@ p {
 }
 
 @keyframes shake {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateX(0);
   }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
+  10%, 30%, 50%, 70%, 90% {
     transform: translateX(-10px);
   }
-  20%,
-  40%,
-  60%,
-  80% {
+  20%, 40%, 60%, 80% {
     transform: translateX(10px);
   }
 }
@@ -465,7 +425,6 @@ p {
 }
 
 /* input field styles */
-
 .contact-form {
   padding: 0px 15px 0px 15px;
 }
@@ -522,29 +481,12 @@ label {
 }
 
 /* footer styles */
-
 .footer {
   background: rgb(160, 101, 182);
-  background: -moz-linear-gradient(
-    top,
-    rgba(160, 101, 182, 1) 0%,
-    rgba(111, 33, 150, 1) 40%,
-    rgba(111, 33, 150, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    top,
-    rgba(160, 101, 182, 1) 0%,
-    rgba(111, 33, 150, 1) 40%,
-    rgba(111, 33, 150, 1) 100%
-  );
-  background: linear-gradient(
-    to bottom,
-    rgba(160, 101, 182, 1) 0%,
-    rgba(111, 33, 150, 1) 40%,
-    rgba(111, 33, 150, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a065b6', endColorstr='#6f2196',GradientType=0 );
-
+  background: -moz-linear-gradient(top, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
+  background: -webkit-linear-gradient(top, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
+  background: linear-gradient(to bottom, rgb(160, 101, 182) 0%, rgb(111, 33, 150) 40%, rgb(111, 33, 150) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#a065b6", endColorstr="#6f2196",GradientType=0 );
   height: 100px;
   padding-top: 10px;
 }
@@ -571,27 +513,21 @@ label {
 }
 
 /* smaller resolution styles */
-
 @media (min-width: 100px) and (max-width: 500px) {
   .fa-bars {
     display: block !important;
   }
-
   .header-links {
     display: none;
   }
 }
-
 /* mobile styles */
-
 @media (min-width: 100px) and (max-width: 400px) {
   .content {
     max-width: 300px;
   }
 }
-
 /* loading screen animation */
-
 .spinner {
   position: fixed;
   width: 100%;
@@ -608,7 +544,6 @@ label {
   height: 100%;
   width: 6px;
   display: inline-block;
-
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
@@ -634,20 +569,15 @@ label {
 }
 
 @-webkit-keyframes sk-stretchdelay {
-  0%,
-  40%,
-  100% {
+  0%, 40%, 100% {
     -webkit-transform: scaleY(0.4);
   }
   20% {
     -webkit-transform: scaleY(1);
   }
 }
-
 @keyframes sk-stretchdelay {
-  0%,
-  40%,
-  100% {
+  0%, 40%, 100% {
     transform: scaleY(0.4);
     -webkit-transform: scaleY(0.4);
   }
@@ -656,69 +586,58 @@ label {
     -webkit-transform: scaleY(1);
   }
 }
-
 .blinking-cursor {
   font-weight: 500;
   margin-left: 4px;
   font-size: 20px;
   color: white !important;
-  -webkit-animation: blink 1s  step-end infinite;
-  -moz-animation: blink  1s step-end infinite;
-  -ms-animation: blink 1s  step-end infinite;
-  -o-animation: blink 1s  step-end infinite;
+  -webkit-animation: blink 1s step-end infinite;
+  -moz-animation: blink 1s step-end infinite;
+  -ms-animation: blink 1s step-end infinite;
+  -o-animation: blink 1s step-end infinite;
   animation: blink 1s step-end infinite;
 }
 
 @keyframes blink {
-  from,
-  to {
+  from, to {
     color: transparent;
   }
   50% {
     color: white;
   }
 }
-
 @-moz-keyframes blink {
-  from,
-  to {
+  from, to {
     color: transparent;
   }
   50% {
     color: white;
   }
 }
-
 @-webkit-keyframes blink {
-  from,
-  to {
+  from, to {
     color: transparent;
   }
   50% {
     color: white;
   }
 }
-
 @-ms-keyframes blink {
-  from,
-  to {
+  from, to {
     color: transparent;
   }
   50% {
     color: white;
   }
 }
-
 @-o-keyframes blink {
-  from,
-  to {
+  from, to {
     color: transparent;
   }
   50% {
     color: white;
   }
 }
-
 .success {
   padding: 1em;
   margin-bottom: 0.75rem;
@@ -742,3 +661,5 @@ label {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
+
+/*# sourceMappingURL=style.css.map */
