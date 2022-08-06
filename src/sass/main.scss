@@ -697,6 +697,28 @@ label {
   100% { opacity: 1.0; }
 }
 
+
+
+// Formulario
+.contact-form-error {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 80%;
+  background-color: red;
+  color: #fff;
+  transition: all 800s ease;
+}
+
+.contact-form-error.is-active {
+  display: block;
+  animation: show-message 1s 1 normal 0s ease-out both;
+}
+
+.none {
+  display: none;
+}
+
 .success {
   padding: 1em;
   margin-bottom: 0.75rem;
