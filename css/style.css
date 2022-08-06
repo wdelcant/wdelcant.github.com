@@ -550,7 +550,7 @@ label {
 }
 
 /* smaller resolution styles */
-@media (min-width: 100px) and (max-width: 500px) {
+@media (min-width: 100px) and (max-width: 700px) {
   .fa-bars {
     display: block !important;
   }
