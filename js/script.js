@@ -71,7 +71,7 @@ $(document).ready(function () {
 
   $("#fullpage").fullpage({
     scrollBar: true,
-    responsiveWidth: 400,
+    responsiveWidth: 200,
     navigation: true,
     navigationTooltips: ["home", "aboutme", "portfolio", "contact", "connect"],
     anchors: ["home", "aboutme", "portfolio", "contact", "connect"],

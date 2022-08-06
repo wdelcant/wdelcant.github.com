@@ -50,7 +50,7 @@ function contactForm() {
         /*
          *  Para activar con tu correo, debes ingresar tu Email donde están los números de mi key
          *  Asi puedes probar la API funcional y ver el resultado en tu correo.
-         * Debes ingresar a https://formsubmit.co/ para mas informacion.
+         * Debes ingresar a https://formsubmit.co/ para mas información.
          */
         //Aqui el usuario debe cambiar el parámetro por su correo y realizar la activación de la API
         fetch("https://formsubmit.co/ajax/5e36ccd515272d990de7549f4ddd264a", {
