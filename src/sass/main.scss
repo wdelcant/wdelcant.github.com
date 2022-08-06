@@ -124,7 +124,7 @@ p {
 
 .header-links a {
   color: #757575;
-  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
 
 .header-links a:hover {
@@ -239,7 +239,7 @@ p {
   cursor: pointer;
   position: absolute;
   opacity: 0;
-  -webkit-transition: 1.2s ease;
+  transition: 1.2s ease;
   text-shadow: 0px 0px 5px, 1px 1px 7px black;
 }
 
