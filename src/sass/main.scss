@@ -700,6 +700,15 @@ label {
 
 
 // Formulario
+.contact-form textarea:focus  {
+  border: 3px solid #a065b6;
+}
+
+.contact-form input:focus  {
+  border: 3px solid #a065b6;
+}
+
+
 .contact-form-error {
   position: absolute;
   top: 10px;

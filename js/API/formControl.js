@@ -41,8 +41,10 @@ function contactForm() {
         e.preventDefault();
         const $loader = d.querySelector(".contact-form-loader"),
             $response = d.querySelector(".contact-form-response");
+        $btn = d.querySelector(".contact-form-button");
 
         $loader.classList.remove("none");
+        $btn.classList.add("none");
 
         // API envía correo electrónico a traves de una petición AJAX
         /*
@@ -61,6 +63,8 @@ function contactForm() {
             // Si la respuesta es correcta toma 3 segundos en realizar el envío
             .then((json) => {
                 console.log(json);
+
+                $btn.classList.remove("none");
                 // agrega un loader debajo del botón enviar
                 $loader.classList.add("none");
                 // remueve el loader una vez realizada la petición
