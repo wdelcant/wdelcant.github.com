@@ -595,55 +595,47 @@ label {
   }
 }
 .blinking-cursor {
-  font-weight: 500;
-  margin-left: 4px;
-  font-size: 20px;
-  color: white !important;
-  -webkit-animation: blink 1s step-end infinite;
-  -moz-animation: blink 1s step-end infinite;
-  -ms-animation: blink 1s step-end infinite;
-  -o-animation: blink 1s step-end infinite;
-  animation: blink 1s step-end infinite;
+  animation-name: parpadeo;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: parpadeo;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
 }
 
-@keyframes blink {
-  from, to {
-    color: transparent;
+@-moz-keyframes parpadeo {
+  0% {
+    opacity: 1;
   }
   50% {
-    color: white;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
-@-moz-keyframes blink {
-  from, to {
-    color: transparent;
+@-webkit-keyframes parpadeo {
+  0% {
+    opacity: 1;
   }
   50% {
-    color: white;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
-@-webkit-keyframes blink {
-  from, to {
-    color: transparent;
+@keyframes parpadeo {
+  0% {
+    opacity: 1;
   }
   50% {
-    color: white;
+    opacity: 0;
   }
-}
-@-ms-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
-  }
-}
-@-o-keyframes blink {
-  from, to {
-    color: transparent;
-  }
-  50% {
-    color: white;
+  100% {
+    opacity: 1;
   }
 }
 .success {
