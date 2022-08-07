@@ -21,7 +21,7 @@
 		})(jQuery);
 
 		// input text for typing animation
-		$("#holder").writeText("FRONTEND DEVELOPER {JR} | REACT");
+		$("#holder").writeText("FRONTEND DEVELOPER </JR>  REACT ");
 
 		// initialize wow.js
 		new WOW().init();

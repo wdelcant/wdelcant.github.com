@@ -97,6 +97,19 @@ p {
   width: 50px;
 }
 
+.nav-brand img:hover {
+  animation:flip 2s infinite;
+}
+
+@keyframes flip{
+  50%{
+    transform: rotateY(180deg);
+  }
+  to{
+    transform: rotateY(360deg);
+  }
+}
+
 .fa-bars {
   display: none !important;
   color: #a065b6;
@@ -581,6 +594,16 @@ label {
   text-align: center;
 }
 
+.copy a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+.copy a:hover {
+  color: #e292ff;
+  text-shadow: 0px 0px 6px, 1px 1px 7px black;
+}
+
 
 .social-links a {
   color: white;
@@ -588,13 +611,28 @@ label {
 }
 
 .social-links a:hover {
-  color: #a065b6;
-  text-shadow: 0px 0px 6px, 1px 1px 7px black;
+  color: #e292ff;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+
+.social-links i:hover {
+  animation:icon 2s infinite;
+  text-shadow: 0px 0px 5px, 1px 1px 7px black;
+}
+
+@keyframes icon{
+
+  50%{
+    transform: rotateY(180deg);
+  }
+  to{
+    transform: rotateY(360deg);
+  }
+
 }
 
 
