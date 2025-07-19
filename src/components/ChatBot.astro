@@ -69,13 +69,41 @@
   <!-- Ventana del chat -->
   <div
     id="chat-window"
-    class="hidden absolute bottom-16 right-0 w-80 h-96 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 overflow-hidden"
+    class="hidden absolute bottom-16 right-0 w-80 h-96 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 overflow-hidden lg:w-96 lg:h-[28rem]"
     style="display: none; flex-direction: column;"
   >
     <!-- Header -->
-    <div class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4">
-      <h3 class="text-white font-semibold">💬 Asistente Wilson</h3>
+    <div class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 relative">
+      <h3 class="text-white font-semibold flex items-center gap-2">
+        💬 Asistente Wilson
+        <!-- Indicador de estado online -->
+        <div class="relative flex items-center">
+          <div class="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+          <div class="absolute w-2 h-2 bg-green-500 rounded-full"></div>
+        </div>
+      </h3>
       <p class="text-purple-100 text-sm">¡Pregúntame sobre mi experiencia!</p>
+
+      <!-- Botón expandir (solo visible en escritorio) -->
+      <button
+        id="expand-chat"
+        class="hidden lg:flex absolute top-3 right-3 text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-all duration-200"
+        title="Expandir chat"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+          ></path>
+        </svg>
+      </button>
     </div>
 
     <!-- Mensajes -->
@@ -130,6 +158,130 @@
         class="hidden text-xs text-gray-400 mt-1 animate-pulse"
       >
         Wilson está escribiendo...
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Chat (solo escritorio) -->
+  <div
+    id="chat-modal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] items-center justify-center p-4"
+    style="display: none;"
+  >
+    <div
+      class="bg-gray-800 rounded-xl shadow-2xl border border-gray-700 w-full max-w-2xl h-[32rem] flex flex-col animate-modal-in"
+    >
+      <!-- Header Modal -->
+      <div
+        class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 rounded-t-xl relative"
+      >
+        <h3 class="text-white font-semibold text-lg flex items-center gap-2">
+          💬 Asistente Wilson
+          <!-- Indicador de estado online -->
+          <div class="relative flex items-center">
+            <div class="w-2.5 h-2.5 bg-green-400 rounded-full animate-ping">
+            </div>
+            <div class="absolute w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+          </div>
+        </h3>
+        <p class="text-purple-100 text-sm">
+          ¡Pregúntame sobre mi experiencia profesional!
+        </p>
+
+        <!-- Botones del modal -->
+        <div class="absolute top-3 right-3 flex gap-2">
+          <button
+            id="minimize-chat"
+            class="text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-all duration-200"
+            title="Minimizar chat"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 12H4"></path>
+            </svg>
+          </button>
+          <button
+            id="close-modal-chat"
+            class="text-white/80 hover:text-white hover:bg-red-500/20 p-1.5 rounded-lg transition-all duration-200"
+            title="Cerrar chat"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensajes Modal -->
+      <div
+        id="chat-messages-modal"
+        class="flex-1 p-6 overflow-y-auto space-y-4 bg-gray-900"
+      >
+        <div class="bg-gray-700 p-4 rounded-lg max-w-md animate-slide-in">
+          <p class="text-gray-200 text-sm">
+            ¡Hola! Soy el asistente de Wilson. ¿En qué puedo ayudarte hoy?
+          </p>
+          <div class="text-xs text-gray-400 mt-2">Pregúntame sobre:</div>
+          <ul class="text-xs text-gray-300 mt-2 ml-3 space-y-1">
+            <li>• Experiencia laboral y proyectos</li>
+            <li>• Habilidades técnicas y herramientas</li>
+            <li>• Formación y certificaciones</li>
+            <li>• Información de contacto</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Input Modal -->
+      <div class="p-4 border-t border-gray-700 bg-gray-800 rounded-b-xl">
+        <div class="flex space-x-3">
+          <input
+            id="chat-input-modal"
+            type="text"
+            placeholder="Escribe tu mensaje aquí..."
+            class="flex-1 bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none text-sm"
+            maxlength="200"
+          />
+          <button
+            id="send-btn-modal"
+            class="bg-purple-500 text-white px-4 py-3 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <svg
+              class="w-5 h-5 transform rotate-90"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          id="typing-indicator-modal"
+          class="hidden text-xs text-gray-400 mt-2 animate-pulse"
+        >
+          Wilson está escribiendo...
+        </div>
       </div>
     </div>
   </div>
@@ -201,6 +353,36 @@
     background: #6b7280;
     border-radius: 2px;
   }
+
+  /* Animaciones del modal */
+  @keyframes modal-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-modal-in {
+    animation: modal-in 0.3s ease-out;
+  }
+
+  /* Scrollbar del modal */
+  #chat-messages-modal::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #chat-messages-modal::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #chat-messages-modal::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 2px;
+  }
 </style>
 
 <script>
@@ -228,6 +410,18 @@
   const notificationPing = document.getElementById('notification-ping');
   const notificationDot = document.getElementById('notification-dot');
 
+  // Elementos del modal
+  const expandChatBtn = document.getElementById('expand-chat');
+  const minimizeChatBtn = document.getElementById('minimize-chat');
+  const closeModalChatBtn = document.getElementById('close-modal-chat');
+  const chatModal = document.getElementById('chat-modal');
+  const chatMessagesModal = document.getElementById('chat-messages-modal');
+  const chatInputModal = document.getElementById('chat-input-modal');
+  const sendBtnModal = document.getElementById('send-btn-modal');
+  const typingIndicatorModal = document.getElementById(
+    'typing-indicator-modal'
+  );
+
   // Estado del chat y notificaciones
   let isOpen = false;
   let notificationShown = false; // Se resetea en cada carga de página (cada visita)
@@ -241,16 +435,19 @@
   // Inicialización
   function initChat() {
     chatToggle?.addEventListener('click', toggleChat);
-    sendBtn?.addEventListener('click', sendMessage);
+    sendBtn?.addEventListener('click', () => sendMessage(false));
     chatInput?.addEventListener('keypress', e => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        sendMessage();
+        sendMessage(false);
       }
     });
 
     // Inicializar sistema de notificaciones
     initNotificationSystem();
+
+    // Inicializar modal del chat
+    initModalChat();
 
     // Focus en input cuando se abre
     const observer = new MutationObserver(() => {
@@ -285,6 +482,91 @@
       }, 100);
     });
   }
+
+  // Inicialización del modal de chat
+  function initModalChat() {
+    // Botón expandir a modal
+    expandChatBtn?.addEventListener('click', expandToModal);
+
+    // Botón minimizar modal
+    minimizeChatBtn?.addEventListener('click', minimizeModal);
+
+    // Botón cerrar modal
+    closeModalChatBtn?.addEventListener('click', closeModal);
+
+    // Cerrar modal al hacer clic en el backdrop
+    chatModal?.addEventListener('click', e => {
+      if (e.target === chatModal) {
+        closeModal();
+      }
+    });
+
+    // Event listeners para el input y botón del modal
+    sendBtnModal?.addEventListener('click', () => sendMessage(true));
+    chatInputModal?.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(true);
+      }
+    });
+  }
+
+  function expandToModal() {
+    if (!window.matchMedia('(min-width: 1024px)').matches) return; // Solo en desktop
+
+    // Copiar mensajes del chat flotante al modal
+    syncMessages(chatMessages, chatMessagesModal);
+
+    // Ocultar chat flotante y mostrar modal
+    chatWindow?.classList.add('hidden');
+    if (chatModal) {
+      chatModal.style.display = 'flex';
+      chatModal.classList.add('animate-modal-in');
+    }
+
+    // Focus en el input del modal
+    setTimeout(() => chatInputModal?.focus(), 100);
+  }
+
+  function minimizeModal() {
+    // Copiar mensajes del modal al chat flotante
+    syncMessages(chatMessagesModal, chatMessages);
+
+    // Ocultar modal y mostrar chat flotante
+    if (chatModal) {
+      chatModal.style.display = 'none';
+      chatModal.classList.remove('animate-modal-in');
+    }
+    chatWindow?.classList.remove('hidden');
+
+    // Focus en el input flotante
+    setTimeout(() => chatInput?.focus(), 100);
+  }
+
+  function closeModal() {
+    // Copiar mensajes del modal al chat flotante
+    syncMessages(chatMessagesModal, chatMessages);
+
+    // Cerrar modal y chat flotante
+    if (chatModal) {
+      chatModal.style.display = 'none';
+      chatModal.classList.remove('animate-modal-in');
+    }
+
+    // Cerrar chat
+    toggleChat();
+  }
+
+  function syncMessages(source: Element | null, target: Element | null) {
+    if (!source || !target) return;
+
+    // Copiar contenido HTML de los mensajes
+    target.innerHTML = source.innerHTML;
+
+    // Scroll al final
+    target.scrollTop = target.scrollHeight;
+  }
+
   function showChatNotification() {
     if (notificationShown || isOpen) return;
 
@@ -395,21 +677,28 @@
     }
   }
 
-  async function sendMessage() {
-    const input = chatInput as HTMLInputElement;
-    const button = sendBtn as HTMLButtonElement;
+  async function sendMessage(isModal = false) {
+    const input = isModal
+      ? (chatInputModal as HTMLInputElement)
+      : (chatInput as HTMLInputElement);
+    const button = isModal
+      ? (sendBtnModal as HTMLButtonElement)
+      : (sendBtn as HTMLButtonElement);
+    const messagesContainer = isModal ? chatMessagesModal : chatMessages;
+    const typing = isModal ? typingIndicatorModal : typingIndicator;
+
     const message = input?.value.trim();
     if (!message || button?.disabled) return;
 
     // Deshabilitar input
-    setInputState(false);
+    setInputState(false, isModal);
 
     // Agregar mensaje del usuario
-    addMessage(message, 'user');
+    addMessage(message, 'user', messagesContainer);
     input.value = '';
 
     // Mostrar indicador de escritura
-    showTypingIndicator();
+    showTypingIndicator(typing);
 
     try {
       // Enviar a N8N webhook
@@ -436,20 +725,29 @@
       await delay(CONFIG.TYPING_DELAY);
 
       // Agregar respuesta del bot
-      addMessage(data.response || CONFIG.ERROR_MESSAGE, 'bot');
+      addMessage(
+        data.response || CONFIG.ERROR_MESSAGE,
+        'bot',
+        messagesContainer
+      );
     } catch (error) {
       console.error('Error de chat:', error);
       await delay(CONFIG.TYPING_DELAY);
-      addMessage(CONFIG.ERROR_MESSAGE, 'bot');
+      addMessage(CONFIG.ERROR_MESSAGE, 'bot', messagesContainer);
     } finally {
-      hideTypingIndicator();
-      setInputState(true);
-      (chatInput as HTMLInputElement)?.focus();
+      hideTypingIndicator(typing);
+      setInputState(true, isModal);
+      input?.focus();
     }
   }
 
-  function addMessage(text: string, sender: 'user' | 'bot') {
-    if (!chatMessages) return;
+  function addMessage(
+    text: string,
+    sender: 'user' | 'bot',
+    container: Element | null = null
+  ) {
+    const targetContainer = container || chatMessages;
+    if (!targetContainer) return;
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `${sender === 'user' ? 'ml-8 bg-purple-500 self-end' : 'mr-8 bg-gray-700'} p-3 rounded-lg max-w-xs animate-slide-in`;
@@ -467,7 +765,7 @@
 
     messageDiv.appendChild(messageText);
     messageDiv.appendChild(timestamp);
-    chatMessages.appendChild(messageDiv);
+    targetContainer.appendChild(messageDiv);
 
     // Guardar en historial
     messageHistory.push({ text, sender, timestamp: Date.now() });
@@ -478,20 +776,26 @@
     }
 
     // Scroll al final
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    targetContainer.scrollTop = targetContainer.scrollHeight;
   }
 
-  function showTypingIndicator() {
-    typingIndicator?.classList.remove('hidden');
+  function showTypingIndicator(indicator: Element | null = null) {
+    const targetIndicator = indicator || typingIndicator;
+    targetIndicator?.classList.remove('hidden');
   }
 
-  function hideTypingIndicator() {
-    typingIndicator?.classList.add('hidden');
+  function hideTypingIndicator(indicator: Element | null = null) {
+    const targetIndicator = indicator || typingIndicator;
+    targetIndicator?.classList.add('hidden');
   }
 
-  function setInputState(enabled: boolean) {
-    const input = chatInput as HTMLInputElement;
-    const button = sendBtn as HTMLButtonElement;
+  function setInputState(enabled: boolean, isModal = false) {
+    const input = isModal
+      ? (chatInputModal as HTMLInputElement)
+      : (chatInput as HTMLInputElement);
+    const button = isModal
+      ? (sendBtnModal as HTMLButtonElement)
+      : (sendBtn as HTMLButtonElement);
     if (input) input.disabled = !enabled;
     if (button) button.disabled = !enabled;
   }
