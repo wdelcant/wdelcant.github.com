@@ -1,4 +1,7 @@
 ---
+import ChatBot from '../components/ChatBot.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -43,6 +46,10 @@ const {
   </head>
   <body class="bg-gray-900 text-white font-raleway overflow-x-hidden">
     <slot />
+    <!-- Scroll to Top Button -->
+    <ScrollToTop />
+    <!-- Chatbot Widget -->
+    <ChatBot />
   </body>
 </html>
 

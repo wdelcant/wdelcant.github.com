@@ -1,0 +1,217 @@
+---
+// Scroll to top button component
+---
+
+<button
+  id="scroll-to-top"
+  class="fixed bottom-10 right-24 z-40 bg-gray-800/90 hover:bg-gray-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none backdrop-blur-sm border border-gray-600/50"
+  aria-label="Volver arriba"
+  title="Volver arriba"
+>
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<style>
+  #scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Hover effects */
+  #scroll-to-top:hover {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+    border-color: #8b5cf6;
+  }
+
+  /* En pantallas pequeñas (móviles), mover a la izquierda */
+  @media (max-width: 640px) {
+    #scroll-to-top {
+      bottom: 7rem;
+      right: 1.5rem;
+      left: auto;
+    }
+  }
+
+  /* En pantallas medianas (tablets), ajustar posición */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    #scroll-to-top {
+      right: 7rem;
+    }
+  }
+
+  /* Cuando el chat está abierto, mover la flecha más arriba */
+  .chat-open #scroll-to-top {
+    bottom: 28rem;
+    transition: all 0.3s ease;
+  }
+
+  /* En móviles con chat abierto */
+  @media (max-width: 640px) {
+    .chat-open #scroll-to-top {
+      bottom: 26rem;
+      right: 1.5rem;
+    }
+  }
+
+  /* En tablets con chat abierto */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .chat-open #scroll-to-top {
+      bottom: 28rem;
+      right: 7rem;
+    }
+  }
+
+  /* Animación de pulso cuando aparece */
+  @keyframes pulse-appear {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+    }
+    50% {
+      transform: translateY(0) scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  #scroll-to-top.visible {
+    animation: pulse-appear 0.5s ease-out;
+  }
+</style>
+
+<script>
+  // Scroll to top functionality
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+  // Mostrar/ocultar el botón basado en scroll
+  function toggleScrollButton() {
+    if (!scrollToTopBtn) return;
+
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    // Mostrar después de hacer scroll al menos 30% de la ventana
+    if (scrollY > windowHeight * 0.3) {
+      scrollToTopBtn.classList.add('visible');
+    } else {
+      scrollToTopBtn.classList.remove('visible');
+    }
+  }
+
+  // Scroll suave hacia arriba con diferentes velocidades según la distancia
+  function scrollToTop() {
+    const scrollY = window.scrollY;
+    const duration = Math.min(Math.max(scrollY / 5, 500), 2000); // Entre 500ms y 2s
+
+    const startTime = performance.now();
+    const startY = scrollY;
+
+    function animateScroll(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Función de easing para scroll más suave
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+
+      window.scrollTo(0, startY * (1 - easeOutCubic));
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    }
+
+    requestAnimationFrame(animateScroll);
+  }
+
+  // Event listeners
+  scrollToTopBtn?.addEventListener('click', scrollToTop);
+
+  // Throttle para optimizar performance
+  let ticking = false;
+
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        toggleScrollButton();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestTick);
+
+  // Detectar cuando el chat está abierto para ajustar posición
+  function observeChatState() {
+    const chatWindow = document.getElementById('chat-window');
+    const body = document.body;
+
+    if (!chatWindow) return;
+
+    // Observar cambios en las clases del chat
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'class'
+        ) {
+          const isHidden = chatWindow.classList.contains('hidden');
+
+          if (isHidden) {
+            body.classList.remove('chat-open');
+          } else {
+            body.classList.add('chat-open');
+          }
+        }
+      });
+    });
+
+    observer.observe(chatWindow, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    // También observar cambios en style.display
+    const styleObserver = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'style'
+        ) {
+          const display = chatWindow.style.display;
+
+          if (display === 'none' || display === '') {
+            body.classList.remove('chat-open');
+          } else if (display === 'flex') {
+            body.classList.add('chat-open');
+          }
+        }
+      });
+    });
+
+    styleObserver.observe(chatWindow, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    toggleScrollButton(); // Verificar estado inicial
+    observeChatState(); // Observar cambios en el chat
+  });
+
+  // Manejar cambios de orientación en móviles
+  window.addEventListener('orientationchange', () => {
+    setTimeout(toggleScrollButton, 100);
+  });
+</script>

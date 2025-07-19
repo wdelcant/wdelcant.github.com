@@ -1,0 +1,327 @@
+---
+// Chatbot component with N8N integration
+---
+
+<div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
+  <!-- Botón de toggle -->
+  <button
+    id="chat-toggle"
+    class="bg-gradient-to-r from-purple-500 to-cyan-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center"
+  >
+    <svg
+      id="chat-icon"
+      class="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 12h.01M12 12h.01M16 12h.01M21 20l-7-7H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v7a2 2 0 01-2 2z"
+      ></path>
+    </svg>
+    <svg
+      id="close-icon"
+      class="w-6 h-6 hidden"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Ventana del chat -->
+  <div
+    id="chat-window"
+    class="hidden absolute bottom-16 right-0 w-80 h-96 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 overflow-hidden"
+    style="display: none; flex-direction: column;"
+  >
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4">
+      <h3 class="text-white font-semibold">💬 Asistente Wilson</h3>
+      <p class="text-purple-100 text-sm">¡Pregúntame sobre mi experiencia!</p>
+    </div>
+
+    <!-- Mensajes -->
+    <div
+      id="chat-messages"
+      class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-900"
+    >
+      <div class="bg-gray-700 p-3 rounded-lg max-w-xs animate-slide-in">
+        <p class="text-gray-200 text-sm">
+          ¡Hola! Soy el asistente de Wilson. ¿En qué puedo ayudarte?
+        </p>
+        <div class="text-xs text-gray-400 mt-1">Pregúntame sobre:</div>
+        <ul class="text-xs text-gray-300 mt-1 ml-2">
+          <li>• Experiencia laboral</li>
+          <li>• Habilidades técnicas</li>
+          <li>• Proyectos realizados</li>
+          <li>• Contacto directo</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="p-4 border-t border-gray-700 bg-gray-800">
+      <div class="flex space-x-2">
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Escribe tu mensaje..."
+          class="flex-1 bg-gray-700 text-white p-2 rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none text-sm"
+          maxlength="200"
+        />
+        <button
+          id="send-btn"
+          class="bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+      <div
+        id="typing-indicator"
+        class="hidden text-xs text-gray-400 mt-1 animate-pulse"
+      >
+        Wilson está escribiendo...
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  #chat-messages::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #chat-messages::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #chat-messages::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  // Configuración del chatbot
+  const CONFIG = {
+    N8N_WEBHOOK_URL: 'https://tu-n8n-instance.com/webhook/chatbot', // Reemplaza con tu URL real
+    MAX_MESSAGES: 20,
+    TYPING_DELAY: 1000,
+    ERROR_MESSAGE:
+      'Lo siento, no pude procesar tu mensaje en este momento. ¿Podrías contactarme directamente a wdelcanto@gmail.com?',
+  };
+
+  // Elementos del DOM
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatInput = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('send-btn');
+  const chatMessages = document.getElementById('chat-messages');
+  const typingIndicator = document.getElementById('typing-indicator');
+  const chatIcon = document.getElementById('chat-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  // Estado del chat
+  let isOpen = false;
+  let messageHistory: Array<{
+    text: string;
+    sender: 'user' | 'bot';
+    timestamp: number;
+  }> = [];
+
+  // Inicialización
+  function initChat() {
+    chatToggle?.addEventListener('click', toggleChat);
+    sendBtn?.addEventListener('click', sendMessage);
+    chatInput?.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Focus en input cuando se abre
+    const observer = new MutationObserver(() => {
+      if (!chatWindow?.classList.contains('hidden')) {
+        chatInput?.focus();
+      }
+    });
+    if (chatWindow) {
+      observer.observe(chatWindow, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+    }
+  }
+
+  function toggleChat() {
+    isOpen = !isOpen;
+    const window = chatWindow as HTMLElement;
+
+    if (isOpen) {
+      window.classList.remove('hidden');
+      window.style.display = 'flex';
+      chatIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      (chatInput as HTMLInputElement)?.focus();
+    } else {
+      window.classList.add('hidden');
+      window.style.display = 'none';
+      chatIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  }
+
+  async function sendMessage() {
+    const input = chatInput as HTMLInputElement;
+    const button = sendBtn as HTMLButtonElement;
+    const message = input?.value.trim();
+    if (!message || button?.disabled) return;
+
+    // Deshabilitar input
+    setInputState(false);
+
+    // Agregar mensaje del usuario
+    addMessage(message, 'user');
+    input.value = '';
+
+    // Mostrar indicador de escritura
+    showTypingIndicator();
+
+    try {
+      // Enviar a N8N webhook
+      const response = await fetch(CONFIG.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+          timestamp: new Date().toISOString(),
+          userId: getOrCreateUserId(),
+          history: messageHistory.slice(-5), // Últimos 5 mensajes para contexto
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Simular delay de escritura
+      await delay(CONFIG.TYPING_DELAY);
+
+      // Agregar respuesta del bot
+      addMessage(data.response || CONFIG.ERROR_MESSAGE, 'bot');
+    } catch (error) {
+      console.error('Error de chat:', error);
+      await delay(CONFIG.TYPING_DELAY);
+      addMessage(CONFIG.ERROR_MESSAGE, 'bot');
+    } finally {
+      hideTypingIndicator();
+      setInputState(true);
+      (chatInput as HTMLInputElement)?.focus();
+    }
+  }
+
+  function addMessage(text: string, sender: 'user' | 'bot') {
+    if (!chatMessages) return;
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `${sender === 'user' ? 'ml-8 bg-purple-500 self-end' : 'mr-8 bg-gray-700'} p-3 rounded-lg max-w-xs animate-slide-in`;
+
+    const messageText = document.createElement('p');
+    messageText.className = 'text-white text-sm';
+    messageText.textContent = text;
+
+    const timestamp = document.createElement('div');
+    timestamp.className = 'text-xs opacity-75 mt-1';
+    timestamp.textContent = new Date().toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    messageDiv.appendChild(messageText);
+    messageDiv.appendChild(timestamp);
+    chatMessages.appendChild(messageDiv);
+
+    // Guardar en historial
+    messageHistory.push({ text, sender, timestamp: Date.now() });
+
+    // Limitar historial
+    if (messageHistory.length > CONFIG.MAX_MESSAGES) {
+      messageHistory = messageHistory.slice(-CONFIG.MAX_MESSAGES);
+    }
+
+    // Scroll al final
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function showTypingIndicator() {
+    typingIndicator?.classList.remove('hidden');
+  }
+
+  function hideTypingIndicator() {
+    typingIndicator?.classList.add('hidden');
+  }
+
+  function setInputState(enabled: boolean) {
+    const input = chatInput as HTMLInputElement;
+    const button = sendBtn as HTMLButtonElement;
+    if (input) input.disabled = !enabled;
+    if (button) button.disabled = !enabled;
+  }
+
+  function getOrCreateUserId(): string {
+    let userId = localStorage.getItem('chatbot-user-id');
+    if (!userId) {
+      userId =
+        'visitor-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('chatbot-user-id', userId);
+    }
+    return userId;
+  }
+
+  function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', initChat);
+</script>
