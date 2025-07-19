@@ -8,7 +8,7 @@ const stats = getExperienceStats();
 
 <section
   id="home"
-  class="min-h-screen flex items-center justify-center relative overflow-hidden"
+  class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 md:pt-0"
 >
   <!-- Background gradient -->
   <div
@@ -34,10 +34,10 @@ const stats = getExperienceStats();
     </div>
   </div>
 
-  <div class="container mx-auto px-6 relative z-10">
+  <div class="container mx-auto px-4 sm:px-6 relative z-10">
     <div class="text-center">
       <!-- Main Title -->
-      <h1 class="text-6xl md:text-8xl font-bold mb-8">
+      <h1 class="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 sm:mb-8">
         <span
           class="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-gradient-x"
         >
@@ -49,7 +49,7 @@ const stats = getExperienceStats();
 
       <!-- Typing Animation -->
       <div class="mb-12">
-        <p class="text-2xl md:text-3xl text-gray-300 h-10">
+        <p class="text-xl sm:text-2xl md:text-3xl text-gray-300 h-10">
           <span id="typed-text"></span>
           <span class="animate-pulse">|</span>
         </p>
@@ -57,7 +57,7 @@ const stats = getExperienceStats();
 
       <!-- Description -->
       <p
-        class="text-lg md:text-xl text-gray-400 max-w-4xl mx-auto mb-12 leading-relaxed"
+        class="text-base sm:text-lg md:text-xl text-gray-400 max-w-4xl mx-auto mb-12 leading-relaxed px-4"
       >
         Analista especialista en IT con más de {stats.totalYearsDisplay} años de
         experiencia. Con vasta experiencia en desarrollo full stack, automatización
@@ -66,30 +66,32 @@ const stats = getExperienceStats();
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <div
+        class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4"
+      >
         <a
           href="#projects"
-          class="px-8 py-4 bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-center"
         >
           Ver Proyectos
         </a>
         <a
           href="#contact"
-          class="px-8 py-4 border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
+          class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 text-center"
         >
           Contacto
         </a>
         <a
           href="/cv_wdelcanto.pdf"
           target="_blank"
-          class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
+          class="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 text-center"
         >
           Descargar CV
         </a>
       </div>
 
       <!-- Scroll Indicator -->
-      <div class="mt-20 flex justify-center">
+      <div class="mt-12 sm:mt-20 flex justify-center">
         <a
           href="#about"
           class="text-gray-400 hover:text-white transition-colors duration-300 animate-bounce"
