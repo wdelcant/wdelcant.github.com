@@ -6,8 +6,20 @@
   <!-- Botón de toggle -->
   <button
     id="chat-toggle"
-    class="bg-gradient-to-r from-purple-500 to-cyan-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center"
+    class="bg-gradient-to-r from-purple-500 to-cyan-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center cursor-pointer relative"
   >
+    <!-- Indicador de notificación -->
+    <div
+      id="notification-ping"
+      class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-ping hidden"
+    >
+    </div>
+    <div
+      id="notification-dot"
+      class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full hidden"
+    >
+    </div>
+
     <svg
       id="chat-icon"
       class="w-6 h-6"
@@ -80,10 +92,10 @@
         />
         <button
           id="send-btn"
-          class="bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           <svg
-            class="w-5 h-5"
+            class="w-5 h-5 transform rotate-90"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -118,8 +130,46 @@
     }
   }
 
+  @keyframes bounce-attention {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    40% {
+      transform: translateY(-10px) scale(1.05);
+    }
+    60% {
+      transform: translateY(-5px) scale(1.02);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+      box-shadow:
+        0 4px 20px rgba(139, 92, 246, 0.6),
+        0 0 30px rgba(139, 92, 246, 0.4);
+    }
+  }
+
   .animate-slide-in {
     animation: slide-in 0.3s ease-out;
+  }
+
+  .bounce-attention {
+    animation:
+      bounce-attention 2s ease-in-out 3,
+      glow-pulse 2s ease-in-out 3;
+  }
+
+  .notification-active {
+    animation: glow-pulse 3s ease-in-out infinite;
   }
 
   #chat-messages::-webkit-scrollbar {
@@ -142,6 +192,9 @@
     N8N_WEBHOOK_URL: 'https://tu-n8n-instance.com/webhook/chatbot', // Reemplaza con tu URL real
     MAX_MESSAGES: 20,
     TYPING_DELAY: 1000,
+    SCROLL_THRESHOLD: 500, // Píxeles de scroll antes de mostrar notificación
+    NOTIFICATION_SOUND: '/sounds/notification.wav', // Archivo de sonido de notificación
+    SOUND_VOLUME: 1, // Volumen del sonido (0.0 - 1.0)
     ERROR_MESSAGE:
       'Lo siento, no pude procesar tu mensaje en este momento. ¿Podrías contactarme directamente a wilsondelcanto.redes@gmail.com?',
   };
@@ -155,9 +208,13 @@
   const typingIndicator = document.getElementById('typing-indicator');
   const chatIcon = document.getElementById('chat-icon');
   const closeIcon = document.getElementById('close-icon');
+  const notificationPing = document.getElementById('notification-ping');
+  const notificationDot = document.getElementById('notification-dot');
 
-  // Estado del chat
+  // Estado del chat y notificaciones
   let isOpen = false;
+  let notificationShown = false; // Se resetea en cada carga de página (cada visita)
+  let scrollThreshold = CONFIG.SCROLL_THRESHOLD;
   let messageHistory: Array<{
     text: string;
     sender: 'user' | 'bot';
@@ -175,6 +232,9 @@
       }
     });
 
+    // Inicializar sistema de notificaciones
+    initNotificationSystem();
+
     // Focus en input cuando se abre
     const observer = new MutationObserver(() => {
       if (!chatWindow?.classList.contains('hidden')) {
@@ -189,6 +249,114 @@
     }
   }
 
+  // Sistema de notificaciones por scroll
+  function initNotificationSystem() {
+    if (notificationShown) return;
+
+    let scrollTimer: ReturnType<typeof setTimeout>;
+
+    // La notificación se activa UNA VEZ por visita/sesión
+    // Se resetea automáticamente al recargar o reabrir la página
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const scrollY = window.scrollY;
+
+        if (scrollY > scrollThreshold && !notificationShown && !isOpen) {
+          showChatNotification();
+        }
+      }, 100);
+    });
+  }
+  function showChatNotification() {
+    if (notificationShown || isOpen) return;
+
+    // Mostrar indicadores visuales
+    notificationPing?.classList.remove('hidden');
+    notificationDot?.classList.remove('hidden');
+
+    // Agregar animación de bounce al botón
+    chatToggle?.classList.add('bounce-attention');
+
+    // Reproducir sonido suave
+    playNotificationSound();
+
+    // Marcar como mostrada (solo para esta sesión/visita)
+    // Se resetea automáticamente al recargar la página
+    notificationShown = true;
+
+    // Remover animación después de 6 segundos
+    setTimeout(() => {
+      chatToggle?.classList.remove('bounce-attention');
+      chatToggle?.classList.add('notification-active');
+    }, 6000);
+  }
+
+  function hideNotification() {
+    notificationPing?.classList.add('hidden');
+    notificationDot?.classList.add('hidden');
+    chatToggle?.classList.remove('notification-active', 'bounce-attention');
+  }
+
+  function playNotificationSound() {
+    try {
+      // Crear elemento de audio para reproducir el archivo
+      const audio = new Audio(CONFIG.NOTIFICATION_SOUND);
+
+      // Configurar volumen desde la configuración
+      audio.volume = CONFIG.SOUND_VOLUME;
+
+      // Configurar para reproducir solo una vez
+      audio.loop = false;
+
+      // Reproducir el sonido
+      audio.play().catch(error => {
+        console.log('No se pudo reproducir el audio:', error);
+        // Fallback al sonido generado por Web Audio API
+        playGeneratedSound();
+      });
+    } catch (error) {
+      console.log('Audio no disponible:', error);
+      // Fallback al sonido generado
+      playGeneratedSound();
+    }
+  }
+
+  function playGeneratedSound() {
+    // Función de respaldo usando Web Audio API (sonido generado)
+    try {
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      // Configurar sonido suave y agradable
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(
+        1000,
+        audioContext.currentTime + 0.1
+      );
+
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(
+        0.1,
+        audioContext.currentTime + 0.05
+      );
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.3
+      );
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (error) {
+      console.log('Web Audio API no disponible:', error);
+    }
+  }
+
   function toggleChat() {
     isOpen = !isOpen;
     const window = chatWindow as HTMLElement;
@@ -199,6 +367,9 @@
       chatIcon?.classList.add('hidden');
       closeIcon?.classList.remove('hidden');
       (chatInput as HTMLInputElement)?.focus();
+
+      // Ocultar notificación al abrir el chat
+      hideNotification();
     } else {
       window.classList.add('hidden');
       window.style.display = 'none';
@@ -272,7 +443,7 @@
 
     const timestamp = document.createElement('div');
     timestamp.className = 'text-xs opacity-75 mt-1';
-    timestamp.textContent = new Date().toLocaleTimeString('es-ES', {
+    timestamp.textContent = new Date().toLocaleTimeString('es-CL', {
       hour: '2-digit',
       minute: '2-digit',
     });
