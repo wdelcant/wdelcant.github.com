@@ -86,12 +86,7 @@ export const experiences: Experience[] = [
       'Documentación y seguimiento de casos de alto impacto',
       'Colaboración con diferentes áreas del holding para continuidad del negocio',
     ],
-    technologies: [
-      'ITIL',
-      'ServiceNow',
-      'Problem Management',
-      'Incident Management',
-    ],
+    technologies: ['ITIL', 'Jira', 'Problem Management', 'Incident Management'],
     achievements: [
       'Gestión exitosa de problemas críticos del holding',
       'Mejora en tiempos de resolución de incidentes',

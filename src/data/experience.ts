@@ -76,22 +76,21 @@ export const experiences: Experience[] = [
     duration: '9+ months', // This will be overridden by dynamic calculation
     location: 'Chile, Hybrid',
     workType: 'Full-time',
-    description: 'Problem manager corp for the holding company falabella',
+    description:
+      'Problem Manager Corp for the Holding Company Falabella. Supported the IT Reporting area by automating data flows and improving alert processes, in addition to managing problem resolution across the organization.',
     startDate: '2024-10-01', // Start date for automatic calculation
     isCurrentPosition: true,
     responsibilities: [
       'Análisis y gestión de problemas corporativos para el holding Falabella',
-      'Coordinación de equipos técnicos para resolución de incidentes críticos',
-      'Implementación de mejores prácticas en gestión de problemas',
       'Documentación y seguimiento de casos de alto impacto',
       'Colaboración con diferentes áreas del holding para continuidad del negocio',
+      'Análisis de tendencias y patrones en incidentes para prevención futura',
+      'Desarrollo de informes y métricas de rendimiento del servicio',
+      'Automatizaciones de aplicaciones y flujos permitiendo optimizar tiempos manuales',
+      'Mejora de procesos de alerta y notificación automatizadas para incidentes críticos',
+      'Integración de herramientas como Jira, Confluence, GCP, Powerautomate, PowerApps, etc',
     ],
-    technologies: [
-      'ITIL',
-      'ServiceNow',
-      'Problem Management',
-      'Incident Management',
-    ],
+    technologies: ['ITIL', 'Jira', 'Confluence' , 'Google Cloud', 'PowerAutomate', 'PowerApps'],
     achievements: [
       'Gestión exitosa de problemas críticos del holding',
       'Mejora en tiempos de resolución de incidentes',
@@ -136,7 +135,7 @@ export const experiences: Experience[] = [
     id: 3,
     title: 'IT Support Specialist',
     company: 'GlobalData',
-    companyType: 'Data Analytics Company',
+    companyType: 'Telecommunications Company',
     period: 'Jan 2023 - Jun 2023',
     duration: '6 months',
     location: 'Coquimbo Region, Chile',
@@ -163,6 +162,7 @@ export const experiences: Experience[] = [
       'Mejora en estabilidad de sistemas de red',
       'Optimización de procesos de soporte técnico',
     ],
+    linkedinHelped: true,
     companyLogo: '/images/globaldata-logo.png',
   },
   {
