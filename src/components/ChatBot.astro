@@ -1,0 +1,819 @@
+---
+// Chatbot component with N8N integration
+---
+
+<div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
+  <!-- Botón de toggle -->
+  <button
+    id="chat-toggle"
+    class="bg-gradient-to-r from-purple-500 to-cyan-500 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center cursor-pointer relative"
+  >
+    <!-- Indicador de notificación -->
+    <div
+      id="notification-ping"
+      class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-ping hidden"
+    >
+    </div>
+    <div
+      id="notification-dot"
+      class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full hidden"
+    >
+    </div>
+
+    <svg
+      id="chat-icon"
+      class="w-7 h-7"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <!-- Chat Bubble Base -->
+      <path
+        d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"
+        stroke-width="1.5"></path>
+      <!-- Robot Face Inside Chat -->
+      <!-- Robot Eyes -->
+      <circle cx="10" cy="9" r="1.2" fill="currentColor"></circle>
+      <circle cx="14" cy="9" r="1.2" fill="currentColor"></circle>
+      <!-- Robot Mouth/Speaker -->
+      <rect
+        x="10.5"
+        y="11.5"
+        width="3"
+        height="1.5"
+        rx="0.5"
+        stroke-width="1"
+        fill="currentColor"></rect>
+      <!-- Robot Antenna/Signal -->
+      <path d="M12 6.5v-1.5" stroke-width="1.5" stroke-linecap="round"></path>
+      <circle cx="12" cy="4.5" r="0.8" fill="currentColor"></circle>
+      <!-- Tech Details -->
+      <path d="M8 11h1.5" stroke-width="1" stroke-linecap="round"></path>
+      <path d="M14.5 11h1.5" stroke-width="1" stroke-linecap="round"></path>
+    </svg>
+    <svg
+      id="close-icon"
+      class="w-6 h-6 hidden"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Ventana del chat -->
+  <div
+    id="chat-window"
+    class="hidden absolute bottom-16 right-0 w-80 h-96 bg-gray-800 rounded-lg shadow-2xl border border-gray-700 overflow-hidden lg:w-96 lg:h-[28rem]"
+    style="display: none; flex-direction: column;"
+  >
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 relative">
+      <h3 class="text-white font-semibold flex items-center gap-2">
+        💬 Asistente Wilson
+        <!-- Indicador de estado online -->
+        <div class="relative flex items-center">
+          <div class="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+          <div class="absolute w-2 h-2 bg-green-500 rounded-full"></div>
+        </div>
+      </h3>
+      <p class="text-purple-100 text-sm">¡Pregúntame sobre mi experiencia!</p>
+
+      <!-- Botón expandir (solo visible en escritorio) -->
+      <button
+        id="expand-chat"
+        class="hidden lg:flex absolute top-3 right-3 text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-all duration-200"
+        title="Expandir chat"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mensajes -->
+    <div
+      id="chat-messages"
+      class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-900"
+    >
+      <div class="bg-gray-700 p-3 rounded-lg max-w-xs animate-slide-in">
+        <p class="text-gray-200 text-sm">
+          ¡Hola! Soy el asistente de Wilson. ¿En qué puedo ayudarte?
+        </p>
+        <div class="text-xs text-gray-400 mt-1">Pregúntame sobre:</div>
+        <ul class="text-xs text-gray-300 mt-1 ml-2">
+          <li>• Experiencia laboral</li>
+          <li>• Habilidades técnicas</li>
+          <li>• Proyectos realizados</li>
+          <li>• Contacto directo</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="p-4 border-t border-gray-700 bg-gray-800">
+      <div class="flex space-x-2">
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Escribe tu mensaje..."
+          class="flex-1 bg-gray-700 text-white p-2 rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none text-sm"
+          maxlength="200"
+        />
+        <button
+          id="send-btn"
+          class="bg-purple-500 text-white p-2 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+        >
+          <svg
+            class="w-5 h-5 transform rotate-90"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+      </div>
+      <div
+        id="typing-indicator"
+        class="hidden text-xs text-gray-400 mt-1 animate-pulse"
+      >
+        Wilson está escribiendo...
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Chat (solo escritorio) -->
+  <div
+    id="chat-modal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] items-center justify-center p-4"
+    style="display: none;"
+  >
+    <div
+      class="bg-gray-800 rounded-xl shadow-2xl border border-gray-700 w-full max-w-2xl h-[32rem] flex flex-col animate-modal-in"
+    >
+      <!-- Header Modal -->
+      <div
+        class="bg-gradient-to-r from-purple-500 to-cyan-500 p-4 rounded-t-xl relative"
+      >
+        <h3 class="text-white font-semibold text-lg flex items-center gap-2">
+          💬 Asistente Wilson
+          <!-- Indicador de estado online -->
+          <div class="relative flex items-center">
+            <div class="w-2.5 h-2.5 bg-green-400 rounded-full animate-ping">
+            </div>
+            <div class="absolute w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+          </div>
+        </h3>
+        <p class="text-purple-100 text-sm">
+          ¡Pregúntame sobre mi experiencia profesional!
+        </p>
+
+        <!-- Botones del modal -->
+        <div class="absolute top-3 right-3 flex gap-2">
+          <button
+            id="minimize-chat"
+            class="text-white/80 hover:text-white hover:bg-white/20 p-1.5 rounded-lg transition-all duration-200"
+            title="Minimizar chat"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 12H4"></path>
+            </svg>
+          </button>
+          <button
+            id="close-modal-chat"
+            class="text-white/80 hover:text-white hover:bg-red-500/20 p-1.5 rounded-lg transition-all duration-200"
+            title="Cerrar chat"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensajes Modal -->
+      <div
+        id="chat-messages-modal"
+        class="flex-1 p-6 overflow-y-auto space-y-4 bg-gray-900"
+      >
+        <div class="bg-gray-700 p-4 rounded-lg max-w-md animate-slide-in">
+          <p class="text-gray-200 text-sm">
+            ¡Hola! Soy el asistente de Wilson. ¿En qué puedo ayudarte hoy?
+          </p>
+          <div class="text-xs text-gray-400 mt-2">Pregúntame sobre:</div>
+          <ul class="text-xs text-gray-300 mt-2 ml-3 space-y-1">
+            <li>• Experiencia laboral y proyectos</li>
+            <li>• Habilidades técnicas y herramientas</li>
+            <li>• Formación y certificaciones</li>
+            <li>• Información de contacto</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Input Modal -->
+      <div class="p-4 border-t border-gray-700 bg-gray-800 rounded-b-xl">
+        <div class="flex space-x-3">
+          <input
+            id="chat-input-modal"
+            type="text"
+            placeholder="Escribe tu mensaje aquí..."
+            class="flex-1 bg-gray-700 text-white p-3 rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none text-sm"
+            maxlength="200"
+          />
+          <button
+            id="send-btn-modal"
+            class="bg-purple-500 text-white px-4 py-3 rounded-lg hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          >
+            <svg
+              class="w-5 h-5 transform rotate-90"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          id="typing-indicator-modal"
+          class="hidden text-xs text-gray-400 mt-2 animate-pulse"
+        >
+          Wilson está escribiendo...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce-attention {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    40% {
+      transform: translateY(-10px) scale(1.05);
+    }
+    60% {
+      transform: translateY(-5px) scale(1.02);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+      box-shadow:
+        0 4px 20px rgba(139, 92, 246, 0.6),
+        0 0 30px rgba(139, 92, 246, 0.4);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  .bounce-attention {
+    animation:
+      bounce-attention 2s ease-in-out 3,
+      glow-pulse 2s ease-in-out 3;
+  }
+
+  .notification-active {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  #chat-messages::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #chat-messages::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #chat-messages::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 2px;
+  }
+
+  /* Animaciones del modal */
+  @keyframes modal-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.9) translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-modal-in {
+    animation: modal-in 0.3s ease-out;
+  }
+
+  /* Scrollbar del modal */
+  #chat-messages-modal::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #chat-messages-modal::-webkit-scrollbar-track {
+    background: #374151;
+  }
+
+  #chat-messages-modal::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 2px;
+  }
+</style>
+
+<script>
+  // Configuración del chatbot
+  const CONFIG = {
+    N8N_WEBHOOK_URL: 'https://tu-n8n-instance.com/webhook/chatbot', // Reemplaza con tu URL real
+    MAX_MESSAGES: 20,
+    TYPING_DELAY: 1000,
+    SCROLL_THRESHOLD: 500, // Píxeles de scroll antes de mostrar notificación
+    NOTIFICATION_SOUND: '/sounds/notification.wav', // Archivo de sonido de notificación
+    SOUND_VOLUME: 1, // Volumen del sonido (0.0 - 1.0)
+    ERROR_MESSAGE:
+      'Lo siento, no pude procesar tu mensaje en este momento. ¿Podrías contactarme directamente a wilsondelcanto.redes@gmail.com?',
+  };
+
+  // Elementos del DOM
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatInput = document.getElementById('chat-input');
+  const sendBtn = document.getElementById('send-btn');
+  const chatMessages = document.getElementById('chat-messages');
+  const typingIndicator = document.getElementById('typing-indicator');
+  const chatIcon = document.getElementById('chat-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const notificationPing = document.getElementById('notification-ping');
+  const notificationDot = document.getElementById('notification-dot');
+
+  // Elementos del modal
+  const expandChatBtn = document.getElementById('expand-chat');
+  const minimizeChatBtn = document.getElementById('minimize-chat');
+  const closeModalChatBtn = document.getElementById('close-modal-chat');
+  const chatModal = document.getElementById('chat-modal');
+  const chatMessagesModal = document.getElementById('chat-messages-modal');
+  const chatInputModal = document.getElementById('chat-input-modal');
+  const sendBtnModal = document.getElementById('send-btn-modal');
+  const typingIndicatorModal = document.getElementById(
+    'typing-indicator-modal'
+  );
+
+  // Estado del chat y notificaciones
+  let isOpen = false;
+  let notificationShown = false; // Se resetea en cada carga de página (cada visita)
+  let scrollThreshold = CONFIG.SCROLL_THRESHOLD;
+  let messageHistory: Array<{
+    text: string;
+    sender: 'user' | 'bot';
+    timestamp: number;
+  }> = [];
+
+  // Inicialización
+  function initChat() {
+    chatToggle?.addEventListener('click', toggleChat);
+    sendBtn?.addEventListener('click', () => sendMessage(false));
+    chatInput?.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(false);
+      }
+    });
+
+    // Inicializar sistema de notificaciones
+    initNotificationSystem();
+
+    // Inicializar modal del chat
+    initModalChat();
+
+    // Focus en input cuando se abre
+    const observer = new MutationObserver(() => {
+      if (!chatWindow?.classList.contains('hidden')) {
+        chatInput?.focus();
+      }
+    });
+    if (chatWindow) {
+      observer.observe(chatWindow, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+    }
+  }
+
+  // Sistema de notificaciones por scroll
+  function initNotificationSystem() {
+    if (notificationShown) return;
+
+    let scrollTimer: ReturnType<typeof setTimeout>;
+
+    // La notificación se activa UNA VEZ por visita/sesión
+    // Se resetea automáticamente al recargar o reabrir la página
+    window.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const scrollY = window.scrollY;
+
+        if (scrollY > scrollThreshold && !notificationShown && !isOpen) {
+          showChatNotification();
+        }
+      }, 100);
+    });
+  }
+
+  // Inicialización del modal de chat
+  function initModalChat() {
+    // Botón expandir a modal
+    expandChatBtn?.addEventListener('click', expandToModal);
+
+    // Botón minimizar modal
+    minimizeChatBtn?.addEventListener('click', minimizeModal);
+
+    // Botón cerrar modal
+    closeModalChatBtn?.addEventListener('click', closeModal);
+
+    // Cerrar modal al hacer clic en el backdrop
+    chatModal?.addEventListener('click', e => {
+      if (e.target === chatModal) {
+        closeModal();
+      }
+    });
+
+    // Event listeners para el input y botón del modal
+    sendBtnModal?.addEventListener('click', () => sendMessage(true));
+    chatInputModal?.addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(true);
+      }
+    });
+  }
+
+  function expandToModal() {
+    if (!window.matchMedia('(min-width: 1024px)').matches) return; // Solo en desktop
+
+    // Copiar mensajes del chat flotante al modal
+    syncMessages(chatMessages, chatMessagesModal);
+
+    // Ocultar chat flotante y mostrar modal
+    chatWindow?.classList.add('hidden');
+    if (chatModal) {
+      chatModal.style.display = 'flex';
+      chatModal.classList.add('animate-modal-in');
+    }
+
+    // Focus en el input del modal
+    setTimeout(() => chatInputModal?.focus(), 100);
+  }
+
+  function minimizeModal() {
+    // Copiar mensajes del modal al chat flotante
+    syncMessages(chatMessagesModal, chatMessages);
+
+    // Ocultar modal y mostrar chat flotante
+    if (chatModal) {
+      chatModal.style.display = 'none';
+      chatModal.classList.remove('animate-modal-in');
+    }
+    chatWindow?.classList.remove('hidden');
+
+    // Focus en el input flotante
+    setTimeout(() => chatInput?.focus(), 100);
+  }
+
+  function closeModal() {
+    // Copiar mensajes del modal al chat flotante
+    syncMessages(chatMessagesModal, chatMessages);
+
+    // Cerrar modal y chat flotante
+    if (chatModal) {
+      chatModal.style.display = 'none';
+      chatModal.classList.remove('animate-modal-in');
+    }
+
+    // Cerrar chat
+    toggleChat();
+  }
+
+  function syncMessages(source: Element | null, target: Element | null) {
+    if (!source || !target) return;
+
+    // Copiar contenido HTML de los mensajes
+    target.innerHTML = source.innerHTML;
+
+    // Scroll al final
+    target.scrollTop = target.scrollHeight;
+  }
+
+  function showChatNotification() {
+    if (notificationShown || isOpen) return;
+
+    // Mostrar indicadores visuales
+    notificationPing?.classList.remove('hidden');
+    notificationDot?.classList.remove('hidden');
+
+    // Agregar animación de bounce al botón
+    chatToggle?.classList.add('bounce-attention');
+
+    // Reproducir sonido suave
+    playNotificationSound();
+
+    // Marcar como mostrada (solo para esta sesión/visita)
+    // Se resetea automáticamente al recargar la página
+    notificationShown = true;
+
+    // Remover animación después de 6 segundos
+    setTimeout(() => {
+      chatToggle?.classList.remove('bounce-attention');
+      chatToggle?.classList.add('notification-active');
+    }, 6000);
+  }
+
+  function hideNotification() {
+    notificationPing?.classList.add('hidden');
+    notificationDot?.classList.add('hidden');
+    chatToggle?.classList.remove('notification-active', 'bounce-attention');
+  }
+
+  function playNotificationSound() {
+    try {
+      // Crear elemento de audio para reproducir el archivo
+      const audio = new Audio(CONFIG.NOTIFICATION_SOUND);
+
+      // Configurar volumen desde la configuración
+      audio.volume = CONFIG.SOUND_VOLUME;
+
+      // Configurar para reproducir solo una vez
+      audio.loop = false;
+
+      // Reproducir el sonido
+      audio.play().catch(error => {
+        console.log('No se pudo reproducir el audio:', error);
+        // Fallback al sonido generado por Web Audio API
+        playGeneratedSound();
+      });
+    } catch (error) {
+      console.log('Audio no disponible:', error);
+      // Fallback al sonido generado
+      playGeneratedSound();
+    }
+  }
+
+  function playGeneratedSound() {
+    // Función de respaldo usando Web Audio API (sonido generado)
+    try {
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      // Configurar sonido suave y agradable
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(
+        1000,
+        audioContext.currentTime + 0.1
+      );
+
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(
+        0.1,
+        audioContext.currentTime + 0.05
+      );
+      gainNode.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.3
+      );
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (error) {
+      console.log('Web Audio API no disponible:', error);
+    }
+  }
+
+  function toggleChat() {
+    isOpen = !isOpen;
+    const window = chatWindow as HTMLElement;
+
+    if (isOpen) {
+      window.classList.remove('hidden');
+      window.style.display = 'flex';
+      chatIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      (chatInput as HTMLInputElement)?.focus();
+
+      // Ocultar notificación al abrir el chat
+      hideNotification();
+    } else {
+      window.classList.add('hidden');
+      window.style.display = 'none';
+      chatIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  }
+
+  async function sendMessage(isModal = false) {
+    const input = isModal
+      ? (chatInputModal as HTMLInputElement)
+      : (chatInput as HTMLInputElement);
+    const button = isModal
+      ? (sendBtnModal as HTMLButtonElement)
+      : (sendBtn as HTMLButtonElement);
+    const messagesContainer = isModal ? chatMessagesModal : chatMessages;
+    const typing = isModal ? typingIndicatorModal : typingIndicator;
+
+    const message = input?.value.trim();
+    if (!message || button?.disabled) return;
+
+    // Deshabilitar input
+    setInputState(false, isModal);
+
+    // Agregar mensaje del usuario
+    addMessage(message, 'user', messagesContainer);
+    input.value = '';
+
+    // Mostrar indicador de escritura
+    showTypingIndicator(typing);
+
+    try {
+      // Enviar a N8N webhook
+      const response = await fetch(CONFIG.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+          timestamp: new Date().toISOString(),
+          userId: getOrCreateUserId(),
+          history: messageHistory.slice(-5), // Últimos 5 mensajes para contexto
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Simular delay de escritura
+      await delay(CONFIG.TYPING_DELAY);
+
+      // Agregar respuesta del bot
+      addMessage(
+        data.response || CONFIG.ERROR_MESSAGE,
+        'bot',
+        messagesContainer
+      );
+    } catch (error) {
+      console.error('Error de chat:', error);
+      await delay(CONFIG.TYPING_DELAY);
+      addMessage(CONFIG.ERROR_MESSAGE, 'bot', messagesContainer);
+    } finally {
+      hideTypingIndicator(typing);
+      setInputState(true, isModal);
+      input?.focus();
+    }
+  }
+
+  function addMessage(
+    text: string,
+    sender: 'user' | 'bot',
+    container: Element | null = null
+  ) {
+    const targetContainer = container || chatMessages;
+    if (!targetContainer) return;
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `${sender === 'user' ? 'ml-8 bg-purple-500 self-end' : 'mr-8 bg-gray-700'} p-3 rounded-lg max-w-xs animate-slide-in`;
+
+    const messageText = document.createElement('p');
+    messageText.className = 'text-white text-sm';
+    messageText.textContent = text;
+
+    const timestamp = document.createElement('div');
+    timestamp.className = 'text-xs opacity-75 mt-1';
+    timestamp.textContent = new Date().toLocaleTimeString('es-CL', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    messageDiv.appendChild(messageText);
+    messageDiv.appendChild(timestamp);
+    targetContainer.appendChild(messageDiv);
+
+    // Guardar en historial
+    messageHistory.push({ text, sender, timestamp: Date.now() });
+
+    // Limitar historial
+    if (messageHistory.length > CONFIG.MAX_MESSAGES) {
+      messageHistory = messageHistory.slice(-CONFIG.MAX_MESSAGES);
+    }
+
+    // Scroll al final
+    targetContainer.scrollTop = targetContainer.scrollHeight;
+  }
+
+  function showTypingIndicator(indicator: Element | null = null) {
+    const targetIndicator = indicator || typingIndicator;
+    targetIndicator?.classList.remove('hidden');
+  }
+
+  function hideTypingIndicator(indicator: Element | null = null) {
+    const targetIndicator = indicator || typingIndicator;
+    targetIndicator?.classList.add('hidden');
+  }
+
+  function setInputState(enabled: boolean, isModal = false) {
+    const input = isModal
+      ? (chatInputModal as HTMLInputElement)
+      : (chatInput as HTMLInputElement);
+    const button = isModal
+      ? (sendBtnModal as HTMLButtonElement)
+      : (sendBtn as HTMLButtonElement);
+    if (input) input.disabled = !enabled;
+    if (button) button.disabled = !enabled;
+  }
+
+  function getOrCreateUserId(): string {
+    let userId = localStorage.getItem('chatbot-user-id');
+    if (!userId) {
+      userId =
+        'visitor-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('chatbot-user-id', userId);
+    }
+    return userId;
+  }
+
+  function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', initChat);
+</script>

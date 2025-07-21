@@ -1,0 +1,280 @@
+---
+import { softSkills } from '../data/skills';
+import { getExperienceStats } from '../data/experience';
+
+// Get dynamic experience statistics
+const stats = getExperienceStats();
+
+// Professional competencies
+const professionalSkills = [
+  {
+    title: 'Problem Management',
+    description: 'Análisis y resolución de problemas corporativos complejos',
+    icon: '🔧',
+    level: 95,
+    color: 'from-blue-400 to-cyan-500',
+  },
+  {
+    title: 'IT Operations',
+    description: 'Gestión de operaciones IT y continuidad del negocio',
+    icon: '⚙️',
+    level: 90,
+    color: 'from-green-400 to-emerald-500',
+  },
+  {
+    title: 'Technical Support',
+    description: 'Soporte técnico especializado multi-industria',
+    icon: '🛠️',
+    level: 95,
+    color: 'from-orange-400 to-red-500',
+  },
+  {
+    title: 'Process Automation',
+    description: 'Automatización de procesos y optimización de workflows',
+    icon: '🤖',
+    level: 85,
+    color: 'from-purple-400 to-pink-500',
+  },
+  {
+    title: 'Full Stack Development',
+    description: 'Desarrollo de aplicaciones web completas',
+    icon: '💻',
+    level: 80,
+    color: 'from-cyan-400 to-blue-500',
+  },
+  {
+    title: 'Cloud Operations',
+    description: 'Gestión y despliegue en plataformas cloud',
+    icon: '☁️',
+    level: 75,
+    color: 'from-indigo-400 to-purple-500',
+  },
+];
+---
+
+<section id="skills" class="py-20 bg-gray-900">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        <span
+          class="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent"
+        >
+          Competencias Profesionales
+        </span>
+      </h2>
+      <div
+        class="w-24 h-1 bg-gradient-to-r from-green-400 to-emerald-500 mx-auto mb-8"
+      >
+      </div>
+      <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+        Mis competencias profesionales y habilidades blandas desarrolladas a
+        través de más de {stats.totalYearsDisplay} años de experiencia en IT, combinando
+        expertise técnico con liderazgo y gestión de equipos.
+      </p>
+    </div>
+
+    <!-- Professional Competencies -->
+    <div class="mb-16">
+      <h3 class="text-3xl font-semibold mb-8 text-center text-white">
+        🎯 Competencias Clave
+      </h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          professionalSkills.map(skill => (
+            <div class="bg-gray-800/50 p-6 rounded-2xl backdrop-blur-sm border border-gray-700/50 hover:border-green-500/50 transition-all duration-300 group">
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class={`w-12 h-12 rounded-lg bg-gradient-to-r ${skill.color} flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}
+                >
+                  {skill.icon}
+                </div>
+                <h4 class="text-xl font-semibold text-white">{skill.title}</h4>
+              </div>
+              <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                {skill.description}
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="flex-1 bg-gray-700 rounded-full h-2">
+                  <div
+                    class={`h-2 rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out`}
+                    style={`width: ${skill.level}%`}
+                  />
+                </div>
+                <span class="text-gray-400 text-sm font-medium">
+                  {skill.level}%
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Soft Skills -->
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div
+        class="bg-gray-800/50 p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300"
+      >
+        <h3 class="text-2xl font-semibold mb-8 text-center">
+          <span
+            class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+          >
+            🧠 Habilidades Blandas
+          </span>
+        </h3>
+        <div class="space-y-6">
+          {
+            softSkills.map(skill => (
+              <div class="skill-item" data-level={skill.level}>
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center space-x-3">
+                    <span class="text-xl">{skill.icon}</span>
+                    <span class="text-white font-medium">{skill.name}</span>
+                  </div>
+                  <span class="text-gray-400">{skill.level}%</span>
+                </div>
+                <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                  <div
+                    class={`skill-bar h-full bg-gradient-to-r ${skill.color} rounded-full relative transition-all duration-1000 ease-out`}
+                    style="width: 0%"
+                    data-width={skill.level}
+                  >
+                    <div class="absolute inset-0 bg-white/20 animate-pulse" />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Areas of Expertise -->
+      <div
+        class="bg-gray-800/50 p-8 rounded-2xl backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300"
+      >
+        <h3 class="text-2xl font-semibold mb-8 text-center">
+          <span
+            class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+          >
+            🚀 Áreas de Especialización
+          </span>
+        </h3>
+        <div class="space-y-6">
+          <div class="flex items-start space-x-4">
+            <div
+              class="bg-gradient-to-r from-blue-500 to-cyan-500 p-2 rounded-lg flex-shrink-0"
+            >
+              <span class="text-white text-lg">�</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold mb-1">
+                Problem Management & ITIL
+              </h4>
+              <p class="text-gray-300 text-sm">
+                Gestión avanzada de problemas corporativos siguiendo mejores
+                prácticas ITIL
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div
+              class="bg-gradient-to-r from-green-500 to-emerald-500 p-2 rounded-lg flex-shrink-0"
+            >
+              <span class="text-white text-lg">🏪</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold mb-1">Operaciones Retail</h4>
+              <p class="text-gray-300 text-sm">
+                Continuidad operacional en entornos críticos de retail y punto
+                de venta
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div
+              class="bg-gradient-to-r from-cyan-500 to-blue-500 p-2 rounded-lg flex-shrink-0"
+            >
+              <span class="text-white text-lg">📡</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold mb-1">
+                Sistemas de Telecomunicaciones
+              </h4>
+              <p class="text-gray-300 text-sm">
+                Mantenimiento de equipos Dispatch, CAS y sistemas críticos de
+                comunicación
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div
+              class="bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-lg flex-shrink-0"
+            >
+              <span class="text-white text-lg">🤖</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold mb-1">
+                Automatización & Scripting
+              </h4>
+              <p class="text-gray-300 text-sm">
+                Desarrollo de soluciones automatizadas con Python, Power
+                Automate y n8n
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div
+              class="bg-gradient-to-r from-orange-500 to-red-500 p-2 rounded-lg flex-shrink-0"
+            >
+              <span class="text-white text-lg">☁️</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold mb-1">
+                Cloud & Infrastructure
+              </h4>
+              <p class="text-gray-300 text-sm">
+                Gestión de infraestructura en Google Cloud Platform y servicios
+                híbridos
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Intersection Observer for skill animations
+  const observerOptions = {
+    threshold: 0.3,
+    rootMargin: '0px 0px -50px 0px',
+  };
+
+  const skillsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const skillBars = entry.target.querySelectorAll('.skill-bar');
+        skillBars.forEach((bar, index) => {
+          setTimeout(() => {
+            const width = bar.getAttribute('data-width');
+            if (width && bar instanceof HTMLElement) {
+              bar.style.width = `${width}%`;
+              bar.classList.add('animate');
+            }
+          }, index * 100);
+        });
+      }
+    });
+  }, observerOptions);
+
+  // Observe the skills section
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) {
+    skillsObserver.observe(skillsSection);
+  }
+</script>
