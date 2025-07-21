@@ -1,5 +1,6 @@
 ---
 import { projects } from '../data/projects';
+import ImageModal from './ImageModal.astro';
 
 const featuredProjects = projects.filter(project => project.featured);
 const otherProjects = projects.filter(project => !project.featured);
@@ -25,14 +26,44 @@ const otherProjects = projects.filter(project => !project.featured);
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {featuredProjects.map((project) => (
           <div class="bg-gray-900/50 rounded-2xl overflow-hidden backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 group hover:scale-105">
-            <!-- Image placeholder since we don't have actual images -->
-            <div class="h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 relative overflow-hidden">
+            <!-- Image with click to expand functionality -->
+            <div class="h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 relative overflow-hidden cursor-pointer group/image">
               <div class="absolute inset-0 flex items-center justify-center">
-                <img src={project.image} alt={project.title} class="w-full h-full object-cover" />
+                <img 
+                  src={project.imagePreview || project.image} 
+                  alt={project.title} 
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover/image:scale-110 project-image"
+                  data-title={project.title}
+                  data-category={project.category}
+                  data-image-full={project.imageFull || project.image}
+                  data-url={project.url}
+                />
               </div>
+              
+              <!-- Overlay con efecto hover -->
+              <div class="absolute inset-0 bg-black/0 group-hover/image:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                <div class="opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 bg-black/50 rounded-full p-3">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Categoría badge -->
               <div class="absolute top-4 right-4">
                 <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm">
                   {project.category}
+                </span>
+              </div>
+              
+              <!-- Indicador de click -->
+              <div class="absolute bottom-4 left-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
+                <span class="bg-black/70 text-white px-2 py-1 rounded text-xs flex items-center">
+                  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  Ver imagen completa
                 </span>
               </div>
             </div>
@@ -135,4 +166,40 @@ const otherProjects = projects.filter(project => !project.featured);
       </div>
     </div>
   </div>
+
+  <!-- Modal de imagen -->
+  <ImageModal />
 </section>
+
+<script>
+  // Inicializar event listeners para las imágenes de proyectos
+  function initProjectImages() {
+    const projectImages = document.querySelectorAll('.project-image');
+    
+    projectImages.forEach((img) => {
+      img.addEventListener('click', function(this: HTMLImageElement) {
+        const title = this.getAttribute('data-title');
+        const category = this.getAttribute('data-category');
+        const imageFull = this.getAttribute('data-image-full');
+        const url = this.getAttribute('data-url');
+        
+        if (title && category && imageFull && url) {
+          // Verificar que la función openImageModal esté disponible
+          if (typeof (window as any).openImageModal === 'function') {
+            (window as any).openImageModal({
+              title: title,
+              category: category,
+              imageFull: imageFull,
+              url: url
+            });
+          } else {
+            console.error('openImageModal function not available');
+          }
+        }
+      });
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', initProjectImages);
+</script>
