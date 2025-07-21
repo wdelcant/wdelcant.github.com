@@ -130,8 +130,12 @@ const SCROLL_THRESHOLD =
           <li>• Proyectos realizados</li>
           <li>• Contacto directo</li>
         </ul>
-        <div class="text-xs text-gray-400 mt-2">💡 También puedo llevarte a cualquier sección:</div>
-        <div class="text-xs text-gray-300 mt-1">Ej: "Llévame a experiencia" o "Muestra mis proyectos"</div>
+        <div class="text-xs text-gray-400 mt-2">
+          💡 También puedo llevarte a cualquier sección:
+        </div>
+        <div class="text-xs text-gray-300 mt-1">
+          Ej: "Llévame a experiencia" o "Muestra mis proyectos"
+        </div>
       </div>
     </div>
 
@@ -255,9 +259,15 @@ const SCROLL_THRESHOLD =
             <li>• Formación y certificaciones</li>
             <li>• Información de contacto</li>
           </ul>
-          <div class="text-xs text-gray-400 mt-3">🧭 **Navegación inteligente:**</div>
-          <div class="text-xs text-gray-300 mt-1">Puedo llevarte directamente a cualquier sección del portafolio.</div>
-          <div class="text-xs text-purple-300 mt-1">Ejemplo: "Llévame a experiencia" o "Quiero ver proyectos"</div>
+          <div class="text-xs text-gray-400 mt-3">
+            🧭 **Navegación inteligente:**
+          </div>
+          <div class="text-xs text-gray-300 mt-1">
+            Puedo llevarte directamente a cualquier sección del portafolio.
+          </div>
+          <div class="text-xs text-purple-300 mt-1">
+            Ejemplo: "Llévame a experiencia" o "Quiero ver proyectos"
+          </div>
         </div>
       </div>
 
@@ -426,48 +436,85 @@ const SCROLL_THRESHOLD =
       url: '#home',
       keywords: ['inicio', 'home', 'principal', 'arriba', 'top', 'empezar'],
       name: 'Inicio',
-      description: 'Página principal del portafolio'
+      description: 'Página principal del portafolio',
     },
     // Sección Acerca de
     about: {
       id: 'about',
       url: '#about',
-      keywords: ['sobre mi', 'acerca', 'about', 'quien soy', 'perfil', 'biografía', 'bio'],
+      keywords: [
+        'sobre mi',
+        'acerca',
+        'about',
+        'quien soy',
+        'perfil',
+        'biografía',
+        'bio',
+      ],
       name: 'Acerca de mí',
-      description: 'Información personal y profesional'
+      description: 'Información personal y profesional',
     },
     // Sección Experiencia
     experience: {
       id: 'experience',
       url: '#experience',
-      keywords: ['experiencia', 'trabajo', 'laboral', 'empleo', 'empresa', 'carrera', 'profesional'],
+      keywords: [
+        'experiencia',
+        'trabajo',
+        'laboral',
+        'empleo',
+        'empresa',
+        'carrera',
+        'profesional',
+      ],
       name: 'Experiencia',
-      description: 'Historial laboral y experiencia profesional'
+      description: 'Historial laboral y experiencia profesional',
     },
     // Sección Habilidades
     skills: {
       id: 'skills',
       url: '#skills',
-      keywords: ['habilidades', 'skills', 'tecnologías', 'herramientas', 'conocimientos', 'competencias'],
+      keywords: [
+        'habilidades',
+        'skills',
+        'tecnologías',
+        'herramientas',
+        'conocimientos',
+        'competencias',
+      ],
       name: 'Habilidades',
-      description: 'Tecnologías y herramientas que domino'
+      description: 'Tecnologías y herramientas que domino',
     },
     // Sección Proyectos
     projects: {
       id: 'projects',
       url: '#projects',
-      keywords: ['proyectos', 'projects', 'portafolio', 'trabajos', 'desarrollo', 'aplicaciones'],
+      keywords: [
+        'proyectos',
+        'projects',
+        'portafolio',
+        'trabajos',
+        'desarrollo',
+        'aplicaciones',
+      ],
       name: 'Proyectos',
-      description: 'Proyectos desarrollados y casos de estudio'
+      description: 'Proyectos desarrollados y casos de estudio',
     },
     // Sección Contacto
     contact: {
       id: 'contact',
       url: '#contact',
-      keywords: ['contacto', 'contact', 'email', 'mensaje', 'comunicación', 'escribir'],
+      keywords: [
+        'contacto',
+        'contact',
+        'email',
+        'mensaje',
+        'comunicación',
+        'escribir',
+      ],
       name: 'Contacto',
-      description: 'Formulario de contacto y información'
-    }
+      description: 'Formulario de contacto y información',
+    },
   };
 
   // Elementos del DOM
@@ -748,7 +795,7 @@ const SCROLL_THRESHOLD =
   // Funciones de navegación automática
   function detectSectionInMessage(message) {
     const lowercaseMessage = message.toLowerCase();
-    
+
     // Buscar coincidencias con las palabras clave de cada sección
     for (const [sectionKey, section] of Object.entries(SECTIONS_MAP)) {
       for (const keyword of section.keywords) {
@@ -757,7 +804,7 @@ const SCROLL_THRESHOLD =
         }
       }
     }
-    
+
     return null;
   }
 
@@ -767,10 +814,10 @@ const SCROLL_THRESHOLD =
       const element = document.getElementById(section.id);
       if (element) {
         // Scroll suave a la sección
-        element.scrollIntoView({ 
+        element.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
-          inline: 'nearest'
+          inline: 'nearest',
         });
 
         // También actualizar la URL
@@ -798,14 +845,27 @@ const SCROLL_THRESHOLD =
 
   function shouldNavigate(message, section) {
     const navigationKeywords = [
-      'llévame', 'llevame', 'ir a', 'navega', 'muestra', 'mostrar', 'ver', 
-      'quiero ver', 'quiero ir', 'dirígeme', 'dirigeme', 'ir', 'vamos a'
+      'llévame',
+      'llevame',
+      'ir a',
+      'navega',
+      'muestra',
+      'mostrar',
+      'ver',
+      'quiero ver',
+      'quiero ir',
+      'dirígeme',
+      'dirigeme',
+      'ir',
+      'vamos a',
     ];
-    
+
     const lowercaseMessage = message.toLowerCase();
-    return navigationKeywords.some(keyword => lowercaseMessage.includes(keyword)) || 
-           lowercaseMessage.includes('quiere') || 
-           lowercaseMessage.includes('interesa');
+    return (
+      navigationKeywords.some(keyword => lowercaseMessage.includes(keyword)) ||
+      lowercaseMessage.includes('quiere') ||
+      lowercaseMessage.includes('interesa')
+    );
   }
 
   async function sendMessage(isModal = false) {
@@ -819,7 +879,8 @@ const SCROLL_THRESHOLD =
 
     // Detectar si el usuario quiere navegar a una sección específica
     const detectedSection = detectSectionInMessage(message);
-    const wantsNavigation = detectedSection && shouldNavigate(message, detectedSection);
+    const wantsNavigation =
+      detectedSection && shouldNavigate(message, detectedSection);
 
     // Deshabilitar input
     setInputState(false, isModal);
@@ -835,15 +896,22 @@ const SCROLL_THRESHOLD =
       await delay(500); // Breve delay para UX
 
       const navigationSuccess = navigateToSection(detectedSection);
-      const navigationMessage = createNavigationMessage(detectedSection, navigationSuccess);
-      
+      const navigationMessage = createNavigationMessage(
+        detectedSection,
+        navigationSuccess
+      );
+
       hideTypingIndicator(typing);
       addMessage(navigationMessage, 'bot', messagesContainer);
       setInputState(true, isModal);
       input?.focus();
-      
+
       // No continuar con la llamada a N8N si es solo navegación
-      if (message.toLowerCase().includes('lleva') || message.toLowerCase().includes('muestra') || message.toLowerCase().includes('ir a')) {
+      if (
+        message.toLowerCase().includes('lleva') ||
+        message.toLowerCase().includes('muestra') ||
+        message.toLowerCase().includes('ir a')
+      ) {
         return;
       }
     }
@@ -859,7 +927,7 @@ const SCROLL_THRESHOLD =
         userId: getOrCreateUserId(),
         history: messageHistory.slice(-5),
         detectedSection: detectedSection ? detectedSection.name : null,
-        navigationPerformed: wantsNavigation
+        navigationPerformed: wantsNavigation,
       });
 
       // Enviar a N8N webhook
@@ -874,7 +942,7 @@ const SCROLL_THRESHOLD =
           userId: getOrCreateUserId(),
           history: messageHistory.slice(-5), // Últimos 5 mensajes para contexto
           detectedSection: detectedSection ? detectedSection.name : null,
-          navigationPerformed: wantsNavigation
+          navigationPerformed: wantsNavigation,
         }),
       });
 
@@ -942,7 +1010,7 @@ const SCROLL_THRESHOLD =
 
     const messageText = document.createElement('p');
     messageText.className = 'text-white text-sm';
-    
+
     // Procesar markdown básico para mensajes del bot
     if (sender === 'bot') {
       // Convertir **texto** a negrita
