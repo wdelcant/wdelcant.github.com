@@ -28,7 +28,7 @@ const otherProjects = projects.filter(project => !project.featured);
             <!-- Image placeholder since we don't have actual images -->
             <div class="h-48 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 relative overflow-hidden">
               <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-4xl opacity-50">🚀</div>
+                <img src={project.image} alt={project.title} class="w-full h-full object-cover" />
               </div>
               <div class="absolute top-4 right-4">
                 <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm">

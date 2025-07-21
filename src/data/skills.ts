@@ -222,10 +222,10 @@ export const softSkills = [
     icon: '🤝',
   },
   {
-    name: 'Liderazgo',
+    name: 'Resiliencia',
     level: 85,
     color: 'from-red-400 to-pink-500',
-    icon: '👑',
+    icon: '💪',
   },
   {
     name: 'Adaptabilidad',

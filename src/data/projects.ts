@@ -2,15 +2,14 @@
 export const projects = [
   {
     id: 1,
-    title: 'Dashboard Cencosud',
-    description:
-      'Sistema creado para ayudar a otros a resolver problemas en el área de soporte técnico.',
+    title: 'Reposteria AbuShole',
+    description: 'Landing page para un negocio de repostería.',
     longDescription:
-      'Dashboard administrativo desarrollado para optimizar los procesos de soporte técnico en Cencosud. Incluye gestión de tickets, métricas en tiempo real y herramientas de diagnóstico.',
-    image: '/images/cencosud.jpg',
-    url: 'https://cencosud.support',
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-    category: 'Web Application',
+      'Landing page diseñada para mostrar los productos y servicios de Reposteria AbuShole. Incluye un catálogo de productos, información sobre la empresa y un formulario de contacto.',
+    image: '/images/reposteriaabu.jpg',
+    url: 'https://proyectofront.vercel.app/',
+    technologies: ['Javascript', 'Tailwind', 'Supabase'],
+    category: 'Business Website',
     featured: true,
   },
   {
@@ -35,7 +34,7 @@ export const projects = [
       'Portafolio personal que muestra mis habilidades, proyectos y experiencia como desarrollador. Construido con Astro para máximo rendimiento.',
     image: '/images/portfolio.jpg',
     url: 'https://wilsondelcanto.dev/',
-    technologies: ['Astro', 'TypeScript', 'Tailwind CSS', 'CSS3'],
+    technologies: ['Astro', 'TypeScript', 'Tailwind CSS', 'GitHub Actions'],
     category: 'Portfolio',
     featured: false,
   },
@@ -60,7 +59,7 @@ export const projects = [
       'E-commerce completo con carrito de compras, procesamiento de pagos, gestión de inventario y panel administrativo. Construido con React y Firebase.',
     image: '/images/wstore.jpg',
     url: 'https://wdelcant.vercel.app/',
-    technologies: ['React', 'Firebase', 'CSS3', 'JavaScript'],
+    technologies: ['React', 'Firebase', 'Sass', 'JavaScript'],
     category: 'E-Commerce',
     featured: true,
   },
