@@ -18,7 +18,7 @@
     {
       "parameters": {
         "mode": "runOnceForAllItems",
-        "jsCode": "// Procesar el mensaje del usuario y preparar contexto\nconst webhookData = $input.all()[0].json;\nconst userMessage = webhookData.message;\nconst userId = webhookData.userId;\nconst messageHistory = webhookData.history || [];\n\n// Contexto sobre Wilson (datos de tu portafolio)\nconst wilsonContext = `\nSoy Wilson Del Canto, un desarrollador fullstack especializado en:\n\n🚀 TECNOLOGÍAS:\n- Frontend: React, Next.js, Astro, TypeScript, Tailwind CSS\n- Backend: Node.js, Express, Strapi CMS, MongoDB\n- Móvil: React Native\n- Bases de datos: MongoDB, PostgreSQL\n- DevOps: Docker, Git, AWS\n\n💼 EXPERIENCIA:\n- Desarrollo de aplicaciones web modernas y responsivas\n- Integración de APIs y servicios terceros\n- Arquitectura de aplicaciones escalables\n- Automatización con N8N\n\n🎯 PROYECTOS DESTACADOS:\n- Portafolio personal con Astro y Tailwind\n- Aplicaciones React Native multiplataforma\n- Sistemas backend con Strapi CMS\n- Integraciones con servicios de terceros\n\n📧 CONTACTO:\n- Email: wdelcanto@gmail.com\n- GitHub: github.com/wdelcant\n- LinkedIn: linkedin.com/in/wilson-del-canto\n\nEstoy disponible para proyectos freelance y oportunidades laborales.\n`;\n\n// Determinar tipo de consulta\nlet queryType = 'general';\nif (userMessage.toLowerCase().includes('experiencia') || userMessage.toLowerCase().includes('trabajo')) {\n  queryType = 'experience';\n} else if (userMessage.toLowerCase().includes('tecnolog') || userMessage.toLowerCase().includes('skill') || userMessage.toLowerCase().includes('habilidad')) {\n  queryType = 'skills';\n} else if (userMessage.toLowerCase().includes('proyecto')) {\n  queryType = 'projects';\n} else if (userMessage.toLowerCase().includes('contacto') || userMessage.toLowerCase().includes('email') || userMessage.toLowerCase().includes('contratar')) {\n  queryType = 'contact';\n}\n\n// Preparar prompt para OpenAI\nconst systemPrompt = `Eres el asistente personal de Wilson Del Canto. Responde de manera amigable, profesional y concisa. \nUsa la información proporcionada para responder preguntas sobre Wilson.\nSi no tienes información específica, dirígelos a contactarlo directamente.\nMantén las respuestas en español y usa emojis cuando sea apropiado.\n\nContexto sobre Wilson:\n${wilsonContext}`;\n\nconst userPrompt = `Consulta del usuario: ${userMessage}\nTipo de consulta: ${queryType}`;\n\nreturn {\n  json: {\n    systemPrompt,\n    userPrompt,\n    originalMessage: userMessage,\n    userId,\n    queryType,\n    timestamp: new Date().toISOString()\n  }\n};"
+        "jsCode": "// Procesar el mensaje del usuario y preparar contexto\nconst webhookData = $input.all()[0].json;\nconsole.log('Webhook data received:', webhookData);\n\n// Los datos del frontend llegan en el campo 'body'\nconst requestData = webhookData.body || webhookData;\nconsole.log('Request data:', requestData);\n\n// Verificar que el mensaje existe\nif (!requestData || !requestData.message) {\n  throw new Error('No se recibió mensaje del usuario');\n}\n\nconst userMessage = requestData.message || '';\nconst userId = requestData.userId || 'anonymous';\nconst messageHistory = requestData.history || [];\n\nconsole.log('User message:', userMessage);\nconsole.log('User ID:', userId);\n\n// Contexto sobre Wilson (datos de tu portafolio)\nconst wilsonContext = `\nSoy Wilson Del Canto, un desarrollador fullstack especializado en:\n\n🚀 TECNOLOGÍAS:\n- Frontend: React, Next.js, Astro, TypeScript, Tailwind CSS\n- Backend: Node.js, Express, Strapi CMS, MongoDB\n- Móvil: React Native\n- Bases de datos: MongoDB, PostgreSQL\n- DevOps: Docker, Git, AWS\n\n💼 EXPERIENCIA:\n- Desarrollo de aplicaciones web modernas y responsivas\n- Integración de APIs y servicios terceros\n- Arquitectura de aplicaciones escalables\n- Automatización con N8N\n\n🎯 PROYECTOS DESTACADOS:\n- Portafolio personal con Astro y Tailwind\n- Aplicaciones React Native multiplataforma\n- Sistemas backend con Strapi CMS\n- Integraciones con servicios de terceros\n\n📧 CONTACTO:\n- Email: wdelcanto@gmail.com\n- GitHub: github.com/wdelcant\n- LinkedIn: linkedin.com/in/wilson-del-canto\n\nEstoy disponible para proyectos freelance y oportunidades laborales.\n`;\n\n// Determinar tipo de consulta (con verificación de seguridad)\nlet queryType = 'general';\nconst messageLower = userMessage.toLowerCase();\n\nif (messageLower.includes('experiencia') || messageLower.includes('trabajo')) {\n  queryType = 'experience';\n} else if (messageLower.includes('tecnolog') || messageLower.includes('skill') || messageLower.includes('habilidad')) {\n  queryType = 'skills';\n} else if (messageLower.includes('proyecto')) {\n  queryType = 'projects';\n} else if (messageLower.includes('contacto') || messageLower.includes('email') || messageLower.includes('contratar')) {\n  queryType = 'contact';\n}\n\nconsole.log('Query type determined:', queryType);\n\n// Preparar prompt para OpenAI\nconst systemPrompt = `Eres el asistente personal de Wilson Del Canto. Responde de manera amigable, profesional y concisa. \nUsa la información proporcionada para responder preguntas sobre Wilson.\nSi no tienes información específica, dirígelos a contactarlo directamente.\nMantén las respuestas en español y usa emojis cuando sea apropiado.\n\nContexto sobre Wilson:\n${wilsonContext}`;\n\nconst userPrompt = `Consulta del usuario: ${userMessage}\nTipo de consulta: ${queryType}`;\n\nreturn {\n  json: {\n    systemPrompt,\n    userPrompt,\n    originalMessage: userMessage,\n    userId,\n    queryType,\n    timestamp: new Date().toISOString()\n  }\n};"
       },
       "id": "process-message",
       "name": "Procesar Mensaje",
@@ -63,7 +63,7 @@
     {
       "parameters": {
         "mode": "runOnceForAllItems",
-        "jsCode": "// Formatear la respuesta de OpenAI\nconst openAiResponse = $input.all()[0].json;\nconst originalData = $input.all()[1].json;\n\n// Extraer texto de respuesta\nlet responseText = '';\nif (openAiResponse.choices && openAiResponse.choices.length > 0) {\n  responseText = openAiResponse.choices[0].message.content.trim();\n} else {\n  responseText = 'Lo siento, no pude procesar tu consulta en este momento. ¿Podrías contactarme directamente a wdelcanto@gmail.com?';\n}\n\n// Agregar call-to-action según el tipo de consulta\nif (originalData.queryType === 'contact') {\n  responseText += '\\n\\n📧 Email: wdelcanto@gmail.com\\n💼 LinkedIn: linkedin.com/in/wilson-del-canto';\n} else if (originalData.queryType === 'projects') {\n  responseText += '\\n\\n🔗 Puedes ver más proyectos en mi GitHub o contactarme para detalles específicos.';\n}\n\nreturn {\n  json: {\n    response: responseText,\n    userId: originalData.userId,\n    originalMessage: originalData.originalMessage,\n    queryType: originalData.queryType,\n    timestamp: new Date().toISOString(),\n    processed: true\n  }\n};"
+        "jsCode": "// Formatear la respuesta de OpenAI\nconst allInputs = $input.all();\nconst openAiResponse = allInputs[0].json;\nconst originalData = allInputs.length > 1 ? allInputs[1].json : null;\n\nconsole.log('OpenAI response:', JSON.stringify(openAiResponse, null, 2));\nconsole.log('Original data:', JSON.stringify(originalData, null, 2));\nconsole.log('Number of inputs:', allInputs.length);\n\n// Extraer texto de respuesta con verificación de seguridad\nlet responseText = '';\n\n// Verificar si openAiResponse es un array (como en tu caso)\nif (Array.isArray(openAiResponse) && openAiResponse.length > 0) {\n  const firstChoice = openAiResponse[0];\n  if (firstChoice && firstChoice.message && firstChoice.message.content) {\n    responseText = firstChoice.message.content.trim();\n    console.log('Respuesta extraída del array:', responseText);\n  }\n} \n// Verificar estructura tradicional de OpenAI\nelse if (openAiResponse && openAiResponse.choices && openAiResponse.choices.length > 0) {\n  const firstChoice = openAiResponse.choices[0];\n  if (firstChoice && firstChoice.message && firstChoice.message.content) {\n    responseText = firstChoice.message.content.trim();\n    console.log('Respuesta extraída de choices:', responseText);\n  }\n}\n\n// Si no se pudo extraer la respuesta\nif (!responseText) {\n  console.log('No se pudo obtener respuesta de OpenAI. Estructura recibida:', openAiResponse);\n  responseText = 'Lo siento, no pude procesar tu consulta en este momento. ¿Podrías contactarme directamente a wdelcanto@gmail.com?';\n}\n\n// Obtener datos originales del nodo anterior\n// Si no hay segundo input, buscar en el contexto del workflow\nlet userId = 'unknown';\nlet originalMessage = 'mensaje no disponible';\nlet queryType = 'general';\n\nif (originalData) {\n  userId = originalData.userId || 'unknown';\n  originalMessage = originalData.originalMessage || 'mensaje no disponible';\n  queryType = originalData.queryType || 'general';\n  console.log('Datos originales encontrados:', { userId, originalMessage, queryType });\n} else {\n  console.log('No se encontraron datos originales en segundo input');\n}\n\n// Agregar call-to-action según el tipo de consulta\nif (queryType === 'contact') {\n  responseText += '\\n\\n📧 Email: wdelcanto@gmail.com\\n💼 LinkedIn: linkedin.com/in/wilson-del-canto';\n} else if (queryType === 'projects') {\n  responseText += '\\n\\n🔗 Puedes ver más proyectos en mi GitHub o contactarme para detalles específicos.';\n}\n\nconst result = {\n  response: responseText,\n  userId: userId,\n  originalMessage: originalMessage,\n  queryType: queryType,\n  timestamp: new Date().toISOString(),\n  processed: true\n};\n\nconsole.log('Resultado final:', JSON.stringify(result, null, 2));\n\nreturn {\n  json: result\n};"
       },
       "id": "format-response",
       "name": "Formatear Respuesta",
@@ -144,17 +144,6 @@
         ]
       ]
     },
-    "Procesar Mensaje": {
-      "main": [
-        [
-          {
-            "node": "OpenAI Chat",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI Chat": {
       "main": [
         [
@@ -162,6 +151,22 @@
             "node": "Formatear Respuesta",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Mensaje": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Formatear Respuesta",
+            "type": "main",
+            "index": 1
           }
         ]
       ]

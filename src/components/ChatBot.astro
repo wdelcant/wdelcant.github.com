@@ -1,5 +1,13 @@
 ---
 // Chatbot component with N8N integration
+// Obtener configuración desde variables de entorno
+const N8N_WEBHOOK_URL =
+  import.meta.env.N8N_CHATBOT_WEBHOOK_URL ||
+  'https://tu-n8n-instance.com/webhook/chatbot';
+const MAX_MESSAGES = parseInt(import.meta.env.CHATBOT_MAX_MESSAGES) || 20;
+const TYPING_DELAY = parseInt(import.meta.env.CHATBOT_TYPING_DELAY) || 1000;
+const SCROLL_THRESHOLD =
+  parseInt(import.meta.env.CHATBOT_SCROLL_THRESHOLD) || 500;
 ---
 
 <div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
@@ -385,13 +393,20 @@
   }
 </style>
 
-<script>
-  // Configuración del chatbot
+<script
+  define:vars={{
+    N8N_WEBHOOK_URL,
+    MAX_MESSAGES,
+    TYPING_DELAY,
+    SCROLL_THRESHOLD,
+  }}
+>
+  // Configuración del chatbot (desde variables de entorno)
   const CONFIG = {
-    N8N_WEBHOOK_URL: 'https://tu-n8n-instance.com/webhook/chatbot', // Reemplaza con tu URL real
-    MAX_MESSAGES: 20,
-    TYPING_DELAY: 1000,
-    SCROLL_THRESHOLD: 500, // Píxeles de scroll antes de mostrar notificación
+    N8N_WEBHOOK_URL: N8N_WEBHOOK_URL,
+    MAX_MESSAGES: MAX_MESSAGES,
+    TYPING_DELAY: TYPING_DELAY,
+    SCROLL_THRESHOLD: SCROLL_THRESHOLD,
     NOTIFICATION_SOUND: '/sounds/notification.wav', // Archivo de sonido de notificación
     SOUND_VOLUME: 1, // Volumen del sonido (0.0 - 1.0)
     ERROR_MESSAGE:
@@ -426,11 +441,7 @@
   let isOpen = false;
   let notificationShown = false; // Se resetea en cada carga de página (cada visita)
   let scrollThreshold = CONFIG.SCROLL_THRESHOLD;
-  let messageHistory: Array<{
-    text: string;
-    sender: 'user' | 'bot';
-    timestamp: number;
-  }> = [];
+  let messageHistory = [];
 
   // Inicialización
   function initChat() {
@@ -467,7 +478,7 @@
   function initNotificationSystem() {
     if (notificationShown) return;
 
-    let scrollTimer: ReturnType<typeof setTimeout>;
+    let scrollTimer;
 
     // La notificación se activa UNA VEZ por visita/sesión
     // Se resetea automáticamente al recargar o reabrir la página
@@ -557,7 +568,7 @@
     toggleChat();
   }
 
-  function syncMessages(source: Element | null, target: Element | null) {
+  function syncMessages(source, target) {
     if (!source || !target) return;
 
     // Copiar contenido HTML de los mensajes
@@ -625,7 +636,7 @@
     // Función de respaldo usando Web Audio API (sonido generado)
     try {
       const audioContext = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+        window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -658,14 +669,14 @@
 
   function toggleChat() {
     isOpen = !isOpen;
-    const window = chatWindow as HTMLElement;
+    const window = chatWindow;
 
     if (isOpen) {
       window.classList.remove('hidden');
       window.style.display = 'flex';
       chatIcon?.classList.add('hidden');
       closeIcon?.classList.remove('hidden');
-      (chatInput as HTMLInputElement)?.focus();
+      chatInput?.focus();
 
       // Ocultar notificación al abrir el chat
       hideNotification();
@@ -678,12 +689,8 @@
   }
 
   async function sendMessage(isModal = false) {
-    const input = isModal
-      ? (chatInputModal as HTMLInputElement)
-      : (chatInput as HTMLInputElement);
-    const button = isModal
-      ? (sendBtnModal as HTMLButtonElement)
-      : (sendBtn as HTMLButtonElement);
+    const input = isModal ? chatInputModal : chatInput;
+    const button = isModal ? sendBtnModal : sendBtn;
     const messagesContainer = isModal ? chatMessagesModal : chatMessages;
     const typing = isModal ? typingIndicatorModal : typingIndicator;
 
@@ -741,11 +748,7 @@
     }
   }
 
-  function addMessage(
-    text: string,
-    sender: 'user' | 'bot',
-    container: Element | null = null
-  ) {
+  function addMessage(text, sender, container = null) {
     const targetContainer = container || chatMessages;
     if (!targetContainer) return;
 
@@ -779,28 +782,24 @@
     targetContainer.scrollTop = targetContainer.scrollHeight;
   }
 
-  function showTypingIndicator(indicator: Element | null = null) {
+  function showTypingIndicator(indicator = null) {
     const targetIndicator = indicator || typingIndicator;
     targetIndicator?.classList.remove('hidden');
   }
 
-  function hideTypingIndicator(indicator: Element | null = null) {
+  function hideTypingIndicator(indicator = null) {
     const targetIndicator = indicator || typingIndicator;
     targetIndicator?.classList.add('hidden');
   }
 
-  function setInputState(enabled: boolean, isModal = false) {
-    const input = isModal
-      ? (chatInputModal as HTMLInputElement)
-      : (chatInput as HTMLInputElement);
-    const button = isModal
-      ? (sendBtnModal as HTMLButtonElement)
-      : (sendBtn as HTMLButtonElement);
+  function setInputState(enabled, isModal = false) {
+    const input = isModal ? chatInputModal : chatInput;
+    const button = isModal ? sendBtnModal : sendBtn;
     if (input) input.disabled = !enabled;
     if (button) button.disabled = !enabled;
   }
 
-  function getOrCreateUserId(): string {
+  function getOrCreateUserId() {
     let userId = localStorage.getItem('chatbot-user-id');
     if (!userId) {
       userId =
@@ -810,7 +809,7 @@
     return userId;
   }
 
-  function delay(ms: number): Promise<void> {
+  function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
