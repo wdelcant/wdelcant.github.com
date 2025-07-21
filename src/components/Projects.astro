@@ -167,19 +167,17 @@ const otherProjects = projects.filter(project => !project.featured);
   </div>
 </section>
 
-<!-- Modal de imagen integrado -->
+<!-- Modal de imagen mejorado -->
 <div 
-  id="image-modal" 
-  class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] hidden items-center justify-center p-4"
-  style="display: none;"
+  id="imageModal" 
+  class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[70] opacity-0 pointer-events-none transition-all duration-300"
 >
-  <!-- Contenedor del modal -->
-  <div class="relative max-w-6xl max-h-[90vh] w-full">
+  <!-- Contenedor del modal con área clickeable -->
+  <div class="w-full h-full flex items-center justify-center p-4" id="modalBackground">
     <!-- Botón cerrar -->
     <button
-      id="close-image-modal"
-      class="absolute -top-12 right-0 text-white/80 hover:text-white bg-black/50 hover:bg-black/70 p-2 rounded-full transition-all duration-200 z-10"
-      title="Cerrar (Esc)"
+      id="closeImageModal"
+      class="absolute top-6 right-6 text-white/80 hover:text-white bg-black/50 hover:bg-black/70 p-3 rounded-full transition-all duration-200 z-10 backdrop-blur-sm"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -187,266 +185,220 @@ const otherProjects = projects.filter(project => !project.featured);
     </button>
 
     <!-- Contenido del modal -->
-    <div class="bg-gray-900/95 rounded-xl border border-gray-700/50 overflow-hidden backdrop-blur-sm">
-      <!-- Header con información del proyecto -->
-      <div class="p-4 border-b border-gray-700/50">
-        <h3 id="modal-project-title" class="text-xl font-semibold text-white mb-1"></h3>
-        <p id="modal-project-category" class="text-purple-400 text-sm"></p>
+    <div class="max-w-7xl max-h-[95vh] w-full bg-gray-900/95 rounded-xl border border-gray-700/50 overflow-hidden backdrop-blur-sm transform scale-75 transition-transform duration-300" id="modalContent">
+      <!-- Header -->
+      <div class="p-6 border-b border-gray-700/50">
+        <h3 id="modalTitle" class="text-2xl font-semibold text-white mb-2"></h3>
+        <p id="modalCategory" class="text-purple-400 text-base"></p>
       </div>
 
       <!-- Imagen -->
-      <div class="relative flex items-center justify-center bg-gray-800/50">
+      <div class="relative flex items-center justify-center bg-gray-800/50 min-h-[500px] max-h-[75vh]">
         <img
-          id="modal-image"
+          id="modalImg"
           src=""
           alt=""
-          class="max-w-full max-h-[70vh] object-contain"
-          style="max-height: 70vh;"
+          class="max-w-full max-h-full object-contain opacity-0 transition-opacity duration-300 rounded-lg"
         />
-        <!-- Loading spinner -->
-        <div id="modal-loading" class="absolute inset-0 flex items-center justify-center bg-gray-800/50">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
+        <!-- Loading -->
+        <div id="modalLoader" class="absolute inset-0 flex items-center justify-center">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
         </div>
       </div>
 
-      <!-- Footer con acciones -->
-      <div class="p-4 border-t border-gray-700/50 flex items-center justify-between">
-        <!-- Información adicional -->
-        <div class="flex items-center space-x-4">
-          <span class="text-gray-400 text-sm">Haz clic fuera de la imagen para cerrar</span>
-        </div>
-
-        <!-- Botones de acción -->
-        <div class="flex items-center space-x-3">
-          <!-- Botón ver proyecto -->
-          <a
-            id="modal-project-link"
-            href=""
-            target="_blank"
-            class="hidden items-center px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white text-sm rounded-lg transition-colors duration-200"
-          >
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-            Ver Proyecto
-          </a>
-        </div>
+      <!-- Footer -->
+      <div class="p-6 border-t border-gray-700/50 flex items-center justify-between">
+        <span class="text-gray-400 text-base">Haz clic fuera del contenido para cerrar o presiona ESC</span>
+        <a
+          id="modalLink"
+          href=""
+          target="_blank"
+          class="flex items-center px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white text-base rounded-lg transition-colors duration-200 font-medium"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          Ver Proyecto Completo
+        </a>
       </div>
     </div>
   </div>
 </div>
 
-<style>
-  /* Animaciones para el modal */
-  @keyframes modal-fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes modal-scale-in {
-    0% {
-      opacity: 0;
-      transform: scale(0.9) translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  .modal-show {
-    animation: modal-fade-in 0.2s ease-out;
-  }
-
-  .modal-content-show {
-    animation: modal-scale-in 0.3s ease-out;
-  }
-
-  /* Prevenir scroll del body cuando el modal está abierto */
-  body.modal-open {
-    overflow: hidden;
-  }
-</style>
-
-<script>
-  // Variables del modal
-  let imageModal: HTMLElement | null = null;
-  let modalImage: HTMLImageElement | null = null;
-  let modalLoading: HTMLElement | null = null;
-  let modalProjectTitle: HTMLElement | null = null;
-  let modalProjectCategory: HTMLElement | null = null;
-  let modalProjectLink: HTMLAnchorElement | null = null;
-  let closeModalBtn: HTMLElement | null = null;
-
-  // Función para abrir el modal
-  function openImageModal(projectData: {
-    title: string;
-    category: string;
-    imageFull: string;
-    url: string;
-  }) {
-    console.log('Intentando abrir modal con:', projectData);
-    
-    if (!imageModal || !modalImage || !modalLoading) {
-      console.error('Elementos del modal no encontrados');
-      return;
-    }
-
-    // Actualizar contenido del modal
-    if (modalProjectTitle) modalProjectTitle.textContent = projectData.title;
-    if (modalProjectCategory) modalProjectCategory.textContent = projectData.category;
-    
-    // Configurar link del proyecto
-    if (modalProjectLink) {
-      modalProjectLink.href = projectData.url;
-      modalProjectLink.classList.remove('hidden');
-      modalProjectLink.classList.add('flex');
-    }
-
-    // Mostrar loading y ocultar imagen
-    modalLoading.classList.remove('hidden');
-    modalImage.style.opacity = '0';
-
-    // Cargar nueva imagen
-    modalImage.src = projectData.imageFull;
-    modalImage.alt = projectData.title;
-
-    // Mostrar modal
-    imageModal.classList.remove('hidden');
-    imageModal.style.display = 'flex';
-    imageModal.classList.add('modal-show');
-
-    // Agregar clase al body para prevenir scroll
-    document.body.classList.add('modal-open');
-
-    console.log('Modal debería estar abierto ahora');
-  }
-
-  // Función para cerrar el modal
-  function closeImageModal() {
-    if (!imageModal) return;
-
-    // Ocultar modal
-    imageModal.classList.add('hidden');
-    imageModal.style.display = 'none';
-    imageModal.classList.remove('modal-show');
-
-    // Remover clase del body
-    document.body.classList.remove('modal-open');
-
-    // Limpiar imagen
-    if (modalImage) {
-      modalImage.src = '';
-      modalImage.style.opacity = '0';
-    }
-
-    console.log('Modal cerrado');
-  }
-
-  // Inicializar event listeners para las imágenes de proyectos
-  function initProjectImages() {
-    console.log('Inicializando event listeners para imágenes de proyectos');
-    
-    const projectImages = document.querySelectorAll('.project-image');
-    console.log('Imágenes de proyecto encontradas:', projectImages.length);
-    
-    projectImages.forEach((img, index) => {
-      console.log(`Configurando evento para imagen ${index + 1}`);
-      
-      img.addEventListener('click', function(this: HTMLImageElement, e) {
-        e.preventDefault();
-        console.log('Click en imagen detectado');
-        
-        const title = this.getAttribute('data-title');
-        const category = this.getAttribute('data-category');
-        const imageFull = this.getAttribute('data-image-full');
-        const url = this.getAttribute('data-url');
-        
-        console.log('Datos extraídos:', { title, category, imageFull, url });
-        
-        if (title && category && imageFull && url) {
-          openImageModal({
-            title: title,
-            category: category,
-            imageFull: imageFull,
-            url: url
-          });
-        } else {
-          console.error('Faltan datos del proyecto:', { title, category, imageFull, url });
-        }
-      });
-    });
-  }
-
-  // Inicializar el modal
+<script is:inline>
+// Modal de imagen - JavaScript puro y limpio
+(function() {
+  console.log('🚀 Cargando modal de imágenes...');
+  
   function initImageModal() {
-    console.log('Inicializando modal de imagen');
-    
-    // Obtener elementos del DOM
-    imageModal = document.getElementById('image-modal');
-    modalImage = document.getElementById('modal-image') as HTMLImageElement;
-    modalLoading = document.getElementById('modal-loading');
-    modalProjectTitle = document.getElementById('modal-project-title');
-    modalProjectCategory = document.getElementById('modal-project-category');
-    modalProjectLink = document.getElementById('modal-project-link') as HTMLAnchorElement;
-    closeModalBtn = document.getElementById('close-image-modal');
+    // Obtener elementos
+    const modal = document.getElementById('imageModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalLink = document.getElementById('modalLink');
+    const modalLoader = document.getElementById('modalLoader');
+    const closeBtn = document.getElementById('closeImageModal');
 
-    console.log('Elementos del modal:', {
-      imageModal: !!imageModal,
-      modalImage: !!modalImage,
-      modalLoading: !!modalLoading,
-      modalProjectTitle: !!modalProjectTitle,
-      modalProjectCategory: !!modalProjectCategory,
-      modalProjectLink: !!modalProjectLink,
-      closeModalBtn: !!closeModalBtn
-    });
-
-    if (!imageModal) {
-      console.error('Modal no encontrado');
+    if (!modal) {
+      console.error('❌ Modal no encontrado');
       return;
     }
+
+    // Función para abrir modal
+    window.openImageModal = function(data) {
+      console.log('📷 Abriendo modal:', data.title);
+      
+      // Actualizar contenido
+      modalTitle.textContent = data.title;
+      modalCategory.textContent = data.category;
+      modalLink.href = data.url;
+      
+      // Mostrar loader
+      modalLoader.style.display = 'flex';
+      modalImg.style.opacity = '0';
+      
+      // Cargar imagen
+      modalImg.src = data.imageFull;
+      modalImg.alt = data.title;
+      
+      // Mostrar modal con animación
+      modal.classList.remove('pointer-events-none');
+      modal.style.opacity = '1';
+      modalContent.style.transform = 'scale(1)';
+      
+      // Bloquear scroll del body
+      document.body.style.overflow = 'hidden';
+    };
+
+    // Función para cerrar modal
+    window.closeImageModal = function() {
+      console.log('🔒 Cerrando modal...');
+      modal.style.opacity = '0';
+      modalContent.style.transform = 'scale(0.75)';
+      
+      setTimeout(() => {
+        modal.classList.add('pointer-events-none');
+        document.body.style.overflow = 'auto';
+      }, 300);
+    };
 
     // Event listeners del modal
-    if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', closeImageModal);
-    }
-
-    // Cerrar modal al hacer clic fuera de la imagen
-    imageModal.addEventListener('click', (e) => {
-      if (e.target === imageModal) {
-        closeImageModal();
-      }
-    });
-
-    // Cerrar modal con la tecla Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !imageModal!.classList.contains('hidden')) {
-        closeImageModal();
-      }
-    });
-
-    // Manejar carga de imagen
-    if (modalImage) {
-      modalImage.addEventListener('load', () => {
-        if (modalLoading) {
-          modalLoading.classList.add('hidden');
-        }
-        modalImage!.style.opacity = '1';
-        modalImage!.style.transition = 'opacity 0.3s ease';
-      });
-
-      modalImage.addEventListener('error', () => {
-        if (modalLoading) {
-          modalLoading.innerHTML = '<p class="text-red-400">Error cargando la imagen</p>';
+    closeBtn.addEventListener('click', window.closeImageModal);
+    
+    // Cerrar al hacer click en el fondo del modal (mejorado)
+    const modalBackground = document.getElementById('modalBackground');
+    if (modalBackground) {
+      modalBackground.addEventListener('click', function(e) {
+        // Cerrar si se hace click en el fondo, no en el contenido
+        if (e.target === modalBackground || e.target === modal) {
+          window.closeImageModal();
         }
       });
     }
+
+    // Cerrar también al hacer click directamente en el modal
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        window.closeImageModal();
+      }
+    });
+
+    // Prevenir que el contenido del modal cierre el modal al hacer click
+    modalContent.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.style.opacity === '1') {
+        window.closeImageModal();
+      }
+    });
+
+    // Cuando la imagen se carga
+    modalImg.addEventListener('load', function() {
+      modalLoader.style.display = 'none';
+      modalImg.style.opacity = '1';
+    });
+
+    modalImg.addEventListener('error', function() {
+      console.error('❌ Error cargando imagen');
+      modalLoader.innerHTML = '<p class="text-red-400 text-center">Error cargando imagen</p>';
+    });
+
+    // Configurar click en las imágenes de proyecto
+    function setupImageClicks() {
+      const allImages = document.querySelectorAll('#projects img');
+      console.log(`🖼️ Configurando ${allImages.length} imágenes`);
+      
+      allImages.forEach(function(img) {
+        // Estilo del cursor
+        img.style.cursor = 'pointer';
+        img.style.position = 'relative';
+        img.style.zIndex = '10';
+        
+        // Evento click directo
+        img.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const data = {
+            title: img.getAttribute('data-title') || 'Proyecto',
+            category: img.getAttribute('data-category') || 'Categoría',
+            imageFull: img.getAttribute('data-image-full') || img.src,
+            url: img.getAttribute('data-url') || '#'
+          };
+          
+          window.openImageModal(data);
+        };
+        
+        // También click en el contenedor
+        const container = img.closest('.h-48');
+        if (container) {
+          container.style.cursor = 'pointer';
+          container.onclick = function(e) {
+            if (e.target === container || e.target === img) {
+              e.preventDefault();
+              e.stopPropagation();
+              img.click();
+            }
+          };
+        }
+      });
+    }
+
+    // Ejecutar configuración
+    setupImageClicks();
+    console.log('✅ Modal configurado correctamente');
   }
 
   // Inicializar cuando el DOM esté listo
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM cargado, inicializando componentes');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageModal);
+  } else {
     initImageModal();
-    initProjectImages();
-  });
+  }
+})();
 </script>
+
+<style>
+  /* Animaciones suaves para el modal */
+  #imageModal {
+    transition: opacity 0.3s ease;
+  }
+  
+  #modalContent {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  #modalImg {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Estilo mejorado para el botón cerrar */
+  #closeImageModal:hover {
+    transform: scale(1.1);
+  }
+</style>
