@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+#documentacion
+
+CHATBOT_SETUP.md
+FORMULARIO_CONFIG.md
+NOTIFICACIONES_CUSTOM.md
+public/README.md
