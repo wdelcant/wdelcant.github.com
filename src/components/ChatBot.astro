@@ -130,6 +130,8 @@ const SCROLL_THRESHOLD =
           <li>• Proyectos realizados</li>
           <li>• Contacto directo</li>
         </ul>
+        <div class="text-xs text-gray-400 mt-2">💡 También puedo llevarte a cualquier sección:</div>
+        <div class="text-xs text-gray-300 mt-1">Ej: "Llévame a experiencia" o "Muestra mis proyectos"</div>
       </div>
     </div>
 
@@ -253,6 +255,9 @@ const SCROLL_THRESHOLD =
             <li>• Formación y certificaciones</li>
             <li>• Información de contacto</li>
           </ul>
+          <div class="text-xs text-gray-400 mt-3">🧭 **Navegación inteligente:**</div>
+          <div class="text-xs text-gray-300 mt-1">Puedo llevarte directamente a cualquier sección del portafolio.</div>
+          <div class="text-xs text-purple-300 mt-1">Ejemplo: "Llévame a experiencia" o "Quiero ver proyectos"</div>
         </div>
       </div>
 
@@ -411,6 +416,58 @@ const SCROLL_THRESHOLD =
     SOUND_VOLUME: 1, // Volumen del sonido (0.0 - 1.0)
     ERROR_MESSAGE:
       'Lo siento, no pude procesar tu mensaje en este momento. ¿Podrías contactarme directamente a wilsondelcanto.redes@gmail.com?',
+  };
+
+  // Mapeo de secciones del portafolio para navegación automática
+  const SECTIONS_MAP = {
+    // Sección Inicio/Home
+    home: {
+      id: 'home',
+      url: '#home',
+      keywords: ['inicio', 'home', 'principal', 'arriba', 'top', 'empezar'],
+      name: 'Inicio',
+      description: 'Página principal del portafolio'
+    },
+    // Sección Acerca de
+    about: {
+      id: 'about',
+      url: '#about',
+      keywords: ['sobre mi', 'acerca', 'about', 'quien soy', 'perfil', 'biografía', 'bio'],
+      name: 'Acerca de mí',
+      description: 'Información personal y profesional'
+    },
+    // Sección Experiencia
+    experience: {
+      id: 'experience',
+      url: '#experience',
+      keywords: ['experiencia', 'trabajo', 'laboral', 'empleo', 'empresa', 'carrera', 'profesional'],
+      name: 'Experiencia',
+      description: 'Historial laboral y experiencia profesional'
+    },
+    // Sección Habilidades
+    skills: {
+      id: 'skills',
+      url: '#skills',
+      keywords: ['habilidades', 'skills', 'tecnologías', 'herramientas', 'conocimientos', 'competencias'],
+      name: 'Habilidades',
+      description: 'Tecnologías y herramientas que domino'
+    },
+    // Sección Proyectos
+    projects: {
+      id: 'projects',
+      url: '#projects',
+      keywords: ['proyectos', 'projects', 'portafolio', 'trabajos', 'desarrollo', 'aplicaciones'],
+      name: 'Proyectos',
+      description: 'Proyectos desarrollados y casos de estudio'
+    },
+    // Sección Contacto
+    contact: {
+      id: 'contact',
+      url: '#contact',
+      keywords: ['contacto', 'contact', 'email', 'mensaje', 'comunicación', 'escribir'],
+      name: 'Contacto',
+      description: 'Formulario de contacto y información'
+    }
   };
 
   // Elementos del DOM
@@ -688,6 +745,69 @@ const SCROLL_THRESHOLD =
     }
   }
 
+  // Funciones de navegación automática
+  function detectSectionInMessage(message) {
+    const lowercaseMessage = message.toLowerCase();
+    
+    // Buscar coincidencias con las palabras clave de cada sección
+    for (const [sectionKey, section] of Object.entries(SECTIONS_MAP)) {
+      for (const keyword of section.keywords) {
+        if (lowercaseMessage.includes(keyword.toLowerCase())) {
+          return section;
+        }
+      }
+    }
+    
+    return null;
+  }
+
+  function navigateToSection(section, showMessage = true) {
+    try {
+      // Navegar a la sección
+      const element = document.getElementById(section.id);
+      if (element) {
+        // Scroll suave a la sección
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        });
+
+        // También actualizar la URL
+        if (history.pushState) {
+          history.pushState(null, null, section.url);
+        } else {
+          window.location.hash = section.id;
+        }
+
+        return true;
+      }
+    } catch (error) {
+      console.error('Error navegando a la sección:', error);
+    }
+    return false;
+  }
+
+  function createNavigationMessage(section, success = true) {
+    if (success) {
+      return `🧭 Te he llevado a la sección **${section.name}** donde puedes ver ${section.description}. ¡Echa un vistazo!`;
+    } else {
+      return `⚠️ No pude navegar a la sección ${section.name}. Puedes hacer clic en el menú superior para acceder a ella.`;
+    }
+  }
+
+  function shouldNavigate(message, section) {
+    const navigationKeywords = [
+      'llévame', 'llevame', 'ir a', 'navega', 'muestra', 'mostrar', 'ver', 
+      'quiero ver', 'quiero ir', 'dirígeme', 'dirigeme', 'ir', 'vamos a'
+    ];
+    
+    const lowercaseMessage = message.toLowerCase();
+    return navigationKeywords.some(keyword => lowercaseMessage.includes(keyword)) || 
+           lowercaseMessage.includes('quiere') || 
+           lowercaseMessage.includes('interesa');
+  }
+
   async function sendMessage(isModal = false) {
     const input = isModal ? chatInputModal : chatInput;
     const button = isModal ? sendBtnModal : sendBtn;
@@ -697,6 +817,10 @@ const SCROLL_THRESHOLD =
     const message = input?.value.trim();
     if (!message || button?.disabled) return;
 
+    // Detectar si el usuario quiere navegar a una sección específica
+    const detectedSection = detectSectionInMessage(message);
+    const wantsNavigation = detectedSection && shouldNavigate(message, detectedSection);
+
     // Deshabilitar input
     setInputState(false, isModal);
 
@@ -704,7 +828,27 @@ const SCROLL_THRESHOLD =
     addMessage(message, 'user', messagesContainer);
     input.value = '';
 
-    // Mostrar indicador de escritura
+    // Si se detecta navegación, realizarla inmediatamente
+    if (wantsNavigation) {
+      // Mostrar indicador de navegación
+      showTypingIndicator(typing);
+      await delay(500); // Breve delay para UX
+
+      const navigationSuccess = navigateToSection(detectedSection);
+      const navigationMessage = createNavigationMessage(detectedSection, navigationSuccess);
+      
+      hideTypingIndicator(typing);
+      addMessage(navigationMessage, 'bot', messagesContainer);
+      setInputState(true, isModal);
+      input?.focus();
+      
+      // No continuar con la llamada a N8N si es solo navegación
+      if (message.toLowerCase().includes('lleva') || message.toLowerCase().includes('muestra') || message.toLowerCase().includes('ir a')) {
+        return;
+      }
+    }
+
+    // Mostrar indicador de escritura para la respuesta de N8N
     showTypingIndicator(typing);
 
     try {
@@ -714,6 +858,8 @@ const SCROLL_THRESHOLD =
         timestamp: new Date().toISOString(),
         userId: getOrCreateUserId(),
         history: messageHistory.slice(-5),
+        detectedSection: detectedSection ? detectedSection.name : null,
+        navigationPerformed: wantsNavigation
       });
 
       // Enviar a N8N webhook
@@ -727,6 +873,8 @@ const SCROLL_THRESHOLD =
           timestamp: new Date().toISOString(),
           userId: getOrCreateUserId(),
           history: messageHistory.slice(-5), // Últimos 5 mensajes para contexto
+          detectedSection: detectedSection ? detectedSection.name : null,
+          navigationPerformed: wantsNavigation
         }),
       });
 
@@ -794,7 +942,17 @@ const SCROLL_THRESHOLD =
 
     const messageText = document.createElement('p');
     messageText.className = 'text-white text-sm';
-    messageText.textContent = text;
+    
+    // Procesar markdown básico para mensajes del bot
+    if (sender === 'bot') {
+      // Convertir **texto** a negrita
+      let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Convertir *texto* a cursiva
+      processedText = processedText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      messageText.innerHTML = processedText;
+    } else {
+      messageText.textContent = text;
+    }
 
     const timestamp = document.createElement('div');
     timestamp.className = 'text-xs opacity-75 mt-1';
