@@ -708,6 +708,14 @@ const SCROLL_THRESHOLD =
     showTypingIndicator(typing);
 
     try {
+      console.log('Enviando mensaje a:', CONFIG.N8N_WEBHOOK_URL);
+      console.log('Datos enviados:', {
+        message: message,
+        timestamp: new Date().toISOString(),
+        userId: getOrCreateUserId(),
+        history: messageHistory.slice(-5),
+      });
+
       // Enviar a N8N webhook
       const response = await fetch(CONFIG.N8N_WEBHOOK_URL, {
         method: 'POST',
@@ -723,7 +731,18 @@ const SCROLL_THRESHOLD =
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
+        console.error('Error HTTP:', response.status, response.statusText);
+        const errorText = await response.text();
+        console.error('Respuesta del servidor:', errorText);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      // Verificar que la respuesta sea JSON válido
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const errorText = await response.text();
+        console.error('Respuesta no es JSON:', errorText);
+        throw new Error('La respuesta del servidor no es JSON válido');
       }
 
       const data = await response.json();
@@ -740,7 +759,21 @@ const SCROLL_THRESHOLD =
     } catch (error) {
       console.error('Error de chat:', error);
       await delay(CONFIG.TYPING_DELAY);
-      addMessage(CONFIG.ERROR_MESSAGE, 'bot', messagesContainer);
+      
+      let errorMessage = CONFIG.ERROR_MESSAGE;
+      
+      // Mensajes de error más específicos
+      if (error.message.includes('JSON')) {
+        errorMessage = '⚠️ Lo siento, hay un problema técnico con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
+      } else if (error.message.includes('HTTP 404')) {
+        errorMessage = '🔧 Los servicios del chatbot están en mantenimiento. Puedes contactarme directamente en wilsondelcanto.redes@gmail.com';
+      } else if (error.message.includes('HTTP 500')) {
+        errorMessage = '🚧 Hay un problema temporal en el servidor. Por favor, inténtalo más tarde o contáctame directamente.';
+      } else if (error.message.includes('Failed to fetch')) {
+        errorMessage = '📡 Sin conexión al servidor. Verifica tu conexión a internet o contáctame directamente.';
+      }
+      
+      addMessage(errorMessage, 'bot', messagesContainer);
     } finally {
       hideTypingIndicator(typing);
       setInputState(true, isModal);
