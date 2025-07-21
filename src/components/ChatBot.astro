@@ -759,20 +759,24 @@ const SCROLL_THRESHOLD =
     } catch (error) {
       console.error('Error de chat:', error);
       await delay(CONFIG.TYPING_DELAY);
-      
+
       let errorMessage = CONFIG.ERROR_MESSAGE;
-      
+
       // Mensajes de error más específicos
       if (error.message.includes('JSON')) {
-        errorMessage = '⚠️ Lo siento, hay un problema técnico con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
+        errorMessage =
+          '⚠️ Lo siento, hay un problema técnico con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
       } else if (error.message.includes('HTTP 404')) {
-        errorMessage = '🔧 Los servicios del chatbot están en mantenimiento. Puedes contactarme directamente en wilsondelcanto.redes@gmail.com';
+        errorMessage =
+          '🔧 Los servicios del chatbot están en mantenimiento. Puedes contactarme directamente en wilsondelcanto.redes@gmail.com';
       } else if (error.message.includes('HTTP 500')) {
-        errorMessage = '🚧 Hay un problema temporal en el servidor. Por favor, inténtalo más tarde o contáctame directamente.';
+        errorMessage =
+          '🚧 Hay un problema temporal en el servidor. Por favor, inténtalo más tarde o contáctame directamente.';
       } else if (error.message.includes('Failed to fetch')) {
-        errorMessage = '📡 Sin conexión al servidor. Verifica tu conexión a internet o contáctame directamente.';
+        errorMessage =
+          '📡 Sin conexión al servidor. Verifica tu conexión a internet o contáctame directamente.';
       }
-      
+
       addMessage(errorMessage, 'bot', messagesContainer);
     } finally {
       hideTypingIndicator(typing);
