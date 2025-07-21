@@ -93,17 +93,6 @@ const professionalSkills = [
               <p class="text-gray-300 text-sm mb-4 leading-relaxed">
                 {skill.description}
               </p>
-              <div class="flex items-center gap-3">
-                <div class="flex-1 bg-gray-700 rounded-full h-2">
-                  <div
-                    class={`h-2 rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out`}
-                    style={`width: ${skill.level}%`}
-                  />
-                </div>
-                <span class="text-gray-400 text-sm font-medium">
-                  {skill.level}%
-                </span>
-              </div>
             </div>
           ))
         }
@@ -122,29 +111,27 @@ const professionalSkills = [
             🧠 Habilidades Blandas
           </span>
         </h3>
-        <div class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {
             softSkills.map(skill => (
-              <div class="skill-item" data-level={skill.level}>
-                <div class="flex items-center justify-between mb-2">
+              <div class="group">
+                <div
+                  class={`bg-gradient-to-r ${skill.color} p-4 rounded-xl hover:scale-105 transform transition-all duration-300 cursor-pointer`}
+                >
                   <div class="flex items-center space-x-3">
-                    <span class="text-xl">{skill.icon}</span>
-                    <span class="text-white font-medium">{skill.name}</span>
-                  </div>
-                  <span class="text-gray-400">{skill.level}%</span>
-                </div>
-                <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                  <div
-                    class={`skill-bar h-full bg-gradient-to-r ${skill.color} rounded-full relative transition-all duration-1000 ease-out`}
-                    style="width: 0%"
-                    data-width={skill.level}
-                  >
-                    <div class="absolute inset-0 bg-white/20 animate-pulse" />
+                    <span class="text-2xl">{skill.icon}</span>
+                    <span class="text-white font-medium text-sm">
+                      {skill.name}
+                    </span>
                   </div>
                 </div>
               </div>
             ))
           }
+        </div>
+        <div class="mt-6 text-center">
+          <p class="text-gray-400 text-sm">
+            Competencias desarrolladas a través de la gestión y motivación de equipos, resolución de conflictos y comunicación efectiva.
         </div>
       </div>
 
@@ -164,7 +151,7 @@ const professionalSkills = [
             <div
               class="bg-gradient-to-r from-blue-500 to-cyan-500 p-2 rounded-lg flex-shrink-0"
             >
-              <span class="text-white text-lg">�</span>
+              <span class="text-white text-lg">📌</span>
             </div>
             <div>
               <h4 class="text-white font-semibold mb-1">
@@ -249,7 +236,7 @@ const professionalSkills = [
 </section>
 
 <script>
-  // Intersection Observer for skill animations
+  // Intersection Observer for soft skills animations
   const observerOptions = {
     threshold: 0.3,
     rootMargin: '0px 0px -50px 0px',
@@ -258,14 +245,11 @@ const professionalSkills = [
   const skillsObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const skillBars = entry.target.querySelectorAll('.skill-bar');
-        skillBars.forEach((bar, index) => {
+        // Animar las tarjetas de habilidades blandas
+        const skillCards = entry.target.querySelectorAll('.group');
+        skillCards.forEach((card, index) => {
           setTimeout(() => {
-            const width = bar.getAttribute('data-width');
-            if (width && bar instanceof HTMLElement) {
-              bar.style.width = `${width}%`;
-              bar.classList.add('animate');
-            }
+            card.classList.add('animate-fade-in-up');
           }, index * 100);
         });
       }
@@ -277,4 +261,23 @@ const professionalSkills = [
   if (skillsSection) {
     skillsObserver.observe(skillsSection);
   }
+
+  // Add CSS animation class
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in-up {
+      animation: fade-in-up 0.6s ease-out forwards;
+    }
+  `;
+  document.head.appendChild(style);
 </script>
